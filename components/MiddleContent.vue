@@ -67,25 +67,26 @@ export default {
   },
   mounted() {
     console.log("midleContent mounted()");
-    this.currentChange(this.page.pageNum);
   },
   methods: {
     currentChange(newIndex) {
       console.log(newIndex);
       this.page.pageNum = newIndex;
-        this.$axios
-          .get("/blog/blogPage", {
-            params: {
-              pageNum: this.page.pageNum,
-              pageSize: this.page.pageSize
-            }
-          })
-          .then(res => {
-            this.page = res.page;
-          })
-          .catch(e => {
-            console.log(e);
-          });
+      // 通知父组件修改数据
+      this.$emit('childPageChange',newIndex);
+        // this.$axios
+        //   .get("/blog/blogPage", {
+        //     params: {
+        //       pageNum: this.page.pageNum,
+        //       pageSize: this.page.pageSize
+        //     }
+        //   })
+        //   .then(res => {
+        //     this.page = res.page;
+        //   })
+        //   .catch(e => {
+        //     console.log(e);
+        //   });
     }
   },
   created() {

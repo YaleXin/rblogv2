@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation @childClick="navigationClick"></navigation>
-    <middle-content :page="info" class="mainBody" />
+    <middle-content  @childPageChange="currentChange" :page="info" class="mainBody" />
     <!-- <div>{{blogList}}</div> -->
     <blog-footer></blog-footer>
   </div>
@@ -76,7 +76,6 @@ export default {
         }
     };
   },
-
   methods: {
     navigationClick(index) {
       switch (index) {
@@ -112,6 +111,23 @@ export default {
           if (this.$route.path == "/home") break;
           this.$router.push("/home").catch(e => {});
       }
+    },
+    currentChange(newIndex) {
+      console.log(newIndex);
+        
+        this.$axios
+          .get("/blog/blogPage", {
+            params: {
+              pageNum: newIndex,
+              pageSize: this.info.pageSize
+            }
+          })
+          .then(res => {
+            this.info = res.page;
+          })
+          .catch(e => {
+            console.log(e);
+          });
     },
   },
   created() {}
