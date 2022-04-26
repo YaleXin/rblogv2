@@ -23,68 +23,73 @@
 </template>
 
 <script>
-
 import ArticleList from "~/components/ArticleList.vue";
 export default {
   name: "Home",
   components: {
     ArticleList
   },
-  data() {
-    return {
-      page: {
-        pageNum: 1,
-        pageSize: 5,
-        totalSize: 10,
-        totalPages: 0,
-        content: [
-          // {
-          //   id: 1,
-          //   name: "",
-          //   content: "",
-          //   description: "",
-          //   createTime: "2021-02-09T08:57:19.000+00:00",
-          //   updateTime: "2021-02-09T08:57:19.000+00:00",
-          //   category: {
-          //     id: 1,
-          //     name: ""
-          //   },
-          //   tags: [
-          //     {
-          //       id: 1,
-          //       name: ""
-          //     }
-          //   ]
-          // }
-        ]
+  props: {
+    page: {
+      type: Object,
+      default: () => {
+        return {
+          pageNum: 1,
+          pageSize: 5,
+          totalSize: 10,
+          totalPages: 0,
+          content: [
+            {
+              id: 1,
+              name: "",
+              content: "",
+              description: "",
+              createTime: "2021-02-09T08:57:19.000+00:00",
+              updateTime: "2021-02-09T08:57:19.000+00:00",
+              category: {
+                id: 1,
+                name: ""
+              },
+              tags: [
+                {
+                  id: 1,
+                  name: ""
+                }
+              ]
+            }
+          ]
+        };
       }
-    };
+    }
   },
-  mounted(){
-    console.log('midleContent mounted()');
+  data() {
+    return {};
+  },
+  mounted() {
+    console.log("midleContent mounted()");
     this.currentChange(this.page.pageNum);
   },
   methods: {
     currentChange(newIndex) {
+      console.log(newIndex);
       this.page.pageNum = newIndex;
-    //   innerHttp
-    //     .get("/blog/blogPage", {
-    //       params: {
-    //         pageNum: this.page.pageNum,
-    //         pageSize: this.page.pageSize
-    //       }
-    //     })
-    //     .then(res => {
-    //       this.page = res.data.page;
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
+        this.$axios
+          .get("/blog/blogPage", {
+            params: {
+              pageNum: this.page.pageNum,
+              pageSize: this.page.pageSize
+            }
+          })
+          .then(res => {
+            this.page = res.page;
+          })
+          .catch(e => {
+            console.log(e);
+          });
     }
   },
   created() {
-    console.log('midleContent created()');
-    
+    console.log("midleContent created()");
   },
   activated() {
     document.title = "黄阿信的博客";

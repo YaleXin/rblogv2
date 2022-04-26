@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation @childClick="navigationClick"></navigation>
-    <middle-content class="mainBody" />
+    <middle-content :page="info" class="mainBody" />
     <!-- <div>{{blogList}}</div> -->
     <blog-footer></blog-footer>
   </div>
@@ -30,41 +30,6 @@ export default {
   },
   mounted() {
   },
-  // mounted(){
-  //   let innerHttp = axios;
-  //   innerHttp
-  //       .get("http://localhost:8080/api/blog/blogPage", {
-  //         params: {
-  //           pageNum: 1,
-  //           pageSize: 5
-  //         }
-  //       })
-  //       .then(res => {
-  //         console.log(res.data);
-  //         this.page = res.data.page;
-  //       })
-  //       .catch(e => {
-  //         console.log(e);
-  //       });
-  // } ,
-  // async  asyncData (ctx) {//请求
-  // console.log('asyncData-----');
-  // let innerHttp = ctx.$axios;
-  // return  innerHttp
-  //       .get("/blog/blogPage", {
-  //         params: {
-  //           pageNum: 1,
-  //           pageSize: 5
-  //         }
-  //       })
-  //       .then(res => {
-  //         console.log(res.data);
-  //         this.page = res.data.page;
-  //       })
-  //       .catch(e => {
-  //         console.log(e);
-  //       });
-  //   },
 
   asyncData(context) {
     return context.$axios
@@ -77,13 +42,38 @@ export default {
       .then(res => {
         console.log(res);
         return {
-          info: res
+          info: res.page
         };
       });
   },
   data() {
     return {
-      info: ""
+      info: {
+          pageNum: 1,
+          pageSize: 5,
+          totalSize: 10,
+          totalPages: 0,
+          content: [
+                       {
+              id: 1,
+              name: "",
+              content: "",
+              description: "",
+              createTime: "2021-02-09T08:57:19.000+00:00",
+              updateTime: "2021-02-09T08:57:19.000+00:00",
+              category: {
+                id: 1,
+                name: ""
+              },
+              tags: [
+                {
+                  id: 1,
+                  name: ""
+                }
+              ]
+            }
+          ]
+        }
     };
   },
 
