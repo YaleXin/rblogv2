@@ -1,29 +1,12 @@
 <!--
  * @Author      : YaleXin
- * @Email       : 181303209@yzu.edu.cn
+ * @Email       : me@yalexin.top
  * @LastEditors : YaleXin
 -->
-<template>
-  <div id="app" >
-    
-  </div>
-</template>
-
 <script>
-
 export default {
-  methods: {},
-  components: {
-    
+  middleware({ store, route, redirect, params, query, req, res }) {
+    redirect('/home') // 默认跳转页面的路由
   },
-};
-</script>
-
-<style>
-body{
-  margin: 0;
-  padding: 0;
 }
-
-</style>
-
+</script>
