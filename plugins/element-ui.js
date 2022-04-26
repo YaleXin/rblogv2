@@ -15,7 +15,9 @@ import {
   MenuItem,
   Form,
   Divider,
-  Link
+  Link,
+  Card,
+  Pagination
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -27,4 +29,6 @@ Vue.use(MenuItem)
 Vue.use(Form)
 Vue.use(Divider)
 Vue.use(Link)
+Vue.use(Card)
+Vue.use(Pagination)
 Vue.prototype.$message = Message

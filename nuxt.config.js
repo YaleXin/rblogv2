@@ -30,7 +30,10 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/axios',
+    {
+      src: '~/plugins/axios',
+      'ssr': true // 服务端渲染
+   },
     // '~/plugins/element-ui',
     {
       src: '~/plugins/element-ui',
@@ -50,10 +53,18 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/toast'
   ],
+  toast: {
+    position: 'top-center',
+    duration: 2000
+  },
   axios: {
-    proxy: true // Can be also an object with default options
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    proxy: true, // 开启跨域行为
+    prefix: '/api', // 配置基本得url地址
+    credentials: true
   },
   proxy: {
     '/api': {
