@@ -6,7 +6,7 @@
 <template>
   <div class="wrapper">
     <span class="with-love heartbeat-animate">
-      <i class="fa fa-heartbeat" color="red"></i>
+      <font-awesome-icon :icon="['fa', 'heart']"/>
     </span>
     <span>本站已在此等候您</span>
     <span class="timeNumber">{{day}}</span>
@@ -18,7 +18,7 @@
     <span class="timeNumber">{{newScd}}</span>
     <span>秒</span>
     <span class="with-love heartbeat-animate">
-      <i class="fa fa-heartbeat" color="red"></i>
+      <font-awesome-icon :icon="['fa', 'heart']"/>
     </span>
   </div>
 </template>
