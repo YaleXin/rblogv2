@@ -63,7 +63,7 @@ export default {
   ],
   toast: {
     position: 'top-center',
-    duration: 2000
+    duration: 3000
   },
   loading: {
     color: '#00c9c3'
