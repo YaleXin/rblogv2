@@ -17,7 +17,9 @@ import {
   Divider,
   Link,
   Card,
-  Pagination
+  Pagination,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -31,4 +33,6 @@ Vue.use(Divider)
 Vue.use(Link)
 Vue.use(Card)
 Vue.use(Pagination)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.prototype.$message = Message
