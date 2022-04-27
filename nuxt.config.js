@@ -65,6 +65,9 @@ export default {
     position: 'top-center',
     duration: 2000
   },
+  loading: {
+    color: '#00c9c3'
+  },
   fontawesome: {
     // See https://github.com/vaso2/nuxt-fontawesome
     // 这里设置了组建的标签为fa
