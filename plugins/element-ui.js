@@ -19,7 +19,15 @@ import {
   Card,
   Pagination,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Row,
+  Col,
+  Drawer,
+  Table,
+  TableColumn,
+  Popover,
+  Tag,
+  Avatar
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -35,4 +43,12 @@ Vue.use(Card)
 Vue.use(Pagination)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Drawer)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Popover)
+Vue.use(Tag)
+Vue.use(Avatar)
 Vue.prototype.$message = Message

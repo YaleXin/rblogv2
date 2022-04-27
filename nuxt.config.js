@@ -26,6 +26,9 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    
+    
+  
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -38,7 +41,8 @@ export default {
     {
       src: '~/plugins/element-ui',
       ssr: true
-    }
+    },
+    '~/plugins/font-awesome'
 ,  
   ],
 
@@ -54,11 +58,35 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    'nuxt-fontawesome'
   ],
   toast: {
     position: 'top-center',
     duration: 2000
+  },
+  loading: {
+    color: '#00c9c3'
+  },
+  fontawesome: {
+    // See https://github.com/vaso2/nuxt-fontawesome
+    // 这里设置了组建的标签为fa
+    // 如果不设置，则默认为在font-awesome.js中，生成的：font-awesome-icon
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons',
+        icons: ['far']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
   },
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308

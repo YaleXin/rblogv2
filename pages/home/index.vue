@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-    <middle-content  @childPageChange="currentChange" :page="info" class="mainBody" />
+    <middle-content  @childPageChange="currentChange" :page="info" class="mainBody middle-box-card" />
     <!-- <div>{{blogList}}</div> -->
     <blog-footer></blog-footer>
   </div>
