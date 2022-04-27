@@ -6,7 +6,7 @@
 <template>
   <div class="my-blog">
     <to-top></to-top>
-    <navigation @childClick="navigationClick"></navigation>
+    <navigation ></navigation>
     <middle-content  @childPageChange="currentChange" :page="info" class="mainBody" />
     <!-- <div>{{blogList}}</div> -->
     <blog-footer></blog-footer>
@@ -77,41 +77,6 @@ export default {
     };
   },
   methods: {
-    navigationClick(index) {
-      switch (index) {
-        case "1":
-          if (this.$route.path == "/home") break;
-          this.$router.push("/home").catch(e => {});
-          break;
-        case "2":
-          if (this.$route.path == "/category") break;
-          this.$router.push("/category/-1").catch(e => {});
-          break;
-        case "3":
-          if (this.$route.path == "/tag") break;
-          this.$router.push("/tag/-1").catch(e => {});
-          break;
-        case "4":
-          if (this.$route.path == "/link") break;
-          this.$router.push("/link").catch(e => {});
-          break;
-        case "5":
-          if (this.$route.path == "/talk") break;
-          this.$router.push("/talk").catch(e => {});
-          break;
-        case "6":
-          if (this.$route.path == "/archive") break;
-          this.$router.push("/archive").catch(e => {});
-          break;
-        case "7":
-          if (this.$route.path == "/search") break;
-          this.$router.push("/search").catch(e => {});
-          break;
-        default:
-          if (this.$route.path == "/home") break;
-          this.$router.push("/home").catch(e => {});
-      }
-    },
     currentChange(newIndex) {
       console.log(newIndex);
         
