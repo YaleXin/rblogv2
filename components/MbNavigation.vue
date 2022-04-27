@@ -9,7 +9,7 @@
       <el-row type="flex" justify="center">
         <el-col :span="2">
           <div class="icon-div">
-            <font-awesome-icon @click="showNvg=true" icon="bars" size="lg" />
+            <span @click="showNvg=true" icon="bars" size="lg" >三</span>
           </div>
         </el-col>
         <el-col class="motto-wrapper" :span="22">

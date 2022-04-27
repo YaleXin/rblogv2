@@ -21,13 +21,14 @@ export default {
   },
   data() {
     return {
-      isMobie: false
+      isMobie: true
     };
   },
-  // created() {
-  //     const wd = document.body.clientWidth;
-  //     if (wd <= 700) this.isMobie = true;
-  // },
+  mounted() {
+      const wd = document.body.clientWidth;
+      console.log('wd = ', wd);
+      if (wd >= 700) this.isMobie = false;
+  },
   methods: {
     choose(index) {
       this.navigationClick(index);
