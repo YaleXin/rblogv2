@@ -1,3 +1,8 @@
+/*
+ * @Author      : YaleXin
+ * @Email       : me@yalexin.top
+ * @LastEditors : YaleXin
+ */
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -16,7 +21,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -25,6 +30,16 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      src: '~/plugins/axios',
+      'ssr': true // 服务端渲染
+   },
+    // '~/plugins/element-ui',
+    {
+      src: '~/plugins/element-ui',
+      ssr: true
+    }
+,  
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -32,13 +47,57 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/axios',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    '@nuxtjs/toast'
   ],
-
+  toast: {
+    position: 'top-center',
+    duration: 2000
+  },
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    proxy: true, // 开启跨域行为
+    prefix: '/api', // 配置基本得url地址
+    credentials: true
+  },
+  proxy: {
+    '/api': {
+        target: 'http://localhost:8080/api/',
+        ws: false,
+        changeOrigin: true,
+        pathRewrite: {
+            '^/api': '',
+        }
+    },
+    '/jinri': {
+        target: 'http://v1.jinrishici.com/',
+        ws: false,
+        changeOrigin: true,
+        pathRewrite: {
+            '^/jinri': '',
+        }
+    },
+},
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: ['element-ui'],
+    babel: {
+      plugins: [
+        [
+          'component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk'
+          }
+        ]
+      ],
+      comments: true
+    },
   }
 }
