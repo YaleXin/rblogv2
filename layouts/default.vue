@@ -17,4 +17,8 @@ body{
   min-height: 300px;
   overflow: auto;
 }
+.middle-box-card {
+  max-width: 85%;
+  margin: 0 auto;
+}
 </style>

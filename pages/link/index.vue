@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-    <middle-link :linkList="linkList"/>
+    <middle-link :linkList="linkList" class="middle-box-card" />
     <blog-footer></blog-footer>
   </div>
 </template>

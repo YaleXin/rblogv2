@@ -5,7 +5,7 @@
 -->
 <template>
   <div   >
-    <article-card v-for="article in articleList" :key="article.id" :article="article"></article-card>
+    <article-card class="article-card-item" v-for="article in articleList" :key="article.id" :article="article"></article-card>
   </div>
 </template>
 
@@ -30,6 +30,9 @@ export default {
 };
 </script>
 <style scoped>
-
+.article-card-item{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 </style>

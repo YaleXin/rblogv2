@@ -4,11 +4,11 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div class="wrapper">
+  <div class="wrapper footer-time-info">
     <span class="with-love heartbeat-animate">
       <font-awesome-icon :icon="['fa', 'heart']"/>
     </span>
-    <span>本站已在此等候您</span>
+    <span>本站已在此等您</span>
     <span class="timeNumber">{{day}}</span>
     <span>日</span>
     <span class="timeNumber">{{newHour}}</span>
@@ -72,6 +72,9 @@ export default {
 </script>
 
 <style scoped >
+.footer-time-info{
+  font-size: 15px;
+}
 .heartbeat-animate {
   animation: iconAnimate 1.33s ease-in-out infinite;
 }

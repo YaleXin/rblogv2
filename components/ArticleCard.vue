@@ -79,7 +79,11 @@ a:focus {
   text-decoration: none;
   color: #000;
 }
+.article-dscr{
+  text-align: justify;
+}
 .article-title-link {
+  font-size: 1.2em;
   position: relative;
   /* text-align: center; */
 }
@@ -120,7 +124,7 @@ a:focus {
   transition-delay: 0s;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
-  font-size: 0.875em;
+  font-size: 0.975em;
 }
 .readMore-btn:hover {
   background: rgb(22, 22, 22);
