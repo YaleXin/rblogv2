@@ -9,6 +9,7 @@
     :right="20"
     class="animate__animated animate__backInRight "
   >
+  <font-awesome-icon :icon="['fas', 'sort-up']"/>
     <i class="fa fa-angle-double-up"></i>
   </el-backtop>
 </template>
