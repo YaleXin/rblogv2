@@ -4,7 +4,20 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div >
+    <el-card>
+      <el-tag
+        v-for="ctgr in categoryList"
+        :type="activedId == ctgr.id ? '' : 'info'"
+        :key="ctgr.id"
+      >
+        <a :href="applicationPre()+ '/category/' + ctgr.id">
+          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+          <span>{{ctgr.name}}</span>
+        </a>
+      </el-tag>
+    </el-card>
+    <el-divider content-position="center">该分类下的文章</el-divider>
     <article-list :articleList="page.content"></article-list>
     <!-- 分页 -->
     <div style="text-align: center">
@@ -23,13 +36,24 @@
 </template>
 
 <script>
+// import innerHttp from "../network/innerHttp.js";
 import ArticleList from "~/components/ArticleList.vue";
 export default {
-  name: "Home",
+  name: "Category",
   components: {
     ArticleList
   },
-  props: {
+  data() {
+    return {
+    };
+  },
+  props:{
+    categoryList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
     page: {
       type: Object,
       default: () => {
@@ -58,34 +82,62 @@ export default {
               ]
             }
           ]
-        };
+        }
       }
-    }
+    },
+    activedId: 0
   },
-  data() {
-    return {};
+  created() {
   },
-  mounted() {
-    console.log("midleContent mounted()");
+  activated() {
+    document.title = '分类'
   },
+  computed: {},
   methods: {
+    applicationPre() {
+      // console.log(process.env.NODE_ENV);
+      // return process.env.NODE_ENV === "production" ? "/blog" : "";
+      // return "/blog";
+      return "";
+    },
+    setActivedId() {
+      let id = parseInt(this.$route.params.id);
+
+      if (id === -1 && this.categoryList.length > 0) {
+        id = this.categoryList[0].id;
+      } else if (id !== NaN) {
+        let exist = false;
+        for (let i = 0; i < this.categoryList.length; i++) {
+          // 检查分类id是否合法
+          if (id === this.categoryList[i].id) {
+            exist = true;
+            break;
+          }
+        }
+        if (!exist) {
+          id = -1;
+        }
+      }
+      this.activedId = id;
+    },
     currentChange(newIndex) {
       console.log(newIndex);
       this.page.pageNum = newIndex;
       // 通知父组件修改数据
       this.$emit('childPageChange',newIndex);
     }
-  },
-  created() {
-    console.log("midleContent created()");
-  },
-  activated() {
-    document.title = "黄阿信的博客";
   }
 };
 </script>
 
 <style scoped>
+.el-tag > a {
+  text-decoration: none;
+  color: #000;
+}
+.el-tag {
+  margin: 2px;
+}
 .el-pagination {
   margin-top: 20px;
 }

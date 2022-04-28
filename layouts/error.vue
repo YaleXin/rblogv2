@@ -12,8 +12,8 @@
       <div class="nvgt">
           <p>请选择：</p>
         <nuxt-link :to="{name: 'home'}">首页</nuxt-link>
-        <nuxt-link :to="{name: 'category'}">分类</nuxt-link>
-        <nuxt-link :to="{name: 'tag'}">标签</nuxt-link>
+        <nuxt-link :to="{path: '/category/-1'}">分类</nuxt-link>
+        <nuxt-link :to="{path: '/tag/-1'}">标签</nuxt-link>
         <nuxt-link :to="{name: 'link'}">友链</nuxt-link>
         <nuxt-link :to="{name: 'talk'}">最近的吐槽</nuxt-link>
         <nuxt-link :to="{name: 'archive'}">归档</nuxt-link>

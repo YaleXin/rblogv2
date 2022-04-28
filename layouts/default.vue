@@ -20,5 +20,6 @@ body{
 .middle-box-card {
   max-width: 85%;
   margin: 0 auto;
+  padding-top: 10px;
 }
 </style>
