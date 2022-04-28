@@ -7,6 +7,10 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
+    <talk-content 
+    class="middle-box-card"
+    :commentList="commentList"
+    />
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -14,82 +18,36 @@
 <script>
 import axios from "axios";
 import Navigation from "~/components/Navigation.vue";
-
+import TalkContent from "~/components/Talk.vue";
 import BlogFooter from "~/components/Footer.vue";
 import ToTop from "~/components/ToTop.vue";
 export default {
-  name: "Blog",
+  name: "Talk",
   components: {
     Navigation,
     BlogFooter,
     ToTop,
+    TalkContent
   },
   mounted() {
   },
 
   asyncData(context) {
     return context.$axios
-      .get("/blog/blogPage", {
-        params: {
-          pageNum: 1,
-          pageSize: 5
-        }
-      })
+      .get("/comment/0")
       .then(res => {
-        console.log(res);
         return {
-          info: res.page
+          commentList: res.comments
         };
       });
   },
   data() {
     return {
-      info: {
-          pageNum: 1,
-          pageSize: 5,
-          totalSize: 10,
-          totalPages: 0,
-          content: [
-                       {
-              id: 1,
-              name: "",
-              content: "",
-              description: "",
-              createTime: "2021-02-09T08:57:19.000+00:00",
-              updateTime: "2021-02-09T08:57:19.000+00:00",
-              category: {
-                id: 1,
-                name: ""
-              },
-              tags: [
-                {
-                  id: 1,
-                  name: ""
-                }
-              ]
-            }
-          ]
-        }
-    };
+      commentList: []
+    }
   },
   methods: {
-    currentChange(newIndex) {
-      console.log(newIndex);
-        
-        this.$axios
-          .get("/blog/blogPage", {
-            params: {
-              pageNum: newIndex,
-              pageSize: this.info.pageSize
-            }
-          })
-          .then(res => {
-            this.info = res.page;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
+    
   },
   created() {}
 };
