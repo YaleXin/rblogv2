@@ -7,7 +7,13 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-
+    <tag-content
+      :page="page"  
+      :tagList="tagList"
+      :activedId="activedId"
+      @childPageChange="currentChange"
+      class="middle-box-card" 
+    />
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -16,6 +22,7 @@
 import Navigation from "~/components/Navigation.vue";
 import BlogFooter from "~/components/Footer.vue";
 import ToTop from "~/components/ToTop.vue";
+import TagContent from "~/components/Tag.vue";
 
 export default {
   name: "Blog",
@@ -23,21 +30,110 @@ export default {
     Navigation,
     BlogFooter,
     ToTop,
-    
+    TagContent
   },
   mounted() {
   },
+validate({ params }) {
+    // 必须是number类型
+    console.log("params.id---->", params.id);
+    return /^\d+$/.test(params.id) || params.id == "-1";
+  },
+  async asyncData(context) {
+    // 输入 -1 则先查找所有分类，再获取第一个分类下的文章
+    if (context.params.id == "-1" || context.params.id === -1) {
+      // 先请求所有分类
+      let [res1] = await Promise.all([context.$axios.get("/tag/all")]);
+      let tagList = res1.tags;
 
-  asyncData(context) {
-   
+      let [res2] = await Promise.all([
+        context.$axios
+            .get("/tag/" + tagList[0].id, {
+              params: {
+                pageNum: 1,
+                pageSize: 5
+              }
+            })
+      ]);
+
+      return{
+        page: res2.page,
+        tagList: tagList,
+        activedId: tagList[0].id
+      }
+    } else if (/^\d+$/.test(context.params.id)) {
+      // 如果 id 是数字，即输入正确
+      // 同时查找所有分类和该分类下的文章
+      let [res1, res2] = await Promise.all([
+        context.$axios.get("/tag/all"),
+        context.$axios
+            .get("/tag/" + context.params.id, {
+              params: {
+                pageNum: 1,
+                pageSize: 5
+              }
+            })
+      ]);
+      return{
+        page: res2.page,
+        tagList: res1.tags,
+        activedId: context.params.id
+      }
+    }
   },
   data() {
     return {
-      
+      activedId: -1,
+      activedtagExist: false,
+      tagList: [],
+      page: {
+        pageNum: 1,
+        pageSize: 5,
+        totalSize: 10,
+        totalPages: 0,
+        content: [
+          {
+            id: 1,
+            name: "",
+            content: "",
+            description: "",
+            createTime: "2021-02-09T08:57:19.000+00:00",
+            updateTime: "2021-02-09T08:57:19.000+00:00",
+            tag: {
+              id: 1,
+              name: ""
+            },
+            tags: [
+              {
+                id: 1,
+                name: ""
+              }
+            ]
+          }
+        ]
+      },
     };
   },
 
   methods: {
+    currentChange(newIndex) {
+      this.page.pageNum = newIndex;
+      if (this.activedId > 0) {
+        this.$axios
+          .get("/tag/" + this.activedId, {
+            params: {
+              pageNum: this.page.pageNum,
+              pageSize: this.page.pageSize
+            }
+          })
+          .then(res => {
+            this.page = res.page;
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+    }
   },
   created() {}
 };
