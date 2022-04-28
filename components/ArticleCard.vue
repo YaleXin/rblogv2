@@ -130,4 +130,12 @@ a:focus {
   background: rgb(22, 22, 22);
   color: #fff;
 }
+.article-card-item{
+  transition: all 100ms ease-in-out;
+  
+}
+.article-card-item:hover{
+	transform: scale(1.1);
+	transition: all 100ms ease-in-out;
+}
 </style>
