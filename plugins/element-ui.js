@@ -27,7 +27,9 @@ import {
   TableColumn,
   Popover,
   Tag,
-  Avatar
+  Avatar,
+  Button,
+  FormItem
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -51,4 +53,6 @@ Vue.use(TableColumn)
 Vue.use(Popover)
 Vue.use(Tag)
 Vue.use(Avatar)
+Vue.use(Button)
+Vue.use(FormItem)
 Vue.prototype.$message = Message
