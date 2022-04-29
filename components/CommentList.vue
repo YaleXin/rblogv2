@@ -56,7 +56,6 @@
                   <td>
                     <span v-if="replyCmt.adminComment" class="comment-author-tag">
                       <font-awesome-icon :icon="['fa', 'flag']" />
-                      <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                       <span>博主</span>
                     </span>
                     <b class="comment-author">{{replyCmt.nickname}}</b>

@@ -8,10 +8,7 @@
     <el-card>
       <div class="article-title-wrapper" style="text-align: center;">
         <h1 class="article-title">
-          <a
-            :href=" applicationPre()+ '/blog/'+article.id"
-            class="article-title-link"
-          >{{article.name}}</a>
+          <nuxt-link  class="article-title-link" :to="{path: '/blog/' + article.id}">{{article.name}}</nuxt-link>
         </h1>
         <div class="article-detail">
           <font-awesome-icon :icon="['far', 'calendar']"/>
@@ -28,8 +25,7 @@
         <p>{{article.description}} ...</p>
       </div>
       <div class="readMore">
-        <!-- <router-link class="readMore-btn" :to="{name: 'blog', params: { id: article.id }}">阅读全文 »</router-link> -->
-        <a class="readMore-btn" :href=" applicationPre() +  '/blog/'+article.id" >阅读全文 »</a>
+        <nuxt-link  class="readMore-btn" :to="{path: '/blog/' + article.id}">阅读全文 »</nuxt-link>
       </div>
     </el-card>
   </div>

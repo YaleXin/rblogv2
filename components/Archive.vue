@@ -24,11 +24,7 @@
             :key="index1"
             :timestamp="blog.createTime.substr(5,99)"
           >
-            <a
-              target="_blank"
-              :href="applicationPre()+ '/blog/' + blog.id"
-              class="article-title-link"
-            >{{blog.name}}</a>
+            <nuxt-link  class="article-title-link" :to="{path: '/blog/' + blog.id}">{{blog.name}}</nuxt-link>
           </el-timeline-item>
         </el-timeline>
       </el-card>
