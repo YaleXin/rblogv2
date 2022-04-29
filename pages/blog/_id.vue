@@ -7,7 +7,9 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation></navigation>
-    <article-content :article="article" class="middle-box-card" />
+    <article-content 
+     :commentList="commentsData"
+    :article="article" class="middle-box-card" />
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -25,18 +27,24 @@ export default {
     ToTop,
     ArticleContent
   },
-  mounted() {},
-  //   validate({ params }) {
-  //     // 必须是number类型
-  //     console.log("params.id---->", params.id);
-  //     return /^\d+$/.test(params.id) && parseInt(params.id) > 0;
-  //   },
+  mounted() {
+    console.log(this.article);
+    document.title = this.article.name;
+  },
+    validate({ params }) {
+      // 必须是number类型
+      console.log("params.id---->", params.id);
+      return /^\d+$/.test(params.id) && parseInt(params.id) > 0;
+    },
   async asyncData(context) {
+    console.log('--asyncData--');
     // 同时请求文章以及评论
     if (/^\d+$/.test(context.params.id)) {
-      let [res1] = await Promise.all([
-        context.$axios.get("/blog/" + context.params.id)
+      let [res1, res2] = await Promise.all([
+        context.$axios.get("/blog/" + context.params.id),
+        context.$axios.get("/comment/" + context.params.id)
       ]);
+      // 防止查不到博客时前端报 undefined 错误
       let blog = {
           id: -1,
           name: "葵花宝典",
@@ -46,18 +54,18 @@ export default {
           },
           views: 0,
           content: 
-          `<p>
-        <b>欲练此功，必先自宫！</b>
-    </p> 
-    <p>
-        <b>若然自宫，未必成功！</b>
-    </p>
-    <p>
-        <b>若不自宫，也能成功！</b>
-    </p>
-    <p>
-        <b style="color:red">少侠，你来错地方啦！这里没有你想要的武林秘籍，换个id试试看</b>
-    </p>`
+                      `<p>
+                    <b>欲练此功，必先自宫！</b>
+                </p> 
+                <p>
+                    <b>若然自宫，未必成功！</b>
+                </p>
+                <p>
+                    <b>若不自宫，也能成功！</b>
+                </p>
+                <p>
+                    <b style="color:red">少侠，你来错地方啦！这里没有你想要的武林秘籍，换个id试试看</b>
+                </p>`
           ,
           tags: [
             // { id: 1, name: "" }
@@ -68,7 +76,8 @@ export default {
           blog = res1.blog
       }
       return {
-        article: blog
+        article: blog,
+        commentsData: res2.comments
       };
     }
   },
@@ -76,8 +85,5 @@ export default {
     return {
     };
   },
-
-  methods: {},
-  created() {}
 };
 </script>

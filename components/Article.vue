@@ -10,20 +10,21 @@
         <h1 class="article-title">{{article.name}}</h1>
         <div class="article-detail">
           <i class="fa fa-calendar"></i>
+          <font-awesome-icon :icon="['fa', 'calendar']" />
           <span style="margin-left:2px; font-size: 14px;">{{article.createTime}}</span>
           <el-divider direction="vertical"></el-divider>
-          <i class="fa fa-eye"></i>
+          <font-awesome-icon :icon="['fa', 'eye']" />
           <span style="margin-left:2px; font-size: 14px;">{{article.views}}</span>
           <el-divider direction="vertical"></el-divider>
-          <i class="fa fa-bookmark-o"></i>
+          <font-awesome-icon :icon="['fa', 'bookmark']" />
           <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
         </div>
       </div>
       <el-divider></el-divider>
       <!-- 目录div -->
-      <el-popover placement="right"  trigger="hover" popper-class="toc-popper">
+      <el-popover placement="right" trigger="hover" popper-class="toc-popper">
         <div class="toc-container"></div>
-        <div slot="reference"  class="toc-wrapper animate__animated animate__backInLeft">目录</div>
+        <div slot="reference" class="toc-wrapper animate__animated animate__backInLeft">目录</div>
       </el-popover>
 
       <div id="articleContent" class="article-content typo" v-html="article.content">
@@ -32,16 +33,21 @@
       <el-divider></el-divider>
       <div class="tag-group">
         <el-tag v-for="tag in article.tags" :key="tag.id">
-          <a :href="applicationPre()+ '/tag/' + tag.id">
-            <i class="fa fa-tag" aria-hidden="true"></i>
+          <nuxt-link :to="{path: '/tag/' + tag.id}">
+            <font-awesome-icon :icon="['fa', 'tag']" />
             <span>{{tag.name}}</span>
-          </a>
+          </nuxt-link>
         </el-tag>
       </div>
       <div class="appreciate-wrapper">
         <appreciate></appreciate>
       </div>
-      <comment ref="commentCpnt" class="comment-card"></comment>
+      <!-- 评论 -->
+      <!-- <el-divider>下面是评论</el-divider>
+      <comment 
+    class="middle-box-card"
+    :commentList="commentList"
+    /> -->
     </el-card>
   </div>
 </template>
@@ -54,78 +60,57 @@
 //     hash: false
 //   });
 // });
-// import innerHttp from "../network/innerHttp.js";
-// import Appreciate from "../components/Appreciate.vue";
-// import Comment from "../components/Comment.vue";
+
+import Appreciate from "~/components/Appreciate.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
+import Comment from "~/components/Comment.vue";
 export default {
+  head() {
+    return {
+      link: [
+        { rel: 'stylesheet', href: require('~/assets/css/blog.css') },
+        { rel: 'stylesheet', href: require('~/assets/css/typo.css') },
+        { rel: 'stylesheet', href: require('~/assets/css/prism-dark.css') },
+        {rel:  'stylesheet',  href: require('~/assets/css/highlight-keyword.css')
+        }
+      ]
+    };
+  },
   name: "Article",
   components: {
     // Comment,
-    // Appreciate
+    Appreciate,
+    Comment
   },
-  activated() {},
+  activated() {
+    document.title = this.article.name;
+  },
 
   mounted() {
-    let blogId = this.$route.params.id;
-    // this.$refs.commentCpnt.loadCommentsByBlogId(blogId);
+    Prism.highlightAll();
+    document.title = this.article.name;
+    this.setTable();
+    this.setFancyBox();
+    this.initTocbot();
   },
-  created() {
-    // const loading = this.$loading({
-    //   lock: true, //lock的修改符--默认是false
-    //   text: "Loading", //显示在加载图标下方的加载文案
-    //   spinner: "el-icon-loading", //自定义加载图标类名
-    //   background: "rgba(0, 0, 0, 0.7)", //遮罩层颜色
-    //   target: document.querySelector("#article-content") //loadin覆盖的dom元素节点
-    // });
-    // setTimeout(() => {
-    //   loading.close();
-    // }, 3000);
-    // let blogId = this.$route.params.id;
-    // innerHttp
-    //   .get("/blog/" + blogId)
-    //   .then(res => {
-    //     if (res.status === 200) {
-    //       this.article = res.data.blog;
-    //       document.title = this.article.name;
-    //       //成功回调函数停止加载
-    //       loading.close();
-
-    //       this.$nextTick(() => {
-    //         Prism.highlightAll();
-    //         this.setTable();
-    //         this.setFancyBox();
-    //         this.initTocbot();
-    //       });
-    //     } else {
-    //       this.$message({
-    //         showClose: true,
-    //         message: "加载文章失败",
-    //         type: "error"
-    //       });
-    //     }
-    //   })
-    //   .catch(e => {});
-  },
-
+  created() {},
+  
   methods: {
-    // initTocbot() {
-    //   setTimeout(() => {
-    //     tocbot.init({
-    //       //要把目录添加元素位置，支持选择器
-    //       tocSelector: ".toc-container",
-    //       //获取html的元素
-    //       contentSelector: "#articleContent",
-    //       //要显示的id的目录
-    //       headingSelector: "h1, h2, h3",
-    //       hasInnerContainers: true,
-    //       scrollSmooth: true,
-    //       scrollSmoothDuration: 420,
-    //       activeLinkClass: "toc-active-item"
-    //     });
-    //   }, 1000);
-    // },
+    initTocbot() {
+      tocbot.init({
+        //要把目录添加元素位置，支持选择器
+        tocSelector: ".toc-container",
+        //获取html的元素
+        contentSelector: "#articleContent",
+        //要显示的id的目录
+        headingSelector: "h1, h2, h3",
+        hasInnerContainers: true,
+        scrollSmooth: true,
+        scrollSmoothDuration: 420,
+        activeLinkClass: "toc-active-item"
+      });
+    },
     applicationPre() {
       // return process.env.NODE_ENV === "production" ? "/blog" : "";
       return "/blog";
@@ -158,29 +143,39 @@ export default {
         aNode.appendChild(imgNode);
         aNode.style.border = "none";
       });
-    }
+    },
+    
   },
   data() {
     return {
+      commentFinished: false,
+      replyId: -1,
+      atNickname: "请输入内容"
     };
   },
   props: {
-    article:{
+    article: {
       type: Object,
-      default: () =>{
-        return{
-        id: -1,
-        name: "",
-        createTime: "2021-02-09T08:57:19.000+00:00",
-        category: {
-          //  id: 1, name: "分类一"
-        },
-        views: 0,
-        content: "",
-        tags: [
-          // { id: 1, name: "" }
-        ]
+      default: () => {
+        return {
+          id: -1,
+          name: "",
+          createTime: "2021-02-09T08:57:19.000+00:00",
+          category: {
+            //  id: 1, name: "分类一"
+          },
+          views: 0,
+          content: "",
+          tags: [
+            // { id: 1, name: "" }
+          ]
+        };
       }
+    },
+    commentList: {
+      type: Array,
+      default: () => {
+        return [];
       }
     }
   }
@@ -188,9 +183,6 @@ export default {
 </script>
 
 <style scoped>
-@import "~/assets/css/typo.css";
-@import "~/assets/css/blog.css";
-
 .article-content >>> table {
   overflow-x: auto;
   width: 100%;
@@ -245,7 +237,4 @@ export default {
 .appreciate-wrapper {
   text-align: center;
 }
-
-
-
 </style>

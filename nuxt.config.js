@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'rblogv2',
+    title: '黄阿信的个人博客',
     htmlAttrs: {
       lang: 'en'
     },
@@ -123,7 +123,34 @@ export default {
             libraryName: 'element-ui',
             styleLibraryName: 'theme-chalk'
           }
-        ]
+        ],
+        [
+          'prismjs',
+          {
+              languages: [
+                  'html',
+                  'css',
+                  'javascript',
+                  'php',
+                  'dart',
+                  'bash',
+                  'nginx',
+                  'sql',
+                  'c',
+                  'cpp',
+                  'python',
+                  'go',
+                  'java'
+              ],
+              plugins: [
+                  'line-numbers',
+                  'show-language',
+                  'copy-to-clipboard'
+              ],
+              theme: 'okaidia',
+              css: true
+          }
+      ]
       ],
       comments: true
     },

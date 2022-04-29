@@ -25,10 +25,10 @@ export default {
 <style scoped>
 .img-wrapper {
   text-align: center;
-  
+  width: auto
 }
 .qr-code-img {
-  width: 150px;
+  width: 130px;
   border: 1px solid;
   border-radius: 25px;
   margin: 1px;
