@@ -6,7 +6,7 @@
 <template>
   <div>
     <mb-navigation @mbClick="choose" v-if="isMobie"></mb-navigation>
-    <pc-navigation @pcClick="choose" v-else></pc-navigation>
+    <pc-navigation  v-else></pc-navigation>
   </div>
 </template>
 
