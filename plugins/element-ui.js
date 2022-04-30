@@ -29,7 +29,10 @@ import {
   Tag,
   Avatar,
   Button,
-  FormItem
+  FormItem,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -55,4 +58,7 @@ Vue.use(Tag)
 Vue.use(Avatar)
 Vue.use(Button)
 Vue.use(FormItem)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 Vue.prototype.$message = Message

@@ -42,8 +42,8 @@ export default {
       src: '~/plugins/element-ui',
       ssr: true
     },
-    '~/plugins/font-awesome'
-,  
+    '~/plugins/font-awesome',
+    { src: '@/plugins/localStorage', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
