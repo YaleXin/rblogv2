@@ -13,7 +13,7 @@ import User from "~/components/admin/User.vue";
 
 
 export default {
-  name: "AdminLogin",
+  name: "AdminPass",
   components: {
     User
   },

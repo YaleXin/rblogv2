@@ -33,6 +33,10 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Select,
+  Option,
+  TimePicker,
+  DatePicker,
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -60,5 +64,9 @@ Vue.use(Button)
 Vue.use(FormItem)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(TimePicker)
+Vue.use(DatePicker)
 Vue.use(DropdownItem)
 Vue.prototype.$message = Message
