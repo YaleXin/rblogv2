@@ -30,7 +30,6 @@ export default {
     // 请求后端session
     this.$axios.get("/admin/user/info")
         .then(res => {
-          console.log('userres');
         })
         .catch(e => {
 
