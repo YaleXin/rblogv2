@@ -90,38 +90,13 @@ export default {
   computed: {
     activeIndex: function() {
       const routePath = this.$route.path;
-      let activeIndex = "0";
+      let activeIndex = "/home";
       if (routePath.indexOf("/category/") > -1) {
-        activeIndex = "2";
+        activeIndex = "/category/-1";
       } else if (routePath.indexOf("/tag/") > -1) {
-        activeIndex = "3";
+        activeIndex = "/tag/-1";
       } else {
-        switch (routePath) {
-          case "/":
-          case "/home":
-            activeIndex = "1";
-            break;
-          // case "/category":
-          //   activeIndex = "2";
-          //   break;
-          // case "/tag":
-          //   activeIndex = "3";
-          //   break;
-          case "/link":
-            activeIndex = "4";
-            break;
-          case "/talk":
-            activeIndex = "5";
-            break;
-          case "/archive":
-            activeIndex = "6";
-            break;
-          case "/search":
-            activeIndex = "7";
-            break;
-          default:
-            activeIndex = "-1";
-        }
+        activeIndex = routePath;
       }
       return activeIndex;
     }

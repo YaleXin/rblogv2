@@ -40,7 +40,7 @@ export default {
         return {
           pageNum: 1,
           pageSize: 5,
-          totalSize: 10,
+          totalSize: 0,
           totalPages: 0,
           content: [
             {

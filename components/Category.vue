@@ -11,10 +11,14 @@
         :type="activedId == ctgr.id ? '' : 'info'"
         :key="ctgr.id"
       >
-        <a :href="applicationPre()+ '/category/' + ctgr.id">
+        <!-- <a :href="applicationPre()+ '/category/' + ctgr.id">
           <i class="fa fa-bookmark-o" aria-hidden="true"></i>
           <span>{{ctgr.name}}</span>
-        </a>
+        </a> -->
+        <nuxt-link :to="{path: '/category/' + ctgr.id}">
+        <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+          <span>{{ctgr.name}}</span>
+        </nuxt-link>
       </el-tag>
     </el-card>
     <el-divider content-position="center">该分类下的文章</el-divider>

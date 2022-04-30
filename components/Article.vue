@@ -17,7 +17,9 @@
           <span style="margin-left:2px; font-size: 14px;">{{article.views}}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'bookmark']" />
-          <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
+          <nuxt-link class="article-category-a" :to="{path: '/category/' + article.category.id}">
+            <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
+          </nuxt-link>
         </div>
       </div>
       <el-divider></el-divider>
@@ -236,5 +238,8 @@ export default {
 }
 .appreciate-wrapper {
   text-align: center;
+}
+.article-category-a{
+  text-decoration:none
 }
 </style>
