@@ -37,6 +37,7 @@ import {
   Option,
   TimePicker,
   DatePicker,
+  MessageBox
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -70,3 +71,4 @@ Vue.use(TimePicker)
 Vue.use(DatePicker)
 Vue.use(DropdownItem)
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
