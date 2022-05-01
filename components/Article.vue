@@ -64,10 +64,6 @@ export default {
   head() {
     return {
       link: [
-        { rel: 'stylesheet', href: require('~/assets/css/blog.css') },
-        { rel: 'stylesheet', href: require('~/assets/css/typo.css') },
-        { rel: 'stylesheet', href: require('~/assets/css/prism-dark.css') },
-        { rel:  'stylesheet',  href: require('~/assets/css/highlight-keyword.css')},
      ],
     };
   },
@@ -190,6 +186,11 @@ export default {
 </script>
 
 <style scoped>
+ @import '~/assets/css/blog.css';
+ @import '~/assets/css/typo.css';
+ @import '~/assets/css/prism-dark.css';
+ @import '~/assets/css/highlight-keyword.css';
+
 .article-content >>> table {
   overflow-x: auto;
   width: 100%;

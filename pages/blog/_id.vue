@@ -27,23 +27,23 @@ export default {
     ToTop,
     ArticleContent
   },
-    head() {
-    return {
-      link: [
-        { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' },
-      ],
-      script: [
-        {
-        src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
-        },
+  //   head() {
+  //   return {
+  //     link: [
+  //       { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' },
+  //     ],
+  //     script: [
+  //       {
+  //       src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
+  //       },
         
-        {
-        src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
-        },
+  //       {
+  //       src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
+  //       },
         
-        ]
-    };
-  },
+  //       ]
+  //   };
+  // },
   mounted() {
     document.title = this.article.name;
   },

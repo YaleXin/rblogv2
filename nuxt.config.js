@@ -27,7 +27,14 @@ let turePlugins =       [
             'cpp',
             'python',
             'go',
-            'java'
+            'java',
+            'clike',
+            'matlab',
+            'bash',
+            'shell',
+            'plsql',
+            'sql'
+
         ],
         plugins: [
             'line-numbers',
@@ -60,8 +67,19 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' }
     ],
+    script: [
+      {
+      src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
+      },
+      
+      {
+      src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
+      },
+      
+      ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
