@@ -28,7 +28,11 @@ export default {
   },
   mounted() {
   },
-
+head() {
+    return {
+      title: '友链-黄阿信的博客'
+    }
+  },
   asyncData(context) {
     return context.$axios
       .get("/link")

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Navigation from "~/components/Navigation.vue";
 import TalkContent from "~/components/Talk.vue";
 import BlogFooter from "~/components/Footer.vue";
@@ -31,7 +30,11 @@ export default {
   },
   mounted() {
   },
-
+  head() {
+    return {
+      title: '留言-黄阿信的博客'
+    }
+  },
   asyncData(context) {
     return context.$axios
       .get("/comment/0")

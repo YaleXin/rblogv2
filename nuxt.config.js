@@ -3,9 +3,49 @@
  * @Email       : me@yalexin.top
  * @LastEditors : YaleXin
  */
+let turePlugins =       [
+  [
+    'component',
+    {
+      libraryName: 'element-ui',
+      styleLibraryName: 'theme-chalk'
+    }
+  ],
+  [
+    'prismjs',
+    {
+        languages: [
+            'html',
+            'css',
+            'javascript',
+            'php',
+            'dart',
+            'bash',
+            'nginx',
+            'sql',
+            'c',
+            'cpp',
+            'python',
+            'go',
+            'java'
+        ],
+        plugins: [
+            'line-numbers',
+            'show-language',
+            'copy-to-clipboard'
+        ],
+        theme: 'okaidia',
+        css: true
+    }
+],
+]
+if (process.env.NODE_ENV === 'production') {
+  turePlugins.push("transform-remove-console")
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -94,6 +134,11 @@ export default {
     prefix: '/api', // 配置基本得url地址
     credentials: true
   },
+  router:{
+    base: process.env.NODE_ENV === 'production' ? '/blog/' : '',
+    resourceHints: false,
+    prefetchLinks: false  // 解决首屏加载全部js
+  },
   proxy: {
     '/api': {
         target: 'http://localhost:8080/api/',
@@ -116,42 +161,44 @@ export default {
   build: {
     vendor: ['element-ui'],
     babel: {
-      plugins: [
-        [
-          'component',
-          {
-            libraryName: 'element-ui',
-            styleLibraryName: 'theme-chalk'
-          }
-        ],
-        [
-          'prismjs',
-          {
-              languages: [
-                  'html',
-                  'css',
-                  'javascript',
-                  'php',
-                  'dart',
-                  'bash',
-                  'nginx',
-                  'sql',
-                  'c',
-                  'cpp',
-                  'python',
-                  'go',
-                  'java'
-              ],
-              plugins: [
-                  'line-numbers',
-                  'show-language',
-                  'copy-to-clipboard'
-              ],
-              theme: 'okaidia',
-              css: true
-          }
-      ]
-      ],
+      plugins: turePlugins,
+      // [
+      //   [
+      //     'component',
+      //     {
+      //       libraryName: 'element-ui',
+      //       styleLibraryName: 'theme-chalk'
+      //     }
+      //   ],
+      //   [
+      //     'prismjs',
+      //     {
+      //         languages: [
+      //             'html',
+      //             'css',
+      //             'javascript',
+      //             'php',
+      //             'dart',
+      //             'bash',
+      //             'nginx',
+      //             'sql',
+      //             'c',
+      //             'cpp',
+      //             'python',
+      //             'go',
+      //             'java'
+      //         ],
+      //         plugins: [
+      //             'line-numbers',
+      //             'show-language',
+      //             'copy-to-clipboard'
+      //         ],
+      //         theme: 'okaidia',
+      //         css: true
+      //     }
+      // ],
+      // 'transform-remove-console'
+      // ],
       comments: true
     },
   }

@@ -32,7 +32,11 @@ export default {
     EventBus.$on("searchSubmit", this.receiveParam);
     document.title = "搜索";
   },
-
+  head() {
+    return {
+      title: '查找-黄阿信的博客'
+    }
+  },
   asyncData(context) {
     // return context.$axios
     //   .get("/blog/search", {

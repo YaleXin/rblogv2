@@ -55,13 +55,6 @@
 </template>
 
 <script>
-// 加载 fancy-box 插件
-// $(document).ready(function() {
-//   $('[data-fancybox="gallery"]').fancybox({
-//     buttons: ["share", "close", "download"],
-//     hash: false
-//   });
-// });
 
 import Appreciate from "~/components/Appreciate.vue";
 import Prism from "prismjs";
@@ -74,9 +67,8 @@ export default {
         { rel: 'stylesheet', href: require('~/assets/css/blog.css') },
         { rel: 'stylesheet', href: require('~/assets/css/typo.css') },
         { rel: 'stylesheet', href: require('~/assets/css/prism-dark.css') },
-        {rel:  'stylesheet',  href: require('~/assets/css/highlight-keyword.css')
-        }
-      ]
+        { rel:  'stylesheet',  href: require('~/assets/css/highlight-keyword.css')},
+     ],
     };
   },
   name: "Article",
@@ -90,11 +82,23 @@ export default {
   },
 
   mounted() {
+    // 加载 fancy-box 插件
+    // $(document).ready(function() {
+      // $('[data-fancybox="gallery"]').fancybox({
+      //   buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
+      //   hash: false
+      // });
+    // });
     Prism.highlightAll();
     document.title = this.article.name;
     this.setTable();
     this.setFancyBox();
     this.initTocbot();
+          $('[data-fancybox="gallery"]').fancybox({
+        buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
+        hash: false
+      });
+      tocbot.refresh();
   },
   created() {},
   
@@ -141,6 +145,7 @@ export default {
         aNode.setAttribute("data-animation-effect", "slide");
         aNode.setAttribute("data-fancybox", "gallery");
         aNode.setAttribute("data-capion", "这是一张图片");
+        aNode.name = 'img-div-fancybox';
         imgNode.parentNode.appendChild(aNode);
         aNode.appendChild(imgNode);
         aNode.style.border = "none";

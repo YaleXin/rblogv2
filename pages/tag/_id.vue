@@ -34,6 +34,11 @@ export default {
   },
   mounted() {
   },
+  head() {
+    return {
+      title: '标签-黄阿信的博客'
+    }
+  },
 validate({ params }) {
     // 必须是number类型
     console.log("params.id---->", params.id);
