@@ -90,11 +90,10 @@ export default {
     this.setTable();
     this.setFancyBox();
     this.initTocbot();
-          $('[data-fancybox="gallery"]').fancybox({
-        buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
-        hash: false
-      });
-      tocbot.refresh();
+    $('[data-fancybox="gallery"]').fancybox({
+      buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
+      hash: false
+    });
   },
   created() {},
   
@@ -110,7 +109,8 @@ export default {
         hasInnerContainers: true,
         scrollSmooth: true,
         scrollSmoothDuration: 420,
-        activeLinkClass: "toc-active-item"
+        activeLinkClass: "toc-active-item",
+        basePath: this.$route.path
       });
     },
     applicationPre() {
@@ -187,6 +187,7 @@ export default {
 
 <style scoped>
  @import '~/assets/css/blog.css';
+ @import url('~/assets/css/blog.css');
  @import '~/assets/css/typo.css';
  @import '~/assets/css/prism-dark.css';
  @import '~/assets/css/highlight-keyword.css';
@@ -247,5 +248,16 @@ export default {
 }
 .article-category-a{
   text-decoration:none
+}
+toc-container >>> ol {
+    padding: 0;
+    list-style: none;
+    counter-reset: sectioncounter
+}
+.toc-list-item{
+  color: aqua;
+}
+.toc-popper .toc-active-item {
+    color: red;
 }
 </style>

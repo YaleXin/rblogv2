@@ -9,7 +9,17 @@
       <el-button @click="editBlogClick(-1)" type="primary" style="margin-bottom: 10px;" plain>添加新文章</el-button>
     </div>
     <el-table :data="page.content" border style="width: 100%" stripe :fit="true">
-      <el-table-column align="center" prop="name" label="文章"></el-table-column>
+      <el-table-column align="center"  label="文章">
+        <template slot-scope="scope">
+          <nuxt-link :to="{path: '/blog/' + scope.row.id}">
+            <span
+            style="margin-left: 10px"
+            >{{ scope.row.name}}</span>
+          </nuxt-link>
+          
+        </template>
+        
+      </el-table-column>
       <el-table-column align="center" label="最后更新日期">
         <template slot-scope="scope">
           <span

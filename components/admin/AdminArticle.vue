@@ -186,16 +186,17 @@ export default {
           data: JSON.stringify(this.blog)
         })
         .then(res => {
-          if (res.status === 200) {
+          // if (res.status === 200) {
             this.handleBlogSuccess("更新成功");
-          }else{
-            this.$message({
-              showClose: true,
-              message: "更新失败",
-              type: 'error'
-            })
-          }
-        })
+        //   }else{
+        //     this.$message({
+        //       showClose: true,
+        //       message: "更新失败",
+        //       type: 'error'
+        //     })
+        //   }
+        }
+        )
         .catch(e => {});
     },
     handleBlogSuccess(msg) {
