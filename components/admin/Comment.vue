@@ -16,6 +16,17 @@
       <el-table-column align="center" label="评论者">
         <el-table-column align="center" label="昵称" prop="nickname"></el-table-column>
         <el-table-column align="center" label="邮箱" prop="email"></el-table-column>
+        <el-table-column align="center" label="IP">
+          <template slot-scope="scope">
+              <el-popover trigger="hover" placement="top">
+                <a type="primary" :href="'https://apis.map.qq.com/ws/location/v1/ip?ip=scope.row.ip'+'&key=???'" target="_blank">{{ "https://apis.map.qq.com/ws/location/v1/ip?key=????&ip=" + scope.row.ip }}</a>
+                <div slot="reference" class="name-wrapper">
+                  <el-tag size="medium">{{ scope.row.ip }}</el-tag>
+                </div>
+              </el-popover>
+          </template>
+        </el-table-column>
+        <!-- <el-table-column align="center" label="IP" prop="ip"></el-table-column> -->
       </el-table-column>
       <el-table-column align="center" label="所属文章" prop="blogName"></el-table-column>
       <!-- <el-table-column align="center" label="回复楼层" prop="blogName"></el-table-column> -->
