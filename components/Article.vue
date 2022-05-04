@@ -64,6 +64,10 @@ export default {
   head() {
     return {
       link: [
+        {rel: 'stylesheet', href: require('~/assets/css/blog.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/typo.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/prism-dark.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/highlight-keyword.css')},
      ],
     };
   },
@@ -79,21 +83,17 @@ export default {
 
   mounted() {
     // 加载 fancy-box 插件
-    // $(document).ready(function() {
-      // $('[data-fancybox="gallery"]').fancybox({
-      //   buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
-      //   hash: false
-      // });
-    // });
+    $(document).ready(function() {
+      $('[data-fancybox="gallery"]').fancybox({
+        buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
+        hash: false
+      });
+    });
     Prism.highlightAll();
     document.title = this.article.name;
     this.setTable();
     this.setFancyBox();
     this.initTocbot();
-    $('[data-fancybox="gallery"]').fancybox({
-      buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
-      hash: false
-    });
   },
   created() {},
   
@@ -110,7 +110,10 @@ export default {
         scrollSmooth: true,
         scrollSmoothDuration: 420,
         activeLinkClass: "toc-active-item",
-        basePath: this.$route.path
+        basePath: this.$route.path,
+        scrollSmooth: true,
+        // Smooth scroll duration.
+        scrollSmoothDuration: 420,
       });
     },
     applicationPre() {
@@ -186,11 +189,10 @@ export default {
 </script>
 
 <style scoped>
- @import '~/assets/css/blog.css';
- @import url('~/assets/css/blog.css');
+ /* @import '~/assets/cssblog.css';
  @import '~/assets/css/typo.css';
  @import '~/assets/css/prism-dark.css';
- @import '~/assets/css/highlight-keyword.css';
+ @import '~/assets/css/highlight-keyword.css'; */
 
 .article-content >>> table {
   overflow-x: auto;
@@ -248,16 +250,5 @@ export default {
 }
 .article-category-a{
   text-decoration:none
-}
-toc-container >>> ol {
-    padding: 0;
-    list-style: none;
-    counter-reset: sectioncounter
-}
-.toc-list-item{
-  color: aqua;
-}
-.toc-popper .toc-active-item {
-    color: red;
 }
 </style>
