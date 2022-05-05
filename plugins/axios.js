@@ -30,7 +30,14 @@ export default function ({store, route, redirect, $axios,req}) {
           // 密码错误
 				case 403: Message({
 					showClose: true,
-					message: '暗号错误！',
+					message: '密令错误！',
+					type: "error"
+				});
+					break;
+            // 密码错误
+				case 405: Message({
+					showClose: true,
+					message: '口令错误！',
 					type: "error"
 				});
 					break;

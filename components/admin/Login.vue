@@ -27,6 +27,18 @@
             type="password"
             v-model="loginForm.rawPassword"
             autocomplete="off"
+            
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item prop="code">
+          <img :src="this.codeImg" @click="changeCodeImg" />
+          <el-input
+            prefix-icon="el-icon-user"
+            placeholder="请输入验证码，不区分大小写"
+            type="text"
+            v-model="loginForm.code"
+            autocomplete="off"
             @keydown.enter.native="onSubmit"
           ></el-input>
         </el-form-item>
@@ -49,22 +61,53 @@ export default {
   activated() {
     console.log("activated");
   },
+  mounted() {
+    this.changeCodeImg();
+  },
   data() {
+    let validateCode = (rule, value, callback) => {
+      let md5code = md5(value.toLocaleLowerCase());
+      if (value == "") {
+        callback(new Error("请输入验证码"));
+      } 
+      else if (this.code != md5code) {
+        callback(new Error("验证码错误!"));
+      }
+      
+      else{
+        callback();
+      }
+    };
     return {
+      code: "",
+      codeImg: "",
       loginForm: {
         username: "",
         rawPassword: "",
-        rememberMe: false
+        rememberMe: false,
+        code: "",
       },
       rules: {
         username: { required: true, message: "请输入用户名", trigger: "blur" },
-        rawPassword: { required: true, message: "请输入密码", trigger: "blur" }
-      }
+        rawPassword: { required: true, message: "请输入密码", trigger: "blur" },
+        code: { validator: validateCode, trigger: "blur" },
+      },
     };
   },
   methods: {
+    changeCodeImg() {
+      this.$axios
+        .get("/admin/verifyCode")
+        .then((res) => {
+          this.codeImg = decodeURI(res.img);
+          this.code = res.code;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
     onSubmit() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.login();
         } else {
@@ -77,10 +120,10 @@ export default {
       this.$message({
         showClose: true,
         message: "登录成功",
-        type: "success"
+        type: "success",
       });
       this.$store.commit("user/saveUser", user);
-      this.$router.replace("/admin").catch(e => {});
+      this.$router.replace("/admin").catch((e) => {});
     },
     login() {
       const code =
@@ -91,24 +134,26 @@ export default {
         str += code[parseInt(Math.random() * 62)];
       }
       let md5Str = md5(str);
-
+      let codeStr = md5(md5(this.loginForm.code.toLocaleLowerCase()));
       let user = {
         username: this.loginForm.username,
-        password: md5(md5(md5(this.loginForm.rawPassword)) + md5Str)
+        password: md5(md5(md5(this.loginForm.rawPassword)) + md5Str),
       };
+      console.log('code = ', codeStr);
       this.$axios
         .post("/admin/login", {
           data: {
             user: user,
-            salt: md5Str
-          }
+            salt: md5Str,
+            code: codeStr
+          },
         })
-        .then(res => {
-            this.loginSuccess(res.user);
+        .then((res) => {
+          this.loginSuccess(res.user);
         })
-        .catch(e => {});
-    }
-  }
+        .catch((e) => {});
+    },
+  },
 };
 </script>
 

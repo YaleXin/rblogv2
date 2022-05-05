@@ -49,4 +49,7 @@ export default {
 .admin-right-content{
     margin-top: 20px;
 }
+#admin-div{
+  margin-bottom: 80px;
+}
 </style>

@@ -110,7 +110,7 @@ export default {
         scrollSmooth: true,
         scrollSmoothDuration: 420,
         activeLinkClass: "toc-active-item",
-        basePath: this.$route.path,
+        basePath: window.location.href,
         scrollSmooth: true,
         // Smooth scroll duration.
         scrollSmoothDuration: 420,
@@ -139,6 +139,7 @@ export default {
       let imgNodeArray = document.querySelectorAll(".fancy-box-img");
       imgNodeArray.forEach(imgNode => {
         let aNode = document.createElement("a");
+        aNode.classList.add("fancybox-a-wrapper")
         aNode.href = imgNode.getAttribute("src");
         aNode.setAttribute("data-transition-effect", "zoom-in-out");
         aNode.setAttribute("data-animation-effect", "slide");
