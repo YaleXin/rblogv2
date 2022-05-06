@@ -75,7 +75,7 @@
   text-decoration: line-through;
 }
 
-.typo address, caption, cite, code, dfn, em, th, var {
+.typo address, caption, cite, code, dfn, th, var {
   font-style: normal;
   font-weight: 400;
 }
@@ -149,7 +149,7 @@
 
 /* 标记，类似于手写的荧光笔的作用 */
 .typo mark {
-  background: #fffdd1;
+  background:yellow;
   border-bottom: 1px solid #ffedce;
   padding: 2px;
   margin: 0 5px;
