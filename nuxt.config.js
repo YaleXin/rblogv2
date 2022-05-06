@@ -102,7 +102,8 @@ export default {
       ssr: true
     },
     '~/plugins/font-awesome',
-    { src: '@/plugins/localStorage', ssr: false }
+    { src: '@/plugins/localStorage', ssr: false },
+    { src: '@/plugins/vue-mavon-editor', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

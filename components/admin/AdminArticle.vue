@@ -55,32 +55,25 @@
       </el-form-item>
     </el-form>
     <p>文章正文</p>
-
-      <!-- <el-form-item prop="content" label="文章内容"> -->
-        <el-input
-          :autosize="{ minRows: 5}"
-          type="textarea"
-          placeholder="文章正文"
-          v-model="blog.content"
-        ></el-input>
-      <!-- </el-form-item> -->
-
+<no-ssr>
+      <mavon-editor :toolbars="markdownOption" v-model="blog.content"/>
+    </no-ssr>
     <!-- <markdown theme="dark" v-model="blog.content"></markdown> -->
     <el-button @click="submit" class="publish-btn" plain type="primary">发布</el-button>
   </div>
 </template>
 
 <script>
-// import innerHttp from "../../network/innerHttp.js";
-// import {Markdown} from 'vue-meditor'
+
 
 export default {
   name: "Article",
   components: {
-    // Markdown
   },
   data() {
     return {
+      markdownOption: {
+      },
       blog: {
         name: "",
         content: "",

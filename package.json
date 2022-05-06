@@ -19,6 +19,7 @@
     "core-js": "^3.19.3",
     "element-ui": "^2.15.0",
     "js-md5": "^0.7.3",
+    "mavon-editor": "^2.10.4",
     "nuxt": "^2.15.8",
     "nuxt-fontawesome": "^0.4.0",
     "prismjs": "^1.28.0",
