@@ -1,5 +1,10 @@
+<!--
+ * @Author      : YaleXin
+ * @Email       : 181303209@yzu.edu.cn
+ * @LastEditors : YaleXin
+-->
 # rblogv2
-
+为了优化SEO，使用Nuxt改造之前的前端，由于修改过多，因此新建了仓库，原先仓库地址[在这里](https://github.com/YaleXin/rblog)
 ## Build Setup
 
 ```bash
