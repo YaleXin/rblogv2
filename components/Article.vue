@@ -17,7 +17,9 @@
           <span style="margin-left:2px; font-size: 14px;">{{article.views}}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'bookmark']" />
-          <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
+          <nuxt-link class="article-category-a" :to="{path: '/category/' + article.category.id}">
+            <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
+          </nuxt-link>
         </div>
       </div>
       <el-divider></el-divider>
@@ -53,13 +55,6 @@
 </template>
 
 <script>
-// 加载 fancy-box 插件
-// $(document).ready(function() {
-//   $('[data-fancybox="gallery"]').fancybox({
-//     buttons: ["share", "close", "download"],
-//     hash: false
-//   });
-// });
 
 import Appreciate from "~/components/Appreciate.vue";
 import Prism from "prismjs";
@@ -69,12 +64,11 @@ export default {
   head() {
     return {
       link: [
-        { rel: 'stylesheet', href: require('~/assets/css/blog.css') },
-        { rel: 'stylesheet', href: require('~/assets/css/typo.css') },
-        { rel: 'stylesheet', href: require('~/assets/css/prism-dark.css') },
-        {rel:  'stylesheet',  href: require('~/assets/css/highlight-keyword.css')
-        }
-      ]
+        {rel: 'stylesheet', href: require('~/assets/css/blog.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/typo.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/prism-dark.css')},
+        {rel: 'stylesheet', href: require('~/assets/css/highlight-keyword.css')},
+     ],
     };
   },
   name: "Article",
@@ -88,6 +82,13 @@ export default {
   },
 
   mounted() {
+    // 加载 fancy-box 插件
+    $(document).ready(function() {
+      $('[data-fancybox="gallery"]').fancybox({
+        buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
+        hash: false
+      });
+    });
     Prism.highlightAll();
     document.title = this.article.name;
     this.setTable();
@@ -108,7 +109,11 @@ export default {
         hasInnerContainers: true,
         scrollSmooth: true,
         scrollSmoothDuration: 420,
-        activeLinkClass: "toc-active-item"
+        activeLinkClass: "toc-active-item",
+        basePath: window.location.href,
+        scrollSmooth: true,
+        // Smooth scroll duration.
+        scrollSmoothDuration: 420,
       });
     },
     applicationPre() {
@@ -134,11 +139,13 @@ export default {
       let imgNodeArray = document.querySelectorAll(".fancy-box-img");
       imgNodeArray.forEach(imgNode => {
         let aNode = document.createElement("a");
+        aNode.classList.add("fancybox-a-wrapper")
         aNode.href = imgNode.getAttribute("src");
         aNode.setAttribute("data-transition-effect", "zoom-in-out");
         aNode.setAttribute("data-animation-effect", "slide");
         aNode.setAttribute("data-fancybox", "gallery");
         aNode.setAttribute("data-capion", "这是一张图片");
+        aNode.name = 'img-div-fancybox';
         imgNode.parentNode.appendChild(aNode);
         aNode.appendChild(imgNode);
         aNode.style.border = "none";
@@ -183,6 +190,11 @@ export default {
 </script>
 
 <style scoped>
+ /* @import '~/assets/cssblog.css';
+ @import '~/assets/css/typo.css';
+ @import '~/assets/css/prism-dark.css';
+ @import '~/assets/css/highlight-keyword.css'; */
+
 .article-content >>> table {
   overflow-x: auto;
   width: 100%;
@@ -236,5 +248,8 @@ export default {
 }
 .appreciate-wrapper {
   text-align: center;
+}
+.article-category-a{
+  text-decoration:none
 }
 </style>

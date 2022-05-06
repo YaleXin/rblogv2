@@ -3,9 +3,57 @@
  * @Email       : me@yalexin.top
  * @LastEditors : YaleXin
  */
+let turePlugins =       [
+  [
+    'component',
+    {
+      libraryName: 'element-ui',
+      styleLibraryName: 'theme-chalk'
+    }
+  ],
+  [
+    'prismjs',
+    {
+        languages: [
+            'html',
+            'css',
+            'javascript',
+            'php',
+            'dart',
+            'bash',
+            'nginx',
+            'sql',
+            'c',
+            'cpp',
+            'python',
+            'go',
+            'java',
+            'clike',
+            'matlab',
+            'bash',
+            'shell',
+            'plsql',
+            'sql',
+            'json'
+
+        ],
+        plugins: [
+            'line-numbers',
+            'show-language',
+            'copy-to-clipboard'
+        ],
+        theme: 'dark',
+        css: true
+    }
+],
+]
+if (process.env.NODE_ENV === 'production') {
+  turePlugins.push("transform-remove-console")
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -20,8 +68,19 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' }
     ],
+    script: [
+      {
+      src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
+      },
+      
+      {
+      src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
+      },
+      
+      ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -42,8 +101,9 @@ export default {
       src: '~/plugins/element-ui',
       ssr: true
     },
-    '~/plugins/font-awesome'
-,  
+    '~/plugins/font-awesome',
+    { src: '@/plugins/localStorage', ssr: false },
+    { src: '@/plugins/vue-mavon-editor', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -94,6 +154,11 @@ export default {
     prefix: '/api', // 配置基本得url地址
     credentials: true
   },
+  router:{
+    base: process.env.NODE_ENV === 'production' ? '/blog/' : '',
+    resourceHints: false,
+    prefetchLinks: false  // 解决首屏加载全部js
+  },
   proxy: {
     '/api': {
         target: 'http://localhost:8080/api/',
@@ -116,42 +181,44 @@ export default {
   build: {
     vendor: ['element-ui'],
     babel: {
-      plugins: [
-        [
-          'component',
-          {
-            libraryName: 'element-ui',
-            styleLibraryName: 'theme-chalk'
-          }
-        ],
-        [
-          'prismjs',
-          {
-              languages: [
-                  'html',
-                  'css',
-                  'javascript',
-                  'php',
-                  'dart',
-                  'bash',
-                  'nginx',
-                  'sql',
-                  'c',
-                  'cpp',
-                  'python',
-                  'go',
-                  'java'
-              ],
-              plugins: [
-                  'line-numbers',
-                  'show-language',
-                  'copy-to-clipboard'
-              ],
-              theme: 'okaidia',
-              css: true
-          }
-      ]
-      ],
+      plugins: turePlugins,
+      // [
+      //   [
+      //     'component',
+      //     {
+      //       libraryName: 'element-ui',
+      //       styleLibraryName: 'theme-chalk'
+      //     }
+      //   ],
+      //   [
+      //     'prismjs',
+      //     {
+      //         languages: [
+      //             'html',
+      //             'css',
+      //             'javascript',
+      //             'php',
+      //             'dart',
+      //             'bash',
+      //             'nginx',
+      //             'sql',
+      //             'c',
+      //             'cpp',
+      //             'python',
+      //             'go',
+      //             'java'
+      //         ],
+      //         plugins: [
+      //             'line-numbers',
+      //             'show-language',
+      //             'copy-to-clipboard'
+      //         ],
+      //         theme: 'okaidia',
+      //         css: true
+      //     }
+      // ],
+      // 'transform-remove-console'
+      // ],
       comments: true
     },
   }

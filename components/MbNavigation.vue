@@ -10,7 +10,6 @@
         <el-col :span="2">
           <div class="icon-div">
             <font-awesome-icon @click="showNvg=true" size="lg" :icon="['fa', 'bars']"/>
-            <!-- <span @click="showNvg=true" icon="bars" size="lg" >三</span> -->
           </div>
         </el-col>
         <el-col class="motto-wrapper" :span="22">
@@ -28,50 +27,53 @@
 
       <el-row :span="10">
         <el-col>
-          <el-menu :default-active="activeIndex" @select="handleSelect">
-            <el-menu-item index="1">
+          <el-menu 
+          :router="true"
+          :default-active="activeIndex"
+           @select="handleSelect">
+            <el-menu-item index="/home">
               <template slot="title">
                 <i class="el-icon-s-home"></i>
                 <span>首页</span>
               </template>
             </el-menu-item>
 
-            <el-menu-item index="2">
+            <el-menu-item index="/category/-1">
               <template slot="title">
                 <i class="el-icon-collection-tag"></i>
                 <span>分类</span>
               </template>
             </el-menu-item>
 
-            <el-menu-item index="3">
+            <el-menu-item index="/tag/-1">
               <template slot="title">
                 <i class="el-icon-price-tag"></i>
                 <span>标签</span>
               </template>
             </el-menu-item>
 
-            <el-menu-item index="4">
+            <el-menu-item index="/link">
               <template slot="title">
                 <i class="el-icon-link"></i>
                 <span>友链</span>
               </template>
             </el-menu-item>
 
-            <el-menu-item index="5">
+            <el-menu-item index="/talk">
               <template slot="title">
                 <i class="el-icon-mic"></i>
                 <span>最近的吐槽</span>
               </template>
             </el-menu-item>
 
-            <el-menu-item index="6">
+            <el-menu-item index="/archive">
               <template slot="title">
                 <i class="el-icon-data-line"></i>
                 <span>归档</span>
               </template>
             </el-menu-item>
             
-            <el-menu-item index="7">
+            <el-menu-item index="/search">
               <div>
                 <el-form :inline="true" :model="searchForm" @submit.native.prevent>
                   <el-input
@@ -106,46 +108,21 @@ export default {
   computed: {
     activeIndex: function() {
       const routePath = this.$route.path;
-      let activeIndex = "0";
+      let activeIndex = "/home";
       if (routePath.indexOf("/category/") > -1) {
-        activeIndex = "2";
+        activeIndex = "/category/-1";
       } else if (routePath.indexOf("/tag/") > -1) {
-        activeIndex = "3";
+        activeIndex = "/tag/-1";
       } else {
-        switch (routePath) {
-          case "/":
-          case "/home":
-            activeIndex = "1";
-            break;
-          // case "/category":
-          //   activeIndex = "2";
-          //   break;
-          // case "/tag":
-          //   activeIndex = "3";
-          //   break;
-          case "/link":
-            activeIndex = "4";
-            break;
-          case "/talk":
-            activeIndex = "5";
-            break;
-          case "/archive":
-            activeIndex = "6";
-            break;
-          case "/search":
-            activeIndex = "7";
-            break;
-          default:
-            activeIndex = "-1";
-        }
+        activeIndex = routePath;
       }
       return activeIndex;
     }
   },
   methods: {
     handleSelect(key, keyPath) {
-      if (key !== "7") this.showNvg = false;
-      this.$emit("mbClick", key);
+      if (key !== "/search") this.showNvg = false;
+      // this.$emit("mbClick", key);
     },
     onSubmit() {
       this.$router.replace("/search").catch(e => {});

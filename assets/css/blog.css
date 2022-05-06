@@ -33,3 +33,7 @@
 .toc-popper .toc-active-item {
     color: red;
 }
+.fancybox-a-wrapper{
+    display: block;
+    text-align: center;
+  }

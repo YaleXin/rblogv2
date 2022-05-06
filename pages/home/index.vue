@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Navigation from "~/components/Navigation.vue";
 
 import BlogFooter from "~/components/Footer.vue";
@@ -30,7 +29,11 @@ export default {
   },
   mounted() {
   },
-
+head() {
+    return {
+      title: '首页-黄阿信的博客'
+    }
+  },
   asyncData(context) {
     return context.$axios
       .get("/blog/blogPage", {

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Navigation from "~/components/Navigation.vue";
 import Archive from "~/components/Archive.vue";
 import BlogFooter from "~/components/Footer.vue";
@@ -29,7 +28,11 @@ export default {
   },
   mounted() {
   },
-
+  head() {
+    return {
+      title: '归档-黄阿信的博客'
+    }
+  },
   asyncData(context) {
     return context.$axios
       .get("/archive")

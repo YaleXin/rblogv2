@@ -65,6 +65,12 @@ export default {
           itemStyle: {
             borderWidth: 0.5
           },
+          dayLabel:{
+            nameMap: 'ZH'
+          },
+          monthLabel:{
+            nameMap: 'ZH'
+          },
           yearLabel: {
             show: true,
             margin: 15,
@@ -73,7 +79,7 @@ export default {
             fontWeight: "bolder",
             position: null,
             formatter: null,
-            fontSize: 18
+            fontSize: 20
           }
         });
         // 获得该年的热力图数据和下一年开始的下标

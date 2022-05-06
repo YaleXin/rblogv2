@@ -7,17 +7,17 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-    <talk-content 
-    class="middle-box-card"
-    :commentList="commentList"
-    />
+    <no-ssr>
+      <mavon-editor :toolbars="markdownOption" v-model="handbook"/>
+    </no-ssr>
+    <el-button @click="clk"></el-button>
     <blog-footer></blog-footer>
   </div>
 </template>
 
 <script>
 import Navigation from "~/components/Navigation.vue";
-import TalkContent from "~/components/Talk.vue";
+// import Markdown from "vue-meditor";
 import BlogFooter from "~/components/Footer.vue";
 import ToTop from "~/components/ToTop.vue";
 export default {
@@ -26,7 +26,7 @@ export default {
     Navigation,
     BlogFooter,
     ToTop,
-    TalkContent
+    // Markdown
   },
   mounted() {
   },
@@ -36,21 +36,19 @@ export default {
     }
   },
   asyncData(context) {
-    return context.$axios
-      .get("/comment/0")
-      .then(res => {
-        return {
-          commentList: res.comments
-        };
-      });
+    
   },
   data() {
     return {
-      commentList: []
+      markdownOption: {
+      },
+      handbook: "#### how to use mavonEditor in nuxt.js"
     }
   },
   methods: {
-    
+    clk(){
+      console.log(this.handbook);
+    }
   },
   created() {}
 };

@@ -11,10 +11,14 @@
         :type="activedId == tag.id ? '' : 'info'"
         :key="tag.id"
       >
-        <a :href="applicationPre()+ '/tag/' + tag.id">
+        <!-- <a :href="applicationPre()+ '/tag/' + tag.id">
           <i class="fa fa-tag" aria-hidden="true"></i>
           <span>{{tag.name}}</span>
-        </a>
+        </a> -->
+        <nuxt-link :to="{path: '/tag/' + tag.id}">
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          <span>{{tag.name}}</span>
+        </nuxt-link>
       </el-tag>
     </el-card>
     <el-divider content-position="center">该标签下的文章</el-divider>
