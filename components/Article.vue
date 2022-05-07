@@ -6,19 +6,28 @@
 <template>
   <div id="#article-content">
     <el-card>
-      <div class="article-title-wrapper" style="text-align: center;">
-        <h1 class="article-title">{{article.name}}</h1>
+      <div class="article-title-wrapper" style="text-align: center">
+        <h1 class="article-title">{{ article.name }}</h1>
         <div class="article-detail">
           <i class="fa fa-calendar"></i>
           <font-awesome-icon :icon="['fa', 'calendar']" />
-          <span style="margin-left:2px; font-size: 14px;">{{article.createTime}}</span>
+          <span style="margin-left: 2px; font-size: 14px">{{
+            article.createTime
+          }}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'eye']" />
-          <span style="margin-left:2px; font-size: 14px;">{{article.views}}</span>
+          <span style="margin-left: 2px; font-size: 14px">{{
+            article.views
+          }}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'bookmark']" />
-          <nuxt-link class="article-category-a" :to="{path: '/category/' + article.category.id}">
-            <span style="margin-left:2px; font-size: 14px;">{{article.category.name}}</span>
+          <nuxt-link
+            class="article-category-a"
+            :to="{ path: '/category/' + article.category.id }"
+          >
+            <span style="margin-left: 2px; font-size: 14px">{{
+              article.category.name
+            }}</span>
           </nuxt-link>
         </div>
       </div>
@@ -26,18 +35,27 @@
       <!-- 目录div -->
       <el-popover placement="right" trigger="hover" popper-class="toc-popper">
         <div class="toc-container"></div>
-        <div slot="reference" class="toc-wrapper animate__animated animate__backInLeft">目录</div>
+        <div
+          slot="reference"
+          class="toc-wrapper animate__animated animate__backInLeft"
+        >
+          目录
+        </div>
       </el-popover>
 
-      <div id="articleContent" class="article-content typo" v-html="article.content">
+      <div
+        id="articleContent"
+        class="article-content typo"
+        v-html="article.content"
+      >
         <!-- v-html="article.content" -->
       </div>
       <el-divider></el-divider>
       <div class="tag-group">
         <el-tag v-for="tag in article.tags" :key="tag.id">
-          <nuxt-link :to="{path: '/tag/' + tag.id}">
+          <nuxt-link :to="{ path: '/tag/' + tag.id }">
             <font-awesome-icon :icon="['fa', 'tag']" />
-            <span>{{tag.name}}</span>
+            <span>{{ tag.name }}</span>
           </nuxt-link>
         </el-tag>
       </div>
@@ -69,6 +87,13 @@ export default {
         {rel: 'stylesheet', href: require('~/assets/css/prism-dark.css')},
         {rel: 'stylesheet', href: require('~/assets/css/highlight-keyword.css')},
      ],
+    //  script: [
+    //   {
+    //   src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
+    //   },
+      
+      
+      // ]
     };
   },
   name: "Article",
@@ -94,6 +119,20 @@ export default {
     this.setTable();
     this.setFancyBox();
     this.initTocbot();
+    // 加载 latex
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+    script.async = true;
+    document.head.appendChild(script);
+    window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+  },
+  chtml:{
+	  scale:0.8
+  }
+};
+
   },
   created() {},
   
@@ -190,7 +229,7 @@ export default {
 </script>
 
 <style scoped>
- /* @import '~/assets/cssblog.css';
+/* @import '~/assets/cssblog.css';
  @import '~/assets/css/typo.css';
  @import '~/assets/css/prism-dark.css';
  @import '~/assets/css/highlight-keyword.css'; */
@@ -249,7 +288,7 @@ export default {
 .appreciate-wrapper {
   text-align: center;
 }
-.article-category-a{
-  text-decoration:none
+.article-category-a {
+  text-decoration: none;
 }
 </style>

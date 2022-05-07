@@ -21,7 +21,7 @@
     <el-drawer :visible.sync="showNvg" direction="ltr" size="70%">
       <el-row type="flex" justify="center">
         <el-col :span="10">
-          <img src="//qiniu.yalexin.top/cat_mouse.jpg" width="90px" height="90px" style="border-radius: 50%;" alt="">
+          <img class="site-author-image" src="//qiniu.yalexin.top/cat_mouse.jpg" width="90px" height="90px" style="border-radius: 50%;" alt="">
         </el-col>
       </el-row>
 
@@ -150,5 +150,19 @@ export default {
   height: 50px;
   line-height: 50px;
   text-align: center;
+}
+.site-author-image {
+  border: 1px solid #eee;
+  display: block;
+  margin: 0 auto;
+  max-width: 120px;
+  padding: 2px;
+  border-radius: 50%;
+}
+.site-author-image {
+  transition: transform 1s cubic-bezier(0.96,-0.61, 0.58, 1);
+}
+.site-author-image:hover {
+  transform: rotateZ(360deg);
 }
 </style>
