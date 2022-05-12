@@ -101,7 +101,7 @@ body {
 @import "~/assets/scss/common/common.scss";
 
 #DarkModelPage {
-  @include background_color("background_color");
+  @include background_color("bold_white_tini_black_color");
   @include font_color("text-color");
   transition: background 1s, color 0.6s;
 }

@@ -1,17 +1,70 @@
-$themes: (
- light: (
-  // 背景色
-  background_color: white,
-  // 主文本色
-  text-color: #000, 
-  // 文章卡片的标题
-  card-title-color: #000,
- //
- ),
- dark: (
-  background_color: #181c27,
-  text-color: rgba(255, 255, 255, 0.85), 
-  card-title-color: rgba(255, 255, 255, 0.85),
+$themes: (light: ( // 背景色
+      bold_white_tini_black_color: white,
+      background_color2: #f0f2f5,
+      background_color3: red,
+      background_color4: #2674e7,
+      readMore_btn_hover_bg_color: rgb(22, 22, 22),
 
- )
-);
+      bold_white_color: white,
+      normal_white_color: rgba(255, 255, 255, 0.9),
+      small_white_color: rgba(255, 255, 255, 0.8),
+      tini_white_color: rgba(255, 255, 255, 0.7),
+
+      bold_black_color: black,
+      normal_black_color: rgba(0, 0, 0, 0.9),
+      small_black_color: rgba(0, 0, 0, 0.8),
+      tini_black_color: rgba(0, 0, 0, 0.7),
+
+      normal_transparent_black_color: rgba(0, 0, 0, 0.4),
+
+
+
+      // 主文本色
+      text-color: #000,
+      //字体
+      font_color1: #414141,
+      font_color2: white,
+      read_more_text_color: #555,
+
+      // 文章卡片的标题
+      card-title-color: #000,
+
+      //边框
+      border_color1: #3d414a,
+   ),
+   dark: ( // 背景色
+      bold_white_tini_black_color: #181c27,
+      background_color2: #283142,
+      background_color3: #1e6ceb,
+      background_color4: #323e4e,
+      readMore_btn_hover_bg_color: white,
+
+
+      bold_white_color: black,
+      normal_white_color: rgba(0, 0, 0, 0.9),
+      small_white_color: rgba(0, 0, 0, 0.8),
+      tini_white_color: rgba(0, 0, 0, 0.7),
+
+
+      bold_black_color: white,
+      normal_black_color: rgba(255, 255, 255, 0.9),
+      small_black_color: rgba(255, 255, 255, 0.8),
+      tini_black_color: rgba(255, 255, 255, 0.7),
+
+      normal_transparent_black_color: rgba(255, 255, 255, 0.4),
+
+
+      // 主文本色
+      text-color: rgba(255, 255, 255, 0.85),
+
+      //字体
+      font_color1: #a7a7a7,
+      font_color2: white,
+      read_more_text_color: rgba(255, 255, 255, 0.727),
+
+      // 文章卡片的标题
+      card-title-color: rgba(255, 255, 255, 0.85),
+
+      //边框
+      border_color1: #3d414a,
+   ));

@@ -67,14 +67,6 @@ export default {
   font-size: 1.3em;
   font-weight: 400;
 }
-
-/* a,
-a:link,
-a:visited,
-a:focus {
-  text-decoration: none;
-  color: #000;
-} */
 .article-dscr{
   text-align: justify;
 }
@@ -83,49 +75,16 @@ a:focus {
   position: relative;
   /* text-align: center; */
 }
-.article-title-link::after {
-  content: "";
-  width: 0;
-  height: 3px;
-  /* background: black; */
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transition: all 0.5s;
-}
 
 .article-title-link:hover::after {
   left: 0%;
   width: 100%;
 }
-.article-detail {
-  padding: 5px;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 0.7em;
-}
+
 .readMore {
   margin-top: 40px;
   text-align: center;
 }
-/* .readMore-btn {
-  background: #fff;
-  border: 2px solid #555;
-  border-radius: 2px;
-  color: #555;
-  display: inline-block;
-  line-height: 2;
-  padding: 0 20px;
-  text-decoration: none;
-  transition-property: background-color;
-  transition-delay: 0s;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  font-size: 0.975em;
-}
-.readMore-btn:hover {
-  background: rgb(22, 22, 22);
-  color: #fff;
-} */
 .article-card-item{
   transition: all 100ms ease-in-out;
   
@@ -139,7 +98,7 @@ a:focus {
 @import '~/assets/scss/common/common.scss';
  
 .el-card{
-  @include background_color("background_color");
+  @include background_color("bold_white_tini_black_color");
   @include font_color("text-color");
   transition: background 1s , color 0.6s;
 }
@@ -148,11 +107,23 @@ a:link,
 a:visited,
 a:focus {
   text-decoration: none;
-  // @include font_color("card_title_color");
+  @include font_color("small_black_color");
 }
+// 文章下划线
+.article-title-link::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  @include background_color("bold_black_color");
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transition: all 0.5s;
+}
+// 阅读全文按钮
 .readMore-btn {
-  @include readMore_btn("text-color");
-  // @include readMore_btn("background_color");
+    @include background_color("bold_white_tini_black_color");
+    @include readMore_btn_text_color("read_more_text_color");
     border-radius: 2px;
     display: inline-block;
     line-height: 2;
@@ -164,5 +135,15 @@ a:focus {
     transition-timing-function: ease-in-out;
     font-size: 0.975em;
 }
+.readMore-btn:hover {
+    @include readMore_btn_hover_bg("bold_black_color");
+    @include readMore_btn_hover_color("bold_white_color");
+}
 
+// 文章描述
+.article-detail {
+  padding: 5px;
+  @include font_color("normal_transparent_black_color");
+  font-size: 0.7em;
+}
 </style>
