@@ -1,0 +1,17 @@
+$themes: (
+ light: (
+  // 背景色
+  background_color: white,
+  // 主文本色
+  text-color: #000, 
+  // 文章卡片的标题
+  card-title-color: #000,
+ //
+ ),
+ dark: (
+  background_color: #181c27,
+  text-color: rgba(255, 255, 255, 0.85), 
+  card-title-color: rgba(255, 255, 255, 0.85),
+
+ )
+);

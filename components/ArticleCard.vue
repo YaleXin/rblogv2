@@ -68,13 +68,13 @@ export default {
   font-weight: 400;
 }
 
-a,
+/* a,
 a:link,
 a:visited,
 a:focus {
   text-decoration: none;
   color: #000;
-}
+} */
 .article-dscr{
   text-align: justify;
 }
@@ -87,7 +87,7 @@ a:focus {
   content: "";
   width: 0;
   height: 3px;
-  background: black;
+  /* background: black; */
   position: absolute;
   top: 100%;
   left: 50%;
@@ -107,7 +107,7 @@ a:focus {
   margin-top: 40px;
   text-align: center;
 }
-.readMore-btn {
+/* .readMore-btn {
   background: #fff;
   border: 2px solid #555;
   border-radius: 2px;
@@ -125,7 +125,7 @@ a:focus {
 .readMore-btn:hover {
   background: rgb(22, 22, 22);
   color: #fff;
-}
+} */
 .article-card-item{
   transition: all 100ms ease-in-out;
   
@@ -134,4 +134,35 @@ a:focus {
 	transform: scale(1.1);
 	transition: all 100ms ease-in-out;
 }
+</style>
+<style scoped lang="scss">
+@import '~/assets/scss/common/common.scss';
+ 
+.el-card{
+  @include background_color("background_color");
+  @include font_color("text-color");
+  transition: background 1s , color 0.6s;
+}
+a,
+a:link,
+a:visited,
+a:focus {
+  text-decoration: none;
+  // @include font_color("card_title_color");
+}
+.readMore-btn {
+  @include readMore_btn("text-color");
+  // @include readMore_btn("background_color");
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 2;
+    padding: 0 20px;
+    text-decoration: none;
+    transition-property: background-color;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    font-size: 0.975em;
+}
+
 </style>
