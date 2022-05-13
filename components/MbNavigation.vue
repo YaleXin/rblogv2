@@ -74,7 +74,7 @@
             <el-menu-item index="/talk">
               <template slot="title">
                 <i class="el-icon-mic"></i>
-                <span>最近的吐槽</span>
+                <span>留言</span>
               </template>
             </el-menu-item>
 

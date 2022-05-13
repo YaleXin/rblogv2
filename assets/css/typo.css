@@ -186,7 +186,7 @@
 
 .typo strong,.typo  b {
   font-weight: bold;
-  color: #000;
+  /* color: #000; */
 }
 
 /* 可拖动文件添加拖动手势 */
@@ -231,7 +231,7 @@
 .typo h1,.typo  h2,.typo  h3,.typo  h4,.typo  h5,.typo  h6 {
   font-family: Lato,"PingFang SC","Microsoft YaHei",sans-serif;
   font-weight: 100;
-  color: #000;
+  /* color: #000; */
   line-height: 1.35;
 }
 
@@ -314,7 +314,7 @@
 }
 
 .typo-em, .typo em, legend, caption {
-  color: #000;
+  /* color: #000; */
   font-weight: inherit;
 }
 

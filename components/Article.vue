@@ -292,3 +292,18 @@ export default {
   text-decoration: none;
 }
 </style>
+<style scoped lang="scss">
+@import '~/assets/scss/common/common.scss';
+
+.el-card{
+  @include background_color("bold_white_tini_tini_black_color");
+  @include font_color("text-color");
+}
+.el-tag--light {
+  @include background_color("tini_gray_color");
+}
+.el-tag > a {
+  text-decoration: none;
+  @include font_color("tag_color");
+}
+</style>

@@ -27,6 +27,10 @@ export default {
     MiddleLink
   },
   mounted() {
+    // 随机打乱友情链接
+    this.linkList[0].content.sort(() => {
+      return 0.5 - Math.random();
+    });
   },
 head() {
     return {
