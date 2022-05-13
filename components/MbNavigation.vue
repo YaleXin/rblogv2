@@ -4,12 +4,16 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div class="mb-navigation">
     <div class="nvg-top">
       <el-row type="flex" justify="center">
         <el-col :span="2">
           <div class="icon-div">
-            <font-awesome-icon @click="showNvg=true" size="lg" :icon="['fa', 'bars']"/>
+            <font-awesome-icon
+              @click="showNvg = true"
+              size="lg"
+              :icon="['fa', 'bars']"
+            />
           </div>
         </el-col>
         <el-col class="motto-wrapper" :span="22">
@@ -21,16 +25,24 @@
     <el-drawer :visible.sync="showNvg" direction="ltr" size="70%">
       <el-row type="flex" justify="center">
         <el-col :span="10">
-          <img src="//qiniu.yalexin.top/cat_mouse.jpg" width="90px" height="90px" style="border-radius: 50%;" alt="">
+          <img
+            class="site-author-image"
+            src="//qiniu.yalexin.top/cat_mouse.jpg"
+            width="90px"
+            height="90px"
+            style="border-radius: 50%"
+            alt=""
+          />
         </el-col>
       </el-row>
 
       <el-row :span="10">
         <el-col>
-          <el-menu 
-          :router="true"
-          :default-active="activeIndex"
-           @select="handleSelect">
+          <el-menu
+            :router="true"
+            :default-active="activeIndex"
+            @select="handleSelect"
+          >
             <el-menu-item index="/home">
               <template slot="title">
                 <i class="el-icon-s-home"></i>
@@ -62,7 +74,7 @@
             <el-menu-item index="/talk">
               <template slot="title">
                 <i class="el-icon-mic"></i>
-                <span>最近的吐槽</span>
+                <span>留言</span>
               </template>
             </el-menu-item>
 
@@ -72,10 +84,14 @@
                 <span>归档</span>
               </template>
             </el-menu-item>
-            
+
             <el-menu-item index="/search">
               <div>
-                <el-form :inline="true" :model="searchForm" @submit.native.prevent>
+                <el-form
+                  :inline="true"
+                  :model="searchForm"
+                  @submit.native.prevent
+                >
                   <el-input
                     placeholder="搜一搜？按下回车即可搜索"
                     prefix-icon="el-icon-search"
@@ -101,12 +117,12 @@ export default {
     return {
       showNvg: false,
       searchForm: {
-        content: ""
-      }
+        content: "",
+      },
     };
   },
   computed: {
-    activeIndex: function() {
+    activeIndex: function () {
       const routePath = this.$route.path;
       let activeIndex = "/home";
       if (routePath.indexOf("/category/") > -1) {
@@ -117,7 +133,7 @@ export default {
         activeIndex = routePath;
       }
       return activeIndex;
-    }
+    },
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -125,11 +141,11 @@ export default {
       // this.$emit("mbClick", key);
     },
     onSubmit() {
-      this.$router.replace("/search").catch(e => {});
+      this.$router.replace("/search").catch((e) => {});
       EventBus.$emit("searchSubmit", this.searchForm.content);
       this.showNvg = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -150,5 +166,38 @@ export default {
   height: 50px;
   line-height: 50px;
   text-align: center;
+}
+.site-author-image {
+  border: 1px solid #eee;
+  display: block;
+  margin: 0 auto;
+  max-width: 120px;
+  padding: 2px;
+  border-radius: 50%;
+}
+.site-author-image {
+  transition: transform 1s cubic-bezier(0.96, -0.61, 0.58, 1);
+}
+.site-author-image:hover {
+  transform: rotateZ(360deg);
+}
+</style>
+<style scoped lang="scss">
+@import "~/assets/scss/common/common.scss";
+.mb-navigation {
+  ::v-deep .el-drawer,
+  ::v-deep .el-menu {
+    @include background_color("bold_white_tini_black_color");
+    @include font_color("text-color");
+  }
+
+  ::v-deep .el-menu-item:not(.is-active){
+    @include font_color("text-color");
+  }
+
+  ::v-deep .el-input__inner{
+    @include background_color("bold_white_color");
+  }
+
 }
 </style>

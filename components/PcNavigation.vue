@@ -16,7 +16,7 @@
     >
       <el-menu-item index="/home">
         <nuxt-link class="navigation-item-a" :to="{path: '/home'}">
-          <i class="el-icon-home"></i>首页
+          <i class="el-icon-s-home"></i>首页
         </nuxt-link>
       </el-menu-item>
       <el-menu-item index="/category/-1">
@@ -36,7 +36,7 @@
       </el-menu-item>
       <el-menu-item index="/talk">
         <nuxt-link class="navigation-item-a" :to="{path: '/talk'}">
-          <i class="el-icon-mic"></i>最近的吐槽
+          <i class="el-icon-mic"></i>留言
         </nuxt-link>
       </el-menu-item>
 
@@ -59,7 +59,7 @@
           </el-form>
         </div>
       </el-menu-item>
-      <el-menu-item index="/home">要么改变世界，要么适应世界</el-menu-item>
+      <el-menu-item disabled index="/home">要么改变世界，要么适应世界</el-menu-item>
     </el-menu>
   </div>
 </template>
