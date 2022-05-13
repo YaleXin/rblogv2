@@ -1,0 +1,64 @@
+$themes: (light: ( // 背景色
+      bold_white_tini_black_color: white,
+      bold_white_tini_tini_black_color: white,
+      readMore_btn_hover_bg_color: rgb(22, 22, 22),
+
+      bold_white_color: white,
+      normal_white_color: rgba(255, 255, 255, 0.9),
+      small_white_color: rgba(255, 255, 255, 0.8),
+      tini_white_color: rgba(255, 255, 255, 0.7),
+
+      bold_black_color: black,
+      normal_black_color: rgba(0, 0, 0, 0.9),
+      small_black_color: rgba(0, 0, 0, 0.8),
+      tini_black_color: rgba(0, 0, 0, 0.7),
+
+      special_blue_color: #409EFF,
+
+      normal_transparent_black_color: rgba(0, 0, 0, 0.4),
+      tag_color: black,
+      tini_gray_color: #f4f4f5,
+
+      // 主文本色
+      text-color: #000,
+      //字体
+      read_more_text_color: #555,
+
+      // 文章卡片的标题
+      card-title-color: #000,
+      reply_box_color: beige,
+   ),
+   dark: ( // 背景色
+      bold_white_tini_black_color: rgba(0, 0, 0, 0.9),
+      bold_white_tini_tini_black_color: rgba(0, 0, 0, 0),
+      readMore_btn_hover_bg_color: white,
+
+
+      bold_white_color: black,
+      normal_white_color: rgba(0, 0, 0, 0.9),
+      small_white_color: rgba(0, 0, 0, 0.8),
+      tini_white_color: rgba(0, 0, 0, 0.7),
+
+
+      bold_black_color: white,
+      normal_black_color: rgba(255, 255, 255, 0.9),
+      small_black_color: rgba(255, 255, 255, 0.8),
+      tini_black_color: rgba(255, 255, 255, 0.7),
+
+      special_blue_color: #409EFF,
+
+
+      normal_transparent_black_color: rgba(255, 255, 255, 0.4),
+      tag_color: rgba(255, 255, 255, 0.6),
+      tini_gray_color: #0B0B0A,
+
+      // 主文本色
+      text-color: rgba(255, 255, 255, 0.85),
+
+      //字体
+      read_more_text_color: rgba(255, 255, 255, 0.727),
+
+      // 文章卡片的标题
+      card-title-color: rgba(255, 255, 255, 0.85),
+      reply_box_color: rgb(49, 47, 47),
+   ));

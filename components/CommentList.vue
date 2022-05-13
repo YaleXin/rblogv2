@@ -161,9 +161,6 @@ export default {
   font-size: 0.6em;
   padding-left: 5px;
 }
-.reply-box {
-  background-color: beige;
-}
 .comment-reply-item {
   margin-top: 20px;
 }
@@ -185,5 +182,12 @@ table.comment-table {
 .reply-btn{
   width: 60px;
   padding: 5px;
+}
+</style>
+<style scoped lang="scss">
+@import "~/assets/scss/common/common.scss";
+.reply-box {
+  @include background_color("reply_box_color");
+  
 }
 </style>

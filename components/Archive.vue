@@ -125,7 +125,8 @@ export default {
       return resultData;
     },
     drawLine() {
-      this.heatmap = echarts.init(this.$refs.heatmap);
+      let theme = window.document.documentElement.getAttribute("data-theme");
+      this.heatmap = echarts.init(this.$refs.heatmap, theme);
       console.log(this.heatmapOption);
       this.heatmap.setOption(this.heatmapOption);
       //做到每个图表根据屏幕变化而自适应宽高
@@ -172,6 +173,7 @@ export default {
     return {
       heatmapData: [],
       heatmapOption: {
+        darkMode: true,
         title: {
           top: 30,
           left: "center",
@@ -206,27 +208,11 @@ export default {
 </script>
 
 <style scoped>
-a,
-a:link,
-a:visited,
-a:focus {
-  text-decoration: none;
-  color: #000;
-}
 .article-title-link {
   position: relative;
   /* text-align: center; */
 }
-.article-title-link::after {
-  content: "";
-  width: 0;
-  height: 3px;
-  background: black;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transition: all 0.5s;
-}
+
 
 .article-title-link:hover::after {
   left: 0%;
@@ -237,5 +223,30 @@ a:focus {
 }
 .total-divider {
   margin-bottom: 30px;
+}
+</style>
+<style scoped lang="scss">
+@import '~/assets/scss/common/common.scss';
+ 
+.el-card{
+  @include background_color("bold_white_tini_tini_black_color");
+  @include font_color("text-color");
+}
+a,
+a:link,
+a:visited,
+a:focus {
+  text-decoration: none;
+  @include font_color("small_black_color");
+}
+.article-title-link::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  @include background_color("bold_black_color");
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transition: all 0.5s;
 }
 </style>
