@@ -105,4 +105,18 @@ body {
   @include font_color("text-color");
   transition: background 1s, color 0.6s;
 }
+
+</style>
+<style  lang="scss">
+@import "~/assets/scss/common/common.scss";
+// 所有的分页组件 颜色设置
+.el-pagination.is-background>button{
+  @include background_color("tini_gray_color")
+}
+.el-pagination.is-background .el-pager li{
+  @include background_color("tini_gray_color")
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  @include background_color("special_blue_color")
+}
 </style>

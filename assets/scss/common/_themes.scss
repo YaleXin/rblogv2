@@ -15,9 +15,11 @@ $themes: (light: ( // 背景色
       small_black_color: rgba(0, 0, 0, 0.8),
       tini_black_color: rgba(0, 0, 0, 0.7),
 
+      special_blue_color: #409EFF,
+
       normal_transparent_black_color: rgba(0, 0, 0, 0.4),
 
-
+      tini_gray_color: #f4f4f5,
 
       // 主文本色
       text-color: #000,
@@ -51,8 +53,11 @@ $themes: (light: ( // 背景色
       small_black_color: rgba(255, 255, 255, 0.8),
       tini_black_color: rgba(255, 255, 255, 0.7),
 
-      normal_transparent_black_color: rgba(255, 255, 255, 0.4),
+      special_blue_color: #409EFF,
 
+
+      normal_transparent_black_color: rgba(255, 255, 255, 0.4),
+      tini_gray_color: #0B0B0A,
 
       // 主文本色
       text-color: rgba(255, 255, 255, 0.85),
