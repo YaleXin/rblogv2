@@ -119,4 +119,10 @@ body {
 .el-pagination.is-background .el-pager li:not(.disabled).active {
   @include background_color("special_blue_color")
 }
+
+// 所有分割线文字背景
+.el-divider__text {
+  @include background_color("bold_white_tini_black_color");
+  @include font_color("text-color");
+}
 </style>

@@ -135,14 +135,29 @@ export default {
 </script>
 
 <style scoped>
-.el-tag > a {
-  text-decoration: none;
-  color: #000;
-}
+
 .el-tag {
   margin: 2px;
 }
 .el-pagination {
   margin-top: 20px;
+}
+</style>
+<style scoped lang="scss">
+@import '~/assets/scss/common/common.scss';
+
+.el-card{
+  @include background_color("bold_white_tini_black_color");
+  @include font_color("text-color");
+}
+.el-tag > a {
+  text-decoration: none;
+  @include font_color("tag_color");
+}
+.el-tag{
+  @include background_color("special_blue_color");
+}
+.el-tag--info {
+  @include background_color("tini_gray_color");
 }
 </style>

@@ -98,9 +98,8 @@ export default {
 @import '~/assets/scss/common/common.scss';
  
 .el-card{
-  @include background_color("bold_white_tini_black_color");
+  @include background_color("bold_white_tini_tini_black_color");
   @include font_color("text-color");
-  transition: background 1s , color 0.6s;
 }
 a,
 a:link,
@@ -140,10 +139,14 @@ a:focus {
     @include readMore_btn_hover_color("bold_white_color");
 }
 
-// 文章描述
+// 文章小的细节信息
 .article-detail {
   padding: 5px;
   @include font_color("normal_transparent_black_color");
   font-size: 0.7em;
+}
+.article-dscr {
+  @include font_color("tag_color");
+
 }
 </style>

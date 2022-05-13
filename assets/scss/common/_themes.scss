@@ -1,8 +1,6 @@
 $themes: (light: ( // 背景色
       bold_white_tini_black_color: white,
-      background_color2: #f0f2f5,
-      background_color3: red,
-      background_color4: #2674e7,
+      bold_white_tini_tini_black_color: white,
       readMore_btn_hover_bg_color: rgb(22, 22, 22),
 
       bold_white_color: white,
@@ -18,27 +16,21 @@ $themes: (light: ( // 背景色
       special_blue_color: #409EFF,
 
       normal_transparent_black_color: rgba(0, 0, 0, 0.4),
-
+      tag_color: black,
       tini_gray_color: #f4f4f5,
 
       // 主文本色
       text-color: #000,
       //字体
-      font_color1: #414141,
-      font_color2: white,
       read_more_text_color: #555,
 
       // 文章卡片的标题
       card-title-color: #000,
-
-      //边框
-      border_color1: #3d414a,
+      reply_box_color: beige,
    ),
    dark: ( // 背景色
-      bold_white_tini_black_color: #181c27,
-      background_color2: #283142,
-      background_color3: #1e6ceb,
-      background_color4: #323e4e,
+      bold_white_tini_black_color: rgba(0, 0, 0, 0.9),
+      bold_white_tini_tini_black_color: rgba(0, 0, 0, 0),
       readMore_btn_hover_bg_color: white,
 
 
@@ -57,19 +49,16 @@ $themes: (light: ( // 背景色
 
 
       normal_transparent_black_color: rgba(255, 255, 255, 0.4),
+      tag_color: rgba(255, 255, 255, 0.6),
       tini_gray_color: #0B0B0A,
 
       // 主文本色
       text-color: rgba(255, 255, 255, 0.85),
 
       //字体
-      font_color1: #a7a7a7,
-      font_color2: white,
       read_more_text_color: rgba(255, 255, 255, 0.727),
 
       // 文章卡片的标题
       card-title-color: rgba(255, 255, 255, 0.85),
-
-      //边框
-      border_color1: #3d414a,
+      reply_box_color: rgb(49, 47, 47),
    ));

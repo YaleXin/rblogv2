@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div class="comment-input-div">
     <el-form ref="form" :model="form" :rules="rules" :inline-message="true">
       <el-form-item prop="nickname">
         <el-input
@@ -29,13 +29,15 @@
           id="input-textarea"
           class="comment-form-item"
           type="textarea"
-          :autosize="{ minRows: 5, maxRows: 10}"
+          :autosize="{ minRows: 5, maxRows: 10 }"
           :placeholder="atNickname"
           v-model="form.content"
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button plain type="primary" @click="submitForm('ruleForm')">立即评论</el-button>
+        <el-button plain type="primary" @click="submitForm('ruleForm')"
+          >立即评论</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -57,7 +59,7 @@ export default {
         browser: "",
         OS: "",
         blogId: -1,
-        parentCommentId: -1
+        parentCommentId: -1,
       },
       rules: {
         nickname: [{ required: true, message: "请输入昵称", trigger: "blur" }],
@@ -66,36 +68,35 @@ export default {
           {
             type: "email",
             message: "请输入正确的邮箱地址",
-            trigger: ["blur", "change"]
-          }
+            trigger: ["blur", "change"],
+          },
         ],
         content: [
-          { required: true, message: "请输入回复内容", trigger: "blur" }
-        ]
+          { required: true, message: "请输入回复内容", trigger: "blur" },
+        ],
       },
       // atNickname: "请输入内容"
     };
   },
-  props:{
-    atNickname:{
+  props: {
+    atNickname: {
       type: String,
-      default: ()=>{
-        return "请输入内容"
-      }
+      default: () => {
+        return "请输入内容";
+      },
     },
-    parentCommentId:{
+    parentCommentId: {
       type: Number,
-      default: ()=>{
-        return 0
-      }
-    }
+      default: () => {
+        return 0;
+      },
+    },
   },
-  mounted(){
+  mounted() {
     this.form.OS = CommentUtils.getOS();
     this.form.browser = CommentUtils.getBrowser();
   },
   created() {
-    
     // EventBus.$on("replyClick", (id, nickname) => {
     //   console.log("id=" + id);
     //   this.form.parentCommentId = id;
@@ -105,7 +106,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           this.form.createTime = new Date();
           this.form.parentCommentId = this.parentCommentId;
@@ -115,10 +116,17 @@ export default {
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "~/assets/scss/common/common.scss";
+.comment-input-div {
+  ::v-deep .el-input__inner,
+  ::v-deep .el-textarea__inner {
+    @include background_color("bold_white_color");
+  }
+}
 </style>
