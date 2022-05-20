@@ -188,3 +188,10 @@
  .token.keyword.keyword-private {
    color: #cb602d;
  }
+
+ /* 调整代码框中，行数和代码正文之间的边距 */
+ pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3em;
+    counter-reset: linenumber;
+}
