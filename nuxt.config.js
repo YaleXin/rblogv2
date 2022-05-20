@@ -3,6 +3,7 @@
  * @Email       : me@yalexin.top
  * @LastEditors : YaleXin
  */
+import sitemap from './static/js/sitemap.js';
 let turePlugins =       [
   [
     'component',
@@ -121,8 +122,10 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/toast',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    '@nuxtjs/sitemap'
   ],
+  sitemap:sitemap,
   toast: {
     position: 'top-center',
     duration: 3000
