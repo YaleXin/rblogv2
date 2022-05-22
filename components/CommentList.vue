@@ -34,13 +34,9 @@
           <tr>
             <td colspan="2">
               <b>{{topCmt.content}}</b>
-              <el-button
-                      @click="replyClick(topCmt.id, topCmt.nickname)"
-                      type="primary"
-                      icon="el-icon-edit"
-                      plain
-                      class="reply-btn"
-                    >回复</el-button>
+              <p  class="reply-wrapper" @click="replyClick(topCmt.id, topCmt.nickname)">
+                <span>回复</span>
+              </p>
             </td>
           </tr>
           <!-- 回复贴 -->
@@ -78,13 +74,9 @@
                     <span style="color:  #35b8ff">{{replyCmt.replyNickname}}</span>
                     <span>:</span>
                     <b>{{replyCmt.content}}</b>
-                    <el-button
-                      @click="replyClick(replyCmt.id, replyCmt.nickname)"
-                      type="primary"
-                      icon="el-icon-edit"
-                      plain
-                      class="reply-btn"
-                    >回复</el-button>
+                    <p  class="reply-wrapper" @click="replyClick(replyCmt.id, replyCmt.nickname)">
+                      <span>回复</span>
+                    </p>
                   </td>
                 </tr>
               </table>
@@ -157,6 +149,9 @@ export default {
 </script>
 
 <style scoped>
+.reply-wrapper{
+  text-align:right;
+}
 .comment-info > span {
   font-size: 0.6em;
   padding-left: 5px;
