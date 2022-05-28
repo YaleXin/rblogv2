@@ -10,6 +10,9 @@
     <talk-content 
     class="middle-box-card"
     :commentList="commentList"
+    :blogId="0"
+    :textUp="'历史留言'"
+    :textDown="'开始留言'"
     />
     <blog-footer></blog-footer>
   </div>

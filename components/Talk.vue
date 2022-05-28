@@ -6,12 +6,12 @@
 <template>
   <div>
     <el-divider content-position="center">
-      历史留言
+      {{textUp}}
       <i class="el-icon-s-comment"></i>
     </el-divider>
     <comment-list :comments="commentList" @reply-click="commentReplyClick"></comment-list>
     <el-divider content-position="center">
-      开始留言
+      {{textDown}}
       <i class="el-icon-edit"></i>
     </el-divider>
     <comment-input 
@@ -54,6 +54,18 @@ export default {
     document.title = "留言";
   },
   props:{
+    blogId:{
+      type: Number,
+      default: 0
+    },
+    textUp: {
+      type: String,
+      default: '历史留言'
+    },
+    textDown: {
+      type: String,
+      default: '开始留言'
+    },
     commentList:{
       type: Array,
       default: () =>{
@@ -82,7 +94,7 @@ export default {
       });
     },
     submitComment(comment) {
-      comment.blogId = 0;
+      comment.blogId = this.blogId;
       console.log('comment=', comment);
       this.$axios
         .put("/comment/add", {

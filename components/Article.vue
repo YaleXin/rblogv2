@@ -63,11 +63,14 @@
         <appreciate></appreciate>
       </div>
       <!-- 评论 -->
-      <!-- <el-divider>下面是评论</el-divider>
-      <comment 
+      <!-- <blog-talk-content 
     class="middle-box-card"
     :commentList="commentList"
+    :blogId="article.id"
+    :textUp="'历史评论'"
+    :textDown="'开始评论'"
     /> -->
+
     </el-card>
   </div>
 </template>
@@ -78,6 +81,7 @@ import Appreciate from "~/components/Appreciate.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
 import Comment from "~/components/Comment.vue";
+import BlogTalkContent from "~/components/Talk.vue";
 export default {
   head() {
     return {
@@ -100,7 +104,8 @@ export default {
   components: {
     // Comment,
     Appreciate,
-    Comment
+    Comment,
+    BlogTalkContent
   },
   activated() {
     document.title = this.article.name;
@@ -121,7 +126,7 @@ export default {
     this.initTocbot();
     // 加载 latex
     var script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+    script.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js';
     script.async = true;
     document.head.appendChild(script);
     window.MathJax = {
