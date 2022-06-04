@@ -8,7 +8,6 @@
     <to-top></to-top>
     <navigation></navigation>
     <article-content 
-     :commentList="commentsData"
     :article="article" class="middle-box-card" />
     <blog-footer></blog-footer>
   </div>
@@ -54,11 +53,11 @@ export default {
     },
   async asyncData(context) {
     console.log('--asyncData--');
-    // 同时请求文章以及评论
+    // 
     if (/^\d+$/.test(context.params.id)) {
       let [res1, res2] = await Promise.all([
         context.$axios.get("/blog/" + context.params.id),
-        context.$axios.get("/comment/" + context.params.id)
+        // context.$axios.get("/comment/" + context.params.id)
       ]);
       // 防止查不到博客时前端报 undefined 错误
       let blog = {
@@ -92,8 +91,7 @@ export default {
           blog = res1.blog
       }
       return {
-        article: blog,
-        commentsData: res2.comments
+        article: blog
       };
     }
   },

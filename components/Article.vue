@@ -63,13 +63,19 @@
         <appreciate></appreciate>
       </div>
       <!-- 评论 -->
-      <!-- <blog-talk-content 
+      <!-- <blog-comment 
     class="middle-box-card"
     :commentList="commentList"
     :blogId="article.id"
+    /> -->
+
+     <blog-talk-content 
+ 
+    :commentList="blogCommentList"
+    :blogId="article.id"
     :textUp="'历史评论'"
     :textDown="'开始评论'"
-    /> -->
+    />
 
     </el-card>
   </div>
@@ -80,7 +86,6 @@
 import Appreciate from "~/components/Appreciate.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
-import Comment from "~/components/Comment.vue";
 import BlogTalkContent from "~/components/Talk.vue";
 export default {
   head() {
@@ -102,9 +107,7 @@ export default {
   },
   name: "Article",
   components: {
-    // Comment,
     Appreciate,
-    Comment,
     BlogTalkContent
   },
   activated() {
@@ -112,6 +115,13 @@ export default {
   },
 
   mounted() {
+
+    this.$axios.get("/comment/" + this.article.id).then((res) =>{
+        this.blogCommentList = res.comments;
+    }).catch((e) =>{
+      
+    })
+
     // 加载 fancy-box 插件
     $(document).ready(function() {
       $('[data-fancybox="gallery"]').fancybox({
@@ -126,7 +136,8 @@ export default {
     this.initTocbot();
     // 加载 latex
     var script = document.createElement('script');
-    script.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js';
+    script.src = 'https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-chtml.min.js';
+    // script.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js';
     script.async = true;
     document.head.appendChild(script);
     window.MathJax = {
@@ -199,6 +210,7 @@ export default {
   },
   data() {
     return {
+      blogCommentList: [],
       commentFinished: false,
       replyId: -1,
       atNickname: "请输入内容"
@@ -223,12 +235,6 @@ export default {
         };
       }
     },
-    commentList: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    }
   }
 };
 </script>
