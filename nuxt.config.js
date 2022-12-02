@@ -106,7 +106,11 @@ export default {
     },
     '~/plugins/font-awesome',
     { src: '@/plugins/localStorage', ssr: false },
-    { src: '@/plugins/vue-mavon-editor', ssr: false }
+    { src: '@/plugins/vue-mavon-editor', ssr: false },
+    {
+      src: '~/plugins/lament_grey',
+      ssr: false
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
