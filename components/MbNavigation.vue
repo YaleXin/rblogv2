@@ -27,7 +27,7 @@
         <el-col :span="10">
           <img
             class="site-author-image"
-            src="//qiniu.yalexin.top/cat_mouse.jpg"
+            src="//cdn.yalexin.top/cat_mouse.jpg"
             width="90px"
             height="90px"
             style="border-radius: 50%"
