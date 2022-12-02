@@ -5,8 +5,10 @@
 -->
 <template>
   <div>
-    <span  v-html="poetryContent">
-    </span>
+    <!-- <span  v-html="poetryContent">
+    </span> -->
+    <span id="jinrishici-sentence">正在加载今日诗词....</span>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
   </div>
 </template>
 
@@ -22,13 +24,13 @@ export default {
     };
   },
   created() {
-    jinriHttp({
-      url: "/all.json"
-    })
-      .then(rep => {
-        this.poetryContent = rep.data.content
-      })
-      .catch(e => {});
+    // jinriHttp({
+    //   url: "/all.json"
+    // })
+    //   .then(rep => {
+    //     this.poetryContent = rep.data.content
+    //   })
+    //   .catch(e => {});
   }
 };
 </script>

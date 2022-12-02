@@ -64,11 +64,15 @@
         </div>
         <div class="info-wrapper">
           <p style="font-size: 0.8em">
-            <i class="fa fa-bookmark" aria-hidden="true"></i>
+             <font-awesome-icon
+              :icon="['fa', 'bookmark']"
+            />
             {{ link.name }}
           </p>
           <p style="font-size: 0.8em">
-            <i class="fa fa-link" aria-hidden="true"></i>
+            <font-awesome-icon
+              :icon="['fa', 'link']"
+            />
             <a style="color: #35b8ff" :href="'//' + link.url" target="_blank">{{
               link.url
             }}</a>
