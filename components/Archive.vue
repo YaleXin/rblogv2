@@ -5,6 +5,18 @@
 -->
 <template>
   <div id="archive-content">
+    <div id="select_year">
+      <el-select v-model="select_year" placeholder="请选择年份" @change="selectChange">
+        
+        <el-option
+          v-for="item in yearList"
+          :key="item"
+          :label="item"
+          :value="item">
+        </el-option>
+      </el-select>  
+    </div>
+    
     <!--  height: '800px' -->
     <div ref="heatmap" :style="{ width: '100%' }"></div>
     <el-divider class="total-divider" content-position="center">
@@ -38,63 +50,76 @@ export default {
   name: "Archive",
   components: {},
   mounted() {
-    this.initHeatmapData();
-    this.drawLine();
+    this.parseEveryYear();
+
+  
+    this.drawLineThisYear();
   },
   methods: {
+    // 根据所选择的年份绘制热力图
+    drawLineThisYear(){
+      this.$refs.heatmap.style.height = '230px';
+      this.heatmapOption.calendar = [{
+            top: 120,
+            left: "10%",
+            right: "10%",
+            cellSize: ["auto", 13],
+            // 范围
+            range: [this.select_year.toString()],
+            itemStyle: {
+              borderWidth: 0.5
+            },
+            dayLabel:{
+              nameMap: 'ZH'
+            },
+            monthLabel:{
+              nameMap: 'ZH'
+            },
+            yearLabel: {
+              show: true,
+              margin: 15,
+              color: "#ccc",
+              fontFamily: "sans-serif",
+              fontWeight: "bolder",
+              position: null,
+              formatter: null,
+              fontSize: 20
+            }
+      }]
+      this.heatmapOption.series = [{
+        calendarIndex: 0,
+        type: 'heatmap',
+        coordinateSystem: 'calendar',
+        data: this.heatmapDataByYear[this.select_year]
+      }]
+      this.drawLine()
+      
+    },
+    parseEveryYear(){
+      this.select_year = parseInt(this.blogList[0].yearMonth / 100).toString()
+      let totalMonth = this.blogList.length;
+      let index = 0;
+      while (index != totalMonth) {
+        // 正在处理的年份
+        let nowYear = parseInt(this.blogList[index].yearMonth / 100);
+        this.yearList.push(nowYear);
+        // 获得该年的热力图数据和下一年开始的下标
+        let resultData = this.handleHeatmapDataByYear(nowYear, index);
+        this.heatmapDataByYear[nowYear.toString()] = resultData.data
+        index = resultData.newIndex;
+      }
+
+    },
+    // 用户选择下拉框，换了一个年份
+    selectChange(newYear){
+      this.drawLineThisYear();
+    },
     applicationPre() {
       console.log(process.env.NODE_ENV);
       // return process.env.NODE_ENV === "production" ? "/blog" : "";
       return "/blog";
     },
-    initHeatmapData() {
-      let totalMonth = this.blogList.length;
-      let index = 0,
-        cnt = 0,
-        startTop = 120;
-      while (index != totalMonth) {
-        // 正在处理的年份
-        let nowYear = parseInt(this.blogList[index].yearMonth / 100);
-        this.heatmapOption.calendar.push({
-          top: startTop + cnt * 150,
-          left: "10%",
-          right: "10%",
-          cellSize: ["auto", 13],
-          // 范围
-          range: [nowYear.toString()],
-          itemStyle: {
-            borderWidth: 0.5
-          },
-          dayLabel:{
-            nameMap: 'ZH'
-          },
-          monthLabel:{
-            nameMap: 'ZH'
-          },
-          yearLabel: {
-            show: true,
-            margin: 15,
-            color: "#ccc",
-            fontFamily: "sans-serif",
-            fontWeight: "bolder",
-            position: null,
-            formatter: null,
-            fontSize: 20
-          }
-        });
-        // 获得该年的热力图数据和下一年开始的下标
-        let resultData = this.handleHeatmapDataByYear(nowYear, index);
-        this.heatmapOption.series.push({
-          type: "heatmap",
-          calendarIndex: cnt,
-          coordinateSystem: "calendar",
-          data: resultData.data
-        });
-        index = resultData.newIndex;
-        cnt++;
-      }
-      this.$refs.heatmap.style.height = (cnt * 180).toString() + 'px' ;
-    },
+    
     handleHeatmapDataByYear(year, index) {
       let date = +echarts.number.parseDate(year + "-01-01");
       let end = +echarts.number.parseDate(+year + 1 + "-01-01");
@@ -171,6 +196,9 @@ export default {
   },
   data() {
     return {
+      select_year: "",
+      yearList:[],
+      heatmapDataByYear:{},
       heatmapData: [],
       heatmapOption: {
         darkMode: true,
@@ -248,5 +276,9 @@ a:focus {
   top: 100%;
   left: 50%;
   transition: all 0.5s;
+}
+#select_year{
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
