@@ -21,17 +21,25 @@
 	  return currentDate + " " + currentTime;
 	}
 	var nowTime = DateFormat();
-	// 2.设置南京事件公祭日
+	// 设置南京事件公祭日
 	var NJ_country_startTime = "12-13 00:00:00";
 	var NJ_country_overTime = "12-14 00:00:00";
-	//2.设置汶川哀悼开始及结束 是 5月12号凌晨
+	//设置汶川哀悼开始及结束 是 5月12号凌晨
 	var earthquake_startTime = "05-19 00:00:00";
 	var earthquake_overTime = "05-22 00:00:00";
 
-    var great_start_time01 = "11-30 00:00:00";
-    var great_end_time01 = "12-07 00:00:00"
+    // var great_start_time01 = "11-30 00:00:00";
+    // var great_end_time01 = "12-07 00:00:00"
+	var start_test = "02-08 00:00:00";
+	var end_test = "02-08 20:59:00";
+	grey_times = [
+		[NJ_country_startTime, NJ_country_overTime],
+		[earthquake_startTime, earthquake_overTime],
+		// [start_test, end_test]
 
-	// 3.将变灰封装到一个函数里，需要的时候再调用
+	]
+
+	// 将变灰封装到一个函数里，需要的时候再调用
 	function grey() {
 	  $("html").css({
 	    "-webkit-filter": "grayscale(100%)",
@@ -44,13 +52,13 @@
 	    _filter: "none"
 	  });
 	}
-	//在这判断时间，时间字符串可以直接判断大小，不过要精确到秒
-	if (nowTime >= NJ_country_startTime && nowTime <= NJ_country_overTime) {
-	  // 4.把html 设置灰色滤镜
-	  grey();
-	} else if (nowTime >= earthquake_startTime && nowTime <= earthquake_overTime) {
-	  // 4.把html 设置灰色滤镜
-	  grey();
-    } else if(nowTime >= great_start_time01 && nowTime <= great_end_time01){
-        grey();
-    }
+	for (let i = 0; i < grey_times.length; i++) {
+		//在这判断时间，时间字符串可以直接判断大小，不过要精确到秒
+		if (nowTime >= grey_times[i][0] && nowTime <= grey_times[i][1]) {
+	  		// 把html 设置灰色滤镜
+	  		grey();
+			break;
+		}
+	}
+	
+	

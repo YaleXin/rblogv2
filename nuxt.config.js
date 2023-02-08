@@ -35,7 +35,8 @@ let turePlugins =       [
             'shell',
             'plsql',
             'sql',
-            'json'
+            'json',
+            'solidity'
 
         ],
         plugins: [
@@ -108,7 +109,7 @@ export default {
     { src: '@/plugins/localStorage', ssr: false },
     { src: '@/plugins/vue-mavon-editor', ssr: false },
     {
-      src: '~/plugins/lament_grey',
+      src: '~/plugins/lament_grey.js',
       ssr: false
     },
   ],
