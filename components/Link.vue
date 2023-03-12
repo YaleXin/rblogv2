@@ -144,7 +144,7 @@ export default {
           name: "黄阿信的个人博客",
           description: "要么改变世界，要么适应世界",
           link: "https://www.yalexin.top/blog/",
-          avatar: "https://www.yalexin.top/img/cat_mouse.jpg",
+          avatar: "https://www.yalexin.top/img/favicon.png",
         },
       ],
     };
