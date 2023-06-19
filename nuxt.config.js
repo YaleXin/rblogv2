@@ -83,6 +83,10 @@ export default {
       {
       src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
       },
+
+      {
+        src: '/js/grey.js'
+      },
       
       ]
   },
@@ -108,10 +112,6 @@ export default {
     '~/plugins/font-awesome',
     { src: '@/plugins/localStorage', ssr: false },
     { src: '@/plugins/vue-mavon-editor', ssr: false },
-    {
-      src: '~/plugins/lament_grey.js',
-      ssr: false
-    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
