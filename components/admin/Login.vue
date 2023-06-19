@@ -27,20 +27,19 @@
             type="password"
             v-model="loginForm.rawPassword"
             autocomplete="off"
-            
           ></el-input>
         </el-form-item>
 
         <el-form-item prop="code">
-          <img :src="this.codeImg" @click="changeCodeImg" />
-          <el-input
+          <!-- <img :src="this.codeImg" @click="changeCodeImg" /> -->
+          <!-- <el-input
             prefix-icon="el-icon-user"
             placeholder="请输入验证码，不区分大小写"
             type="text"
             v-model="loginForm.code"
             autocomplete="off"
             @keydown.enter.native="onSubmit"
-          ></el-input>
+          ></el-input> -->
         </el-form-item>
         <!-- <el-form-item>
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
@@ -55,6 +54,7 @@
 
 <script>
 import md5 from "js-md5";
+import {Captcha} from "../../static/js/pow-captcha-js.js"
 export default {
   name: "Login",
   components: {},
@@ -62,19 +62,17 @@ export default {
     console.log("activated");
   },
   mounted() {
-    this.changeCodeImg();
+    // this.changeCodeImg();
+    this.pow();
   },
   data() {
     let validateCode = (rule, value, callback) => {
       let md5code = md5(value.toLocaleLowerCase());
       if (value == "") {
         callback(new Error("请输入验证码"));
-      } 
-      else if (this.code != md5code) {
+      } else if (this.code != md5code) {
         callback(new Error("验证码错误!"));
-      }
-      
-      else{
+      } else {
         callback();
       }
     };
@@ -90,11 +88,20 @@ export default {
       rules: {
         username: { required: true, message: "请输入用户名", trigger: "blur" },
         rawPassword: { required: true, message: "请输入密码", trigger: "blur" },
-        code: { validator: validateCode, trigger: "blur" },
+        // code: { validator: validateCode, trigger: "blur" },
       },
     };
   },
   methods: {
+    pow() {
+
+      const cpt = new Captcha();
+      cpt.start('/api/admin/powConfig', '/api/admin/powVerify').then(resobj=>{
+        console.log('obj==>', resobj);
+      }).catch(e=>{
+        console.log('pow e =>', e);
+      })
+    },
     changeCodeImg() {
       this.$axios
         .get("/admin/verifyCode")
@@ -139,13 +146,13 @@ export default {
         username: this.loginForm.username,
         password: md5(md5(md5(this.loginForm.rawPassword)) + md5Str),
       };
-      console.log('code = ', codeStr);
+      console.log("code = ", codeStr);
       this.$axios
         .post("/admin/login", {
           data: {
             user: user,
             salt: md5Str,
-            code: codeStr
+            code: codeStr,
           },
         })
         .then((res) => {
