@@ -3,7 +3,7 @@
 	  let date = new Date(),
 	    currentDate,
 	    currentTime,
-	    seperator = "-", // 如果想要其他格式 只需 修改这里
+	    seperator = "-", 
 	    month = date.getMonth() + 1,
 	    day = date.getDate(),
 	    hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours(),
@@ -25,13 +25,12 @@
 	var NJ_country_startTime = "12-13 00:00:00";
 	var NJ_country_overTime = "12-14 00:00:00";
 	//设置汶川哀悼开始及结束 是 5月12号凌晨
-	var earthquake_startTime = "05-19 00:00:00";
-	var earthquake_overTime = "05-22 00:00:00";
+	var earthquake_startTime = "05-12 00:00:00";
+	var earthquake_overTime = "05-13 00:00:00";
 
-    // var great_start_time01 = "11-30 00:00:00";
-    // var great_end_time01 = "12-07 00:00:00"
-	var start_test = "02-08 00:00:00";
-	var end_test = "02-08 20:59:00";
+
+	var start_test = "07-08 00:00:00";
+	var end_test = "07-08 20:59:00";
 	grey_times = [
 		[NJ_country_startTime, NJ_country_overTime],
 		[earthquake_startTime, earthquake_overTime],
