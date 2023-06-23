@@ -77,7 +77,7 @@ body {
   /* overflow: auto; */
 }
 .middle-box-card {
-  max-width: 85%;
+  max-width: 80%;
   margin: 0 auto;
   padding-top: 10px;
 }
