@@ -28,15 +28,19 @@
 	var earthquake_startTime = "05-12 00:00:00";
 	var earthquake_overTime = "05-13 00:00:00";
 
+	var mao_startTime = "09-09 00:00:00";
+	var mao_overTime = "09-09 23:59:59";
 
-	var start_test = "07-08 00:00:00";
-	var end_test = "07-08 20:59:00";
+	var start_test = "09-13 00:00:00";
+	var end_test = "09-13 20:59:00";
 	grey_times = [
-		[NJ_country_startTime, NJ_country_overTime],
-		[earthquake_startTime, earthquake_overTime],
-		// [start_test, end_test]
+			[NJ_country_startTime, NJ_country_overTime],
+			[earthquake_startTime, earthquake_overTime],
+			[mao_startTime, mao_overTime],
+			[start_test, end_test]
 
 	]
+
 
 	// 将变灰封装到一个函数里，需要的时候再调用
 	function grey() {

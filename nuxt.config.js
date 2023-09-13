@@ -72,7 +72,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' }
     ],
     script: [
@@ -85,7 +85,7 @@ export default {
       },
 
       {
-        src: '/js/grey.js'
+        src: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/js/grey.js'
       },
       
       ]

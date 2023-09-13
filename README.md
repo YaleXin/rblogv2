@@ -15,7 +15,8 @@
 还有之前使用的后台`markdown`编辑器似乎不兼容`nuxt`，使用过程中一直失败，然后我就换用了[mavon-editor](https://github.com/hinesboy/mavonEditor)
 
 然后还增加了验证码登录的功能（算是完善吧，之前的不用验证码，输入正确的账户和密码就可以登录~~~）
-
+## require
+nodejs >= v12.16.1
 ## Build Setup
 
 ```bash
