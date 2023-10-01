@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-    <archive :blogList="blogList" class="middle-box-card"/>
+    <archive :initBlogList="initBlogList" class="middle-box-card"/>
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -34,19 +34,23 @@ export default {
     }
   },
   asyncData(context) {
+    // 当前年份
+    let year = new Date().getFullYear();  
     return context.$axios
-      .get("/archive")
+      .post("/archive", {
+        data: year
+      })
       .then(res => {
         console.log(res);
           return {
-          blogList: res.blogs
+          initBlogList: res.blogs
         };
       })
       .catch(e => {});
   },
   data() {
     return {
-      blogList: []
+      initBlogList: []
     };
   },
 
