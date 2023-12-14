@@ -48,7 +48,18 @@
 	 border: .3em solid hsl(30, 20%, 40%);
 	 border-radius: .5em;
 	 box-shadow: 1px 1px .5em black inset;
+	 max-height: 30em;
  }
+
+  pre {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border: .3em solid hsl(30, 20%, 40%);
+	border-radius: .5em;
+	box-shadow: 1px 1px .5em black inset;
+	max-height: 30em;
+}
  
  /* Inline code */
  :not(pre) > code[class*="language-"] {
