@@ -36,7 +36,9 @@ let turePlugins =       [
             'plsql',
             'sql',
             'json',
-            'solidity'
+            'solidity',
+            'makefile',
+            'vhdl'
 
         ],
         plugins: [
@@ -171,7 +173,7 @@ export default {
   },
   proxy: {
     '/api': {
-        target: 'http://localhost:8080/api/',
+        target: process.env.NODE_ENV === 'production' ? `http://${process.env.HOST_IP}:8080/api/` : 'http://localhost:8080/api/',
         ws: false,
         changeOrigin: true,
         pathRewrite: {
@@ -192,43 +194,6 @@ export default {
     vendor: ['element-ui'],
     babel: {
       plugins: turePlugins,
-      // [
-      //   [
-      //     'component',
-      //     {
-      //       libraryName: 'element-ui',
-      //       styleLibraryName: 'theme-chalk'
-      //     }
-      //   ],
-      //   [
-      //     'prismjs',
-      //     {
-      //         languages: [
-      //             'html',
-      //             'css',
-      //             'javascript',
-      //             'php',
-      //             'dart',
-      //             'bash',
-      //             'nginx',
-      //             'sql',
-      //             'c',
-      //             'cpp',
-      //             'python',
-      //             'go',
-      //             'java'
-      //         ],
-      //         plugins: [
-      //             'line-numbers',
-      //             'show-language',
-      //             'copy-to-clipboard'
-      //         ],
-      //         theme: 'okaidia',
-      //         css: true
-      //     }
-      // ],
-      // 'transform-remove-console'
-      // ],
       comments: true
     },
   }
