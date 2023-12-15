@@ -5,6 +5,9 @@
 -->
 <template>
   <div>
+    <el-divider content-position="center" v-if="page.pageNum==1">置顶</el-divider>
+    <article-list :articleList="topBlog" v-if="page.pageNum==1"></article-list>
+    <el-divider content-position="center" v-if="page.pageNum==1"></el-divider>
     <article-list :articleList="page.content"></article-list>
     <!-- 分页 -->
     <div style="text-align: center">
@@ -48,18 +51,41 @@ export default {
               updateTime: "2021-02-09T08:57:19.000+00:00",
               category: {
                 id: 1,
-                name: ""
+                name: "category-name"
               },
               tags: [
                 {
                   id: 1,
-                  name: ""
+                  name: "tag-name"
                 }
               ]
             }
           ]
         };
       }
+    },
+    topBlog: {
+      type: Array,
+      default: () => [
+            {
+              id: 1,
+              name: "name",
+              content: "content",
+              description: "description",
+              createTime: "2021-02-09T08:57:19.000+00:00",
+              updateTime: "2021-02-09T08:57:19.000+00:00",
+              category: {
+                id: 1,
+                name: "category-name"
+              },
+              tags: [
+                {
+                  id: 1,
+                  name: "tag-name"
+                }
+              ]
+            }
+          ]
     }
   },
   data() {

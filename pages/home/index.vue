@@ -7,7 +7,7 @@
   <div class="my-blog">
     <to-top></to-top>
     <navigation ></navigation>
-    <middle-content  @childPageChange="currentChange" :page="info" class="mainBody middle-box-card" />
+    <middle-content  @childPageChange="currentChange" :page="info" :topBlog="top" class="mainBody middle-box-card" />
     <!-- <div>{{blogList}}</div> -->
     <blog-footer></blog-footer>
   </div>
@@ -34,20 +34,24 @@ head() {
       title: '首页-黄阿信的博客'
     }
   },
-  asyncData(context) {
-    return context.$axios
-      .get("/blog/blogPage", {
+  async asyncData(context) {
+
+    // 使用 Promise.all 并行发送两个请求
+      const [blogPageData, topData] = await Promise.all([
+        context.$axios.get("/blog/blogPage", {
         params: {
           pageNum: 1,
           pageSize: 5
         }
-      })
-      .then(res => {
-        console.log(res);
-        return {
-          info: res.page
-        };
-      });
+      }),
+        context.$axios.get('/blog/top'),
+      ]);
+      
+      // 返回数据，将其映射到组件的数据属性中
+      return {
+        info: blogPageData.page,
+        top: topData.topBlogs,
+      };
   },
   data() {
     return {
@@ -57,7 +61,7 @@ head() {
           totalSize: 10,
           totalPages: 0,
           content: [
-                       {
+            {
               id: 1,
               name: "",
               content: "",
@@ -66,17 +70,37 @@ head() {
               updateTime: "2021-02-09T08:57:19.000+00:00",
               category: {
                 id: 1,
-                name: ""
+                name: "category-name"
               },
               tags: [
                 {
                   id: 1,
-                  name: ""
+                  name: "tags-name"
                 }
               ]
             }
           ]
-        }
+        },
+        top: [
+              {
+                id: 1,
+                name: "",
+                content: "",
+                description: "",
+                createTime: "2021-02-09T08:57:19.000+00:00",
+                updateTime: "2021-02-09T08:57:19.000+00:00",
+                category: {
+                  id: 1,
+                  name: "category-name"
+                },
+                tags: [
+                  {
+                    id: 1,
+                    name: "tag-name"
+                  }
+                ]
+            }
+          ]
     };
   },
   methods: {

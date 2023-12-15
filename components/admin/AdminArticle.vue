@@ -33,6 +33,9 @@
           <el-option v-for="tag in tagList" :key="tag.id" :label="tag.name" :value="tag"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="置顶" required>
+        <el-checkbox v-model="blog.top"></el-checkbox>
+      </el-form-item>
       <el-form-item label="创建时间" required>
         <el-col :span="5">
           <el-form-item prop="date">
@@ -82,7 +85,8 @@ export default {
         description: "",
         category: [],
         date: "",
-        createTime: ""
+        createTime: "",
+        top: false
       },
       tagList: [
         { id: 0, name: "暴力法" },

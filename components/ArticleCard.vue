@@ -7,6 +7,12 @@
   <div>
     <el-card>
       <div class="article-title-wrapper" style="text-align: center;">
+        <div class="card-header" v-if="article.top">
+          <div class="top-label">
+            <font-awesome-icon :icon="['fas', 'thumbtack']" />
+            <span>置顶</span>
+            </div>
+        </div>
         <h1 class="article-title">
           <nuxt-link  class="article-title-link" :to="{path: '/blog/' + article.id}">{{article.name}}</nuxt-link>
         </h1>
@@ -54,7 +60,13 @@ export default {
           category: {
             name: "分类",
             id: 1
-          }
+          },
+          tags: [
+            {
+              id: 1,
+              name : "tag-name"
+            }
+          ]
         };
       }
     }
@@ -63,6 +75,20 @@ export default {
 </script>
 
 <style scoped>
+.card-header {
+  position: relative;
+}
+
+.top-label {
+  position: absolute;
+  margin-top: -25px;
+  left: 5px;
+  background-color: #f00; 
+  color: #fff; 
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 50%;
+}
 .article-title {
   font-size: 1.3em;
   font-weight: 400;
