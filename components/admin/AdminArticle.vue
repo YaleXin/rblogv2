@@ -292,4 +292,7 @@ export default {
 .publish-btn {
   margin-top: 5px;
 }
+pre{
+  max-height: auto
+}
 </style>
