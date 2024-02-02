@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NUXT_HOST=0.0.0.0 nuxt",
+    "dev_andr": "cross-env NUXT_HOST=192.168.1.28 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

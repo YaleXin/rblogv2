@@ -4,22 +4,22 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div >
+  <div>
     <el-card>
-      <el-tag
+      <el-badge
         v-for="ctgr in categoryList"
-        :type="activedId == ctgr.id ? '' : 'info'"
         :key="ctgr.id"
+        :value="ctgr.blogsCnt"
+        class="ctgr_item"
+        :type="activedId == ctgr.id ? 'primary' : 'info'"
       >
-        <!-- <a :href="applicationPre()+ '/category/' + ctgr.id">
-          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-          <span>{{ctgr.name}}</span>
-        </a> -->
-        <nuxt-link :to="{path: '/category/' + ctgr.id}">
-        <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-          <span>{{ctgr.name}}</span>
-        </nuxt-link>
-      </el-tag>
+        <el-tag :type="activedId == ctgr.id ? '' : 'info'">
+          <nuxt-link :to="{ path: '/category/' + ctgr.id }">
+            <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+            <span>{{ ctgr.name }}</span>
+          </nuxt-link>
+        </el-tag>
+      </el-badge>
     </el-card>
     <el-divider content-position="center">该分类下的文章</el-divider>
     <article-list :articleList="page.content"></article-list>
@@ -45,18 +45,17 @@ import ArticleList from "~/components/ArticleList.vue";
 export default {
   name: "Category",
   components: {
-    ArticleList
+    ArticleList,
   },
   data() {
-    return {
-    };
+    return {};
   },
-  props:{
+  props: {
     categoryList: {
       type: Array,
       default: () => {
-        return []
-      }
+        return [];
+      },
     },
     page: {
       type: Object,
@@ -76,25 +75,24 @@ export default {
               updateTime: "2021-02-09T08:57:19.000+00:00",
               category: {
                 id: 1,
-                name: ""
+                name: "",
               },
               tags: [
                 {
                   id: 1,
-                  name: ""
-                }
-              ]
-            }
-          ]
-        }
-      }
+                  name: "",
+                },
+              ],
+            },
+          ],
+        };
+      },
     },
-    activedId: 0
+    activedId: 0,
   },
-  created() {
-  },
+  created() {},
   activated() {
-    document.title = '分类'
+    document.title = "分类";
   },
   computed: {},
   methods: {
@@ -128,14 +126,13 @@ export default {
       console.log(newIndex);
       this.page.pageNum = newIndex;
       // 通知父组件修改数据
-      this.$emit('childPageChange',newIndex);
-    }
-  }
+      this.$emit("childPageChange", newIndex);
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .el-tag {
   margin: 2px;
 }
@@ -144,9 +141,9 @@ export default {
 }
 </style>
 <style scoped lang="scss">
-@import '~/assets/scss/common/common.scss';
+@import "~/assets/scss/common/common.scss";
 
-.el-card{
+.el-card {
   @include background_color("bold_white_tini_black_color");
   @include font_color("text-color");
 }
@@ -154,10 +151,18 @@ export default {
   text-decoration: none;
   @include font_color("tag_color");
 }
-.el-tag{
+.el-tag {
   @include background_color("special_blue_color");
 }
 .el-tag--info {
   @include background_color("tini_gray_color");
+}
+.ctgr_item {
+  margin-right: 10px;
+}
+.el-badge {
+  /deep/.el-badge__content {
+    font-size: 10px;
+  }
 }
 </style>

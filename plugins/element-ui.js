@@ -38,7 +38,8 @@ import {
   TimePicker,
   DatePicker,
   MessageBox,
-  Checkbox
+  Checkbox,
+  Badge
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -72,5 +73,6 @@ Vue.use(TimePicker)
 Vue.use(DatePicker)
 Vue.use(DropdownItem)
 Vue.use(Checkbox)
+Vue.use(Badge)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

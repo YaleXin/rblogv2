@@ -6,20 +6,23 @@
 <template>
   <div>
     <el-card >
-      <el-tag
-        v-for="tag in tagList"
-        :type="activedId == tag.id ? '' : 'info'"
-        :key="tag.id"
+      <el-badge
+      v-for="tag in tagList"
+      :key="tag.id"
+      :value="tag.blogsCnt"
+      class="tag_item"
+      :type="activedId == tag.id ? 'primary' : 'info'"
       >
-        <!-- <a :href="applicationPre()+ '/tag/' + tag.id">
-          <i class="fa fa-tag" aria-hidden="true"></i>
-          <span>{{tag.name}}</span>
-        </a> -->
-        <nuxt-link :to="{path: '/tag/' + tag.id}">
-          <i class="fa fa-tag" aria-hidden="true"></i>
-          <span>{{tag.name}}</span>
-        </nuxt-link>
-      </el-tag>
+        <el-tag
+          :type="activedId == tag.id ? '' : 'info'"
+        >
+          <nuxt-link :to="{path: '/tag/' + tag.id}">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            <span>{{tag.name}}</span>
+          </nuxt-link>
+        </el-tag>
+      </el-badge>
+      
     </el-card>
     <el-divider content-position="center">该标签下的文章</el-divider>
     <article-list :articleList="page.content"></article-list>
@@ -140,5 +143,14 @@ export default {
 }
 .el-tag--info {
   @include background_color("tini_gray_color");
+}
+
+.tag_item {
+  margin-right: 10px;
+}
+.el-badge {
+  /deep/.el-badge__content {
+    font-size: 10px;
+  }
 }
 </style>
