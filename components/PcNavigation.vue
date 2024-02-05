@@ -44,21 +44,14 @@
         <nuxt-link class="navigation-item-a" :to="{path: '/archive'}">
           <i class="el-icon-data-line"></i>归档
         </nuxt-link>
-        
       </el-menu-item>
 
       <el-menu-item index="/search">
-        <div>
-          <el-form :inline="true" :model="searchForm">
-            <el-input
-              placeholder="搜一搜？按下回车即可搜索"
-              prefix-icon="el-icon-search"
-              @keyup.native.enter="onSubmit"
-              v-model="searchForm.content"
-            ></el-input>
-          </el-form>
-        </div>
+        <nuxt-link class="navigation-item-a" :to="{path: '/search'}">
+          <i class="el-icon-search"></i>搜索
+        </nuxt-link>
       </el-menu-item>
+
       <el-menu-item disabled index="/home">要么改变世界，要么适应世界</el-menu-item>
     </el-menu>
   </div>
@@ -71,15 +64,10 @@ export default {
   components: {},
   data() {
     return {
-      searchForm: {
-        content: ""
-      }
     };
   },
   methods: {
-    onSubmit() {
-      EventBus.$emit("searchSubmit", this.searchForm.content);
-    },
+
     getRout() {
       const routePath = this.$route.path;
       console.log(routePath);

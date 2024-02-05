@@ -86,20 +86,10 @@
             </el-menu-item>
 
             <el-menu-item index="/search">
-              <div>
-                <el-form
-                  :inline="true"
-                  :model="searchForm"
-                  @submit.native.prevent
-                >
-                  <el-input
-                    placeholder="搜一搜？按下回车即可搜索"
-                    prefix-icon="el-icon-search"
-                    @keyup.native.enter="onSubmit"
-                    v-model="searchForm.content"
-                  ></el-input>
-                </el-form>
-              </div>
+              <template slot="title">
+                <i class="el-icon-search"></i>
+                <span>搜索</span>
+              </template>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -139,11 +129,6 @@ export default {
     handleSelect(key, keyPath) {
       if (key !== "/search") this.showNvg = false;
       // this.$emit("mbClick", key);
-    },
-    onSubmit() {
-      this.$router.replace("/search").catch((e) => {});
-      EventBus.$emit("searchSubmit", this.searchForm.content);
-      this.showNvg = false;
     },
   },
 };
