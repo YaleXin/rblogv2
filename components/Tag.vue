@@ -5,24 +5,34 @@
 -->
 <template>
   <div>
-    <el-card >
-      <el-badge
-      v-for="tag in tagList"
-      :key="tag.id"
-      :value="tag.blogsCnt"
-      class="tag_item"
-      :type="activedId == tag.id ? 'primary' : 'info'"
+    <el-card>
+      <el-popover
+        popper-class="my_popover"
+        v-for="tag in tagList"
+        :key="tag.id"
+        placement="top-start"
+        width="50"
+        trigger="hover"
+        :close-delay="100"
+        :content="`共${tag.blogsCnt}篇`"
       >
         <el-tag
+          effect="plain"
+          slot="reference"
           :type="activedId == tag.id ? '' : 'info'"
+          v-bind:style="{
+            fontSize:
+              10 + tag.blogsCnt * 2 <= 20
+                ? 10 + tag.blogsCnt * 3 + 'px'
+                : '20px',
+          }"
         >
-          <nuxt-link :to="{path: '/tag/' + tag.id}">
+          <nuxt-link :to="{ path: '/tag/' + tag.id }">
             <i class="fa fa-tag" aria-hidden="true"></i>
-            <span>{{tag.name}}</span>
+            <span>{{ tag.name }}</span>
           </nuxt-link>
         </el-tag>
-      </el-badge>
-      
+      </el-popover>
     </el-card>
     <el-divider content-position="center">该标签下的文章</el-divider>
     <article-list :articleList="page.content"></article-list>
@@ -47,24 +57,22 @@ import ArticleList from "~/components/ArticleList.vue";
 export default {
   name: "Tag",
   components: {
-    ArticleList
+    ArticleList,
   },
   data() {
-    return {
-    };
+    return {};
   },
-  created() {
-  },
+  created() {},
   activated() {
-    document.title = '标签'
+    document.title = "标签";
   },
   computed: {},
-  props:{
+  props: {
     tagList: {
       type: Array,
       default: () => {
-        return []
-      }
+        return [];
+      },
     },
     page: {
       type: Object,
@@ -84,20 +92,20 @@ export default {
               updateTime: "2021-02-09T08:57:19.000+00:00",
               category: {
                 id: 1,
-                name: ""
+                name: "",
               },
               tags: [
                 {
                   id: 1,
-                  name: ""
-                }
-              ]
-            }
-          ]
-        }
-      }
+                  name: "",
+                },
+              ],
+            },
+          ],
+        };
+      },
     },
-    activedId: 0
+    activedId: 0,
   },
   methods: {
     applicationPre() {
@@ -110,9 +118,9 @@ export default {
       console.log(newIndex);
       this.page.pageNum = newIndex;
       // 通知父组件修改数据
-      this.$emit('childPageChange',newIndex);
-    }
-  }
+      this.$emit("childPageChange", newIndex);
+    },
+  },
 };
 </script>
 
@@ -126,11 +134,14 @@ export default {
 .el-pagination {
   margin-top: 20px;
 }
+.el-tag.el-tag--info {
+  border: none;
+}
 </style>
 <style scoped lang="scss">
-@import '~/assets/scss/common/common.scss';
+@import "~/assets/scss/common/common.scss";
 
-.el-card{
+.el-card {
   @include background_color("bold_white_tini_black_color");
   @include font_color("text-color");
 }
@@ -138,7 +149,7 @@ export default {
   text-decoration: none;
   @include font_color("tag_color");
 }
-.el-tag{
+.el-tag {
   @include background_color("special_blue_color");
 }
 .el-tag--info {
@@ -152,5 +163,10 @@ export default {
   /deep/.el-badge__content {
     font-size: 10px;
   }
+}
+</style>
+<style lang="scss">
+.my_popover {
+  min-width: 0px !important;
 }
 </style>
