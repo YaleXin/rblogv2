@@ -185,13 +185,13 @@ export default {
 @import "~/assets/scss/common/common.scss";
 
 .el-card {
-  @include background_color("bold_white_tini_black_color");
+  @include background_color("bold_white_tini_tini_black_color");
   @include font_color("text-color");
 }
 
 .el-table {
-  @include background_color("bold_white_tini_black_color");
-  // @include font_color("text-color");
+  @include background_color("bold_white_tini_tini_black_color");
+  @include font_color("text-color");
 }
 .box-card {
   ::v-deep .el-table th,

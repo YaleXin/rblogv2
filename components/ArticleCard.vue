@@ -147,7 +147,7 @@ a:focus {
 }
 // 阅读全文按钮
 .readMore-btn {
-    @include background_color("bold_white_tini_black_color");
+    @include background_color("bold_white_tini_tini_black_color");
     @include readMore_btn_text_color("read_more_text_color");
     border-radius: 2px;
     display: inline-block;

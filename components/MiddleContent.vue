@@ -5,7 +5,7 @@
 -->
 <template>
   <div>
-    <el-divider content-position="center" v-if="page.pageNum==1">置顶</el-divider>
+    <el-divider content-position="center" v-if="page.pageNum==1" ><div class="home_top">置顶</div></el-divider>
     <article-list :articleList="topBlog" v-if="page.pageNum==1"></article-list>
     <el-divider content-position="center" v-if="page.pageNum==1"></el-divider>
     <article-list :articleList="page.content"></article-list>
@@ -114,5 +114,14 @@ export default {
 <style scoped>
 .el-pagination {
   margin-top: 20px;
+}
+</style>
+
+<style scoped lang="scss">
+@import "~/assets/scss/common/common.scss";
+
+.home_top {
+  @include background_color("bold_white_tini_tini_black_color");
+  @include font_color("text-color");
 }
 </style>

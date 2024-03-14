@@ -119,7 +119,7 @@ export default {
 .search-input-div {
   ::v-deep .el-input__inner,
   ::v-deep .el-textarea__inner {
-    @include background_color("bold_white_color");
+    @include background_color("bold_white_tini_tini_black_color");
   }
   margin-top: 20px;
 }

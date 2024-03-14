@@ -126,7 +126,7 @@ export default {
 .comment-input-div {
   ::v-deep .el-input__inner,
   ::v-deep .el-textarea__inner {
-    @include background_color("bold_white_color");
+    @include background_color("bold_white_tini_tini_black_color");
   }
 }
 </style>
