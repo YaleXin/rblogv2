@@ -17,14 +17,16 @@
         :content="`共${tag.blogsCnt}篇`"
       >
         <el-tag
-          effect="plain"
           slot="reference"
-          :type="activedId == tag.id ? '' : 'info'"
+          :class="{'activeTag':activedId == tag.id}"
           v-bind:style="{
             fontSize:
               10 + tag.blogsCnt * 2 <= 20
                 ? 10 + tag.blogsCnt * 3 + 'px'
                 : '20px',
+            fontWeight:300 + tag.blogsCnt * 100 <= 1000
+                ? 300 + tag.blogsCnt * 100
+                : 1000,
           }"
         >
           <nuxt-link :to="{ path: '/tag/' + tag.id }">
@@ -125,11 +127,15 @@ export default {
 </script>
 
 <style scoped>
-.el-tag > a {
-  text-decoration: none;
-}
+
+
+
+
 .el-tag {
   margin: 2px;
+  border: none;
+  border-color: transparent;
+  background: transparent;
 }
 .el-pagination {
   margin-top: 20px;
@@ -145,17 +151,6 @@ export default {
   @include background_color("bold_white_tini_black_color");
   @include font_color("text-color");
 }
-.el-tag > a {
-  text-decoration: none;
-  @include font_color("tag_color");
-}
-.el-tag {
-  @include background_color("special_blue_color");
-}
-.el-tag--info {
-  @include background_color("tini_gray_color");
-}
-
 .tag_item {
   margin-right: 10px;
 }
@@ -166,7 +161,19 @@ export default {
 }
 </style>
 <style lang="scss">
+@import '~/assets/scss/common/common.scss';
 .my_popover {
   min-width: 0px !important;
+};
+.el-tag > a,
+.el-tag > a:link,
+.el-tag > a:visited,
+.el-tag > a:focus {
+  text-decoration: none;
+  @include font_color("small_black_color");
+}
+.el-tag.activeTag > a {
+  text-decoration: none;
+  @include font_color("special_blue_color");
 }
 </style>
