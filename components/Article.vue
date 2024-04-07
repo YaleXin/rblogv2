@@ -47,9 +47,7 @@
         id="articleContent"
         class="article-content typo"
         v-html="article.content"
-      >
-        <!-- v-html="article.content" -->
-      </div>
+      ></div>
       <el-divider></el-divider>
       <div class="tag-group">
         <el-tag v-for="tag in article.tags" :key="tag.id">
@@ -62,6 +60,9 @@
       <div class="appreciate-wrapper">
         <appreciate></appreciate>
       </div>
+      <div class="copyright-wrapper">
+        <copyright-article></copyright-article>
+      </div>
       <!-- 评论 -->
       <!-- <blog-comment 
     class="middle-box-card"
@@ -69,21 +70,19 @@
     :blogId="article.id"
     /> -->
 
-     <blog-talk-content 
- 
-    :commentList="blogCommentList"
-    :blogId="article.id"
-    :textUp="'历史评论'"
-    :textDown="'开始评论'"
-    />
-
+      <blog-talk-content
+        :commentList="blogCommentList"
+        :blogId="article.id"
+        :textUp="'历史评论'"
+        :textDown="'开始评论'"
+      />
     </el-card>
   </div>
 </template>
 
 <script>
-
 import Appreciate from "~/components/Appreciate.vue";
+import CopyrightArticle from "~/components/CopyrightArticle.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
 import BlogTalkContent from "~/components/Talk.vue";
@@ -91,42 +90,45 @@ export default {
   head() {
     return {
       link: [
-        {rel: 'stylesheet', href: require('~/assets/css/blog.css')},
-        {rel: 'stylesheet', href: require('~/assets/css/typo.css')},
-        {rel: 'stylesheet', href: require('~/assets/css/prism-dark.css')},
-        {rel: 'stylesheet', href: require('~/assets/css/highlight-keyword.css')},
-     ],
-    //  script: [
-    //   {
-    //   src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
-    //   },
-      
-      
+        { rel: "stylesheet", href: require("~/assets/css/blog.css") },
+        { rel: "stylesheet", href: require("~/assets/css/typo.css") },
+        { rel: "stylesheet", href: require("~/assets/css/prism-dark.css") },
+        {
+          rel: "stylesheet",
+          href: require("~/assets/css/highlight-keyword.css"),
+        },
+      ],
+      //  script: [
+      //   {
+      //   src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
+      //   },
+
       // ]
     };
   },
   name: "Article",
   components: {
     Appreciate,
-    BlogTalkContent
+    BlogTalkContent,
+    CopyrightArticle,
   },
   activated() {
     document.title = this.article.name;
   },
 
   mounted() {
-
-    this.$axios.get("/comment/" + this.article.id).then((res) =>{
+    this.$axios
+      .get("/comment/" + this.article.id)
+      .then((res) => {
         this.blogCommentList = res.comments;
-    }).catch((e) =>{
-      
-    })
+      })
+      .catch((e) => {});
 
     // 加载 fancy-box 插件
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('[data-fancybox="gallery"]').fancybox({
-        buttons: ["share", "close", "download", "zoom",'fullScreen','thumbs'],
-        hash: false
+        buttons: ["share", "close", "download", "zoom", "fullScreen", "thumbs"],
+        hash: false,
       });
     });
     Prism.highlightAll();
@@ -135,23 +137,26 @@ export default {
     this.setFancyBox();
     this.initTocbot();
     // 加载 latex
-    var script = document.createElement('script');
-    script.src = 'https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-chtml.min.js';
+    var script = document.createElement("script");
+    script.src =
+      "https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-chtml.min.js";
     // script.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js';
     script.async = true;
     document.head.appendChild(script);
     window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-  },
-  chtml:{
-	  scale:0.8
-  }
-};
-
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"],
+        ],
+      },
+      chtml: {
+        scale: 0.8,
+      },
+    };
   },
   created() {},
-  
+
   methods: {
     initTocbot() {
       tocbot.init({
@@ -192,28 +197,27 @@ export default {
     // 为每个图片设置环境 使之能够满足fancyBox插件的要求
     setFancyBox() {
       let imgNodeArray = document.querySelectorAll(".fancy-box-img");
-      imgNodeArray.forEach(imgNode => {
+      imgNodeArray.forEach((imgNode) => {
         let aNode = document.createElement("a");
-        aNode.classList.add("fancybox-a-wrapper")
+        aNode.classList.add("fancybox-a-wrapper");
         aNode.href = imgNode.getAttribute("src");
         aNode.setAttribute("data-transition-effect", "zoom-in-out");
         aNode.setAttribute("data-animation-effect", "slide");
         aNode.setAttribute("data-fancybox", "gallery");
         aNode.setAttribute("data-capion", "这是一张图片");
-        aNode.name = 'img-div-fancybox';
+        aNode.name = "img-div-fancybox";
         imgNode.parentNode.appendChild(aNode);
         aNode.appendChild(imgNode);
         aNode.style.border = "none";
       });
     },
-    
   },
   data() {
     return {
       blogCommentList: [],
       commentFinished: false,
       replyId: -1,
-      atNickname: "请输入内容"
+      atNickname: "请输入内容",
     };
   },
   props: {
@@ -231,11 +235,11 @@ export default {
           content: "",
           tags: [
             // { id: 1, name: "" }
-          ]
+          ],
         };
-      }
+      },
     },
-  }
+  },
 };
 </script>
 
@@ -299,14 +303,19 @@ export default {
 .appreciate-wrapper {
   text-align: center;
 }
+.copyright-wrapper {
+  padding: 14px;
+  border-left: 6px solid #ccc !important;
+  border-color: #2196f3 !important;
+}
 .article-category-a {
   text-decoration: none;
 }
 </style>
 <style scoped lang="scss">
-@import '~/assets/scss/common/common.scss';
+@import "~/assets/scss/common/common.scss";
 
-.el-card{
+.el-card {
   @include background_color("bold_white_tini_tini_black_color");
   @include font_color("text-color");
 }
