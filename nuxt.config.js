@@ -89,6 +89,10 @@ export default {
       {
         src: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/js/grey.js'
       },
+
+      {
+        src: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/js/copyright.js'
+      },
       
       ]
   },
