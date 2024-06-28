@@ -45,17 +45,24 @@
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
         </el-form-item> -->
         <el-form-item class="login-btn">
-          <el-button plain type="primary" ref="loginBtn" :loading="powLoading" @click="onSubmit">{{loginBtnText}}</el-button>
+          <el-button
+            plain
+            type="primary"
+            ref="loginBtn"
+            :loading="powLoading"
+            @click="onSubmit"
+            >{{ loginBtnText }}</el-button
+          >
         </el-form-item>
       </el-form>
     </el-card>
   </div>
 </template>
 
-<script>
+<script type="module">
 import md5 from "js-md5";
-
-import { Captcha } from "../../static/js/pow-captcha-js.js";
+const Captcha = require("@yalexin/pow-captcha");
+// import { Captcha } from "../../static/js/pow-captcha-js.js";
 
 export default {
   name: "Login",
@@ -98,22 +105,23 @@ export default {
   },
   methods: {
     pow() {
-      console.log("pow----------------");
-      const a = new Captcha();
-
-      a.start("/api/admin/powConfig", "/api/admin/powVerify")
-        .then((resObj) => {
-
-          // 修改按钮样式
-          this.powLoading = false;
-          this.loginBtnText = "登录";
-          console.log("resObj ==> ", resObj);
+      
+      Captcha.getPoWWithAxios("/admin/powConfig", this.$axios)
+        .then((config) => {
+          Captcha.tryPoWWithAxios("/admin/powVerify", config, this.$axios)
+            .then((verifyResult) => {
+              // 修改按钮样式
+              this.powLoading = false;
+              this.loginBtnText = "登录";
+              console.log("resObj ==> ", verifyResult);
+            })
+            .catch((e) => {
+              console.log("pow error =>", e);
+            });
         })
         .catch((e) => {
           console.log("pow error =>", e);
         });
-
-
     },
     changeCodeImg() {
       this.$axios

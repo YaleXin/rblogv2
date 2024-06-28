@@ -46,6 +46,12 @@
         </nuxt-link>
       </el-menu-item>
 
+      <el-menu-item :index="'/blog/' + aboutMeId">
+        <nuxt-link class="navigation-item-a" :to="{path: '/blog/' + aboutMeId}">
+          <i class="el-icon-info"></i>关于我
+        </nuxt-link>
+      </el-menu-item>
+
       <el-menu-item index="/search">
         <nuxt-link class="navigation-item-a" :to="{path: '/search'}">
           <i class="el-icon-search"></i>搜索
@@ -64,6 +70,7 @@ export default {
   components: {},
   data() {
     return {
+      aboutMeId: process.env.VUE_APP_ABOUT_ME_ID
     };
   },
   methods: {

@@ -56,6 +56,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default {
+  env:{
+    VUE_APP_ABOUT_ME_ID: process.env.VUE_APP_ABOUT_ME_ID
+  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'server',
 

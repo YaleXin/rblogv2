@@ -85,6 +85,13 @@
               </template>
             </el-menu-item>
 
+            <el-menu-item :index="'/blog/' + aboutMeId">
+              <template slot="title">
+                <i class="el-icon-info"></i>
+                <span>关于我</span>
+              </template>
+            </el-menu-item>
+
             <el-menu-item index="/search">
               <template slot="title">
                 <i class="el-icon-search"></i>
@@ -105,6 +112,7 @@ export default {
   components: {},
   data() {
     return {
+      aboutMeId: process.env.VUE_APP_ABOUT_ME_ID,
       showNvg: false,
       searchForm: {
         content: "",
