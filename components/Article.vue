@@ -16,9 +16,7 @@
           }}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'eye']" />
-          <span style="margin-left: 2px; font-size: 14px">{{
-            article.views
-          }}</span>
+          <span style="margin-left: 2px; font-size: 14px"><count-to :startVal='0' :endVal='article.views' :duration='3000'></count-to></span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fa', 'bookmark']" />
           <nuxt-link
@@ -61,7 +59,7 @@
         <appreciate></appreciate>
       </div>
       <div class="copyright-wrapper">
-        <copyright-article></copyright-article>
+        <copy-right-article></copy-right-article>
       </div>
       <!-- 评论 -->
       <!-- <blog-comment 
@@ -81,8 +79,9 @@
 </template>
 
 <script>
+import CountTo from 'vue-count-to';
 import Appreciate from "~/components/Appreciate.vue";
-import CopyrightArticle from "~/components/CopyrightArticle.vue";
+import CopyRightArticle from "~/components/CopyRightArticle.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
 import BlogTalkContent from "~/components/Talk.vue";
@@ -110,7 +109,8 @@ export default {
   components: {
     Appreciate,
     BlogTalkContent,
-    CopyrightArticle,
+    CopyRightArticle,
+    CountTo
   },
   activated() {
     document.title = this.article.name;

@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "CopyrightArticle",
+  name: "CopyRightArticle",
   components: {},
   data() {
     return {};

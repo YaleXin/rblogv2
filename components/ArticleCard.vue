@@ -5,7 +5,7 @@
 -->
 <template>
   <div>
-    <el-card>
+    <el-card shadow="hover">
       <div class="article-title-wrapper" style="text-align: center;">
         <div class="card-header" v-if="article.top">
           <div class="top-label">
@@ -21,7 +21,7 @@
           <span style="margin-left:2px;">{{article.createTime.split('T')[0]}}</span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fas', 'eye']"/>
-          <span style="margin-left:2px;">{{article.views}}</span>
+          <span style="margin-left:2px;"><count-to :startVal='0' :endVal='article.views' :duration='4000'></count-to></span>
           <el-divider direction="vertical"></el-divider>
           <font-awesome-icon :icon="['fas', 'bookmark']"/>
           <span style="margin-left:2px;">{{article.category.name}}</span>
@@ -38,9 +38,10 @@
 </template>
 
 <script>
+import CountTo from 'vue-count-to';
 export default {
   name: "ArticleCard",
-  components: {},
+  components: {CountTo},
   methods: {
     applicationPre() {
       // return process.env.NODE_ENV === "production" ? "/blog" : "";
@@ -115,10 +116,12 @@ export default {
   transition: all 100ms ease-in-out;
   
 }
-.article-card-item:hover{
-	transform: scale(1.1);
-	transition: all 100ms ease-in-out;
-}
+/* 鼠标悬浮时放大 */
+ .article-card-item:hover{
+	/* transform: scale(1.1);
+	transition: all 100ms ease-in-out; */
+  transform: translateY(-5px);
+} 
 </style>
 <style scoped lang="scss">
 @import '~/assets/scss/common/common.scss';

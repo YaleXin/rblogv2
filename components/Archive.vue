@@ -26,15 +26,16 @@
     <div ref="heatmap" :style="{ width: '100%' }"></div>
     <el-divider class="total-divider" content-position="center">
       <span style="color: #35b8ff; font-size: 2em"
-        >{{ select_year }} : 共 {{ totalNum }} 篇</span
+        >{{ select_year }} : 共 <count-to :startVal='0' :endVal='totalNum' :duration='3000'></count-to> 篇</span
       >
+      
     </el-divider>
     <div v-for="(list, index) in blogList" :key="index">
       <el-divider content-position="center">
         <span style="color: #35b8ff; font-size: 1.2em"
           >{{ list.yearMonth.toString().substring(0, 4) }}-{{
             list.yearMonth.toString().substring(4, 6)
-          }}: {{ list.content.length }} 篇</span
+          }}: <count-to :startVal='0' :endVal='list.content.length' :duration='3000'></count-to> 篇</span
         >
       </el-divider>
       <el-card>
@@ -58,10 +59,11 @@
 </template>
 
 <script>
+import CountTo from 'vue-count-to';
 import echarts from "~/assets/js/echarts.min.js";
 export default {
   name: "Archive",
-  components: {},
+  components: {CountTo},
   mounted() {
     this.blogList = this.initBlogList;
     let heatMapCurrentYearData = this.handleCurrentYearHeatmapData(new Date().getFullYear());

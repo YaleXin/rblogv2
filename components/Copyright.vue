@@ -6,7 +6,7 @@
 <template>
   <div>
     <font-awesome-icon :icon="['far', 'copyright']"/>
-    <span>2020-</span>
+    <span>2020 -</span>
     <span v-text="nowYear">2020</span>
     <span>
        by Yalexin
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "Copyright",
+  name: "CopyRight",
   components: {},
   data() {
     return {

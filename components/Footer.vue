@@ -8,7 +8,7 @@
     <el-divider></el-divider>
     <poetry></poetry>
     <time-info></time-info>
-    <copyright></copyright>
+    <copy-right></copy-right>
     <icp></icp>
   </div>
 </template>
@@ -17,14 +17,14 @@
 import Poetry from '~/components/Poetry.vue';
 import TimeInfo from "~/components/TimeInfo.vue";
 import Icp from "~/components/Icp.vue";
-import Copyright from "~/components/Copyright.vue";
+import CopyRight from "~/components/CopyRight.vue";
 export default {
   name: "Footer",
   components: {
     Poetry,
     Icp,
     TimeInfo,
-    Copyright
+    CopyRight
   },
   created() {}
 };

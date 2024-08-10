@@ -14,7 +14,7 @@
         width="50"
         trigger="hover"
         :close-delay="100"
-        :content="`共${tag.blogsCnt}篇`"
+        :content="`共 ${tag.blogsCnt} 篇`"
       >
         <el-tag
           slot="reference"
