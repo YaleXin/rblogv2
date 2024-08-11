@@ -38,7 +38,7 @@
           }}: <count-to :startVal='0' :endVal='list.content.length' :duration='3000'></count-to> 篇</span
         >
       </el-divider>
-      <el-card>
+      <el-card shadow="hover">
         <el-timeline>
           <el-timeline-item
             class="my-timeline-item"

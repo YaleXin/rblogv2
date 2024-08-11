@@ -129,6 +129,7 @@ export default {
 .el-card{
   @include background_color("bold_white_tini_tini_black_color");
   @include font_color("text-color");
+  // border:  solid ;
 }
 a,
 a:link,

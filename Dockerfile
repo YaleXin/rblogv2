@@ -1,4 +1,4 @@
-# 使用 Node.js 18 作为基础镜像
+# 使用 Node.js 12 作为基础镜像
 FROM node:12.16.1
 
 MAINTAINER yalexin

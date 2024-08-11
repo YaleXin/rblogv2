@@ -11,27 +11,28 @@
         v-for="tag in tagList"
         :key="tag.id"
         placement="top-start"
-        width="50"
+        width="100"
         trigger="hover"
         :close-delay="100"
-        :content="`共 ${tag.blogsCnt} 篇`"
+        :content="`${tag.name}:共 ${tag.blogsCnt} 篇`"
       >
         <el-tag
           slot="reference"
-          :class="{'activeTag':activedId == tag.id}"
+          :class="{ activeTag: activedId == tag.id }"
           v-bind:style="{
             fontSize:
               10 + tag.blogsCnt * 2 <= 20
                 ? 10 + tag.blogsCnt * 3 + 'px'
                 : '20px',
-            fontWeight:300 + tag.blogsCnt * 100 <= 1000
+            fontWeight:
+              300 + tag.blogsCnt * 100 <= 1000
                 ? 300 + tag.blogsCnt * 100
                 : 1000,
           }"
         >
           <nuxt-link :to="{ path: '/tag/' + tag.id }">
             <i class="fa fa-tag" aria-hidden="true"></i>
-            <span>{{ tag.name }}</span>
+            <span v-bind:style="{color: getColor(tag.name)}">{{ tag.name }}</span>
           </nuxt-link>
         </el-tag>
       </el-popover>
@@ -55,6 +56,7 @@
 </template>
 
 <script>
+import md5 from "js-md5";
 import ArticleList from "~/components/ArticleList.vue";
 export default {
   name: "Tag",
@@ -64,7 +66,10 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.getColor("qq");
+    this.getColor("qq1");
+  },
   activated() {
     document.title = "标签";
   },
@@ -122,15 +127,19 @@ export default {
       // 通知父组件修改数据
       this.$emit("childPageChange", newIndex);
     },
+    getColor(tagName) {
+      const md5Str = md5(tagName);
+      console.log("md5=", md5Str);
+      // 16进制颜色表示法中颜色使用三个字节，即6个字符
+      const colorStr = md5Str.slice(-6);
+      console.log("color=", colorStr);
+      return "#" + colorStr;
+    },
   },
 };
 </script>
 
 <style scoped>
-
-
-
-
 .el-tag {
   margin: 2px;
   border: none;
@@ -161,10 +170,10 @@ export default {
 }
 </style>
 <style lang="scss">
-@import '~/assets/scss/common/common.scss';
+@import "~/assets/scss/common/common.scss";
 .my_popover {
   min-width: 0px !important;
-};
+}
 .el-tag > a,
 .el-tag > a:link,
 .el-tag > a:visited,
@@ -173,7 +182,12 @@ export default {
   @include font_color("small_black_color");
 }
 .el-tag.activeTag > a {
-  text-decoration: none;
-  @include font_color("special_blue_color");
+  @include font_color("small_black_color");
+   border: 2px dashed ;
+   border-radius: 10px;
+    padding: 2px 2px;
+    text-decoration: none;
+
+    display: inline-block;
 }
 </style>
