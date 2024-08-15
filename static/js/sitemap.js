@@ -1,7 +1,7 @@
 import axios from "axios";
 const sitemap = {
     path: '/sitemap.xml', // sitemap path，不用改
-    hostname: 'https://www.yalexin.top/', // sitemap网址的前缀
+    hostname: 'https://www.yalexin.top', // sitemap网址的前缀
     cacheTime: 60 * 60 * 6, //  更新频率，只在 generate: false有用
     gzip: true, // 生成 .xml.gz 压缩的 sitemap
     generate: false, // 允许使用 nuxt generate 生成
@@ -11,45 +11,43 @@ const sitemap = {
         '/admin/*',
         '/admin'
     ],
-    // // 页面路由
-    // routes: async () => {
-    //     let productList = await axios.get('https://www.yalexin.top/api/archive')
-    //         .then(res => {
-    //             let siteArray = [];
-    //             console.log('res.data=', res.data);
-    //             let yearMonthBlog = res.data.blogs;
-    //             yearMonthBlog.forEach(yearMonthBlog => {
-    //                 yearMonthBlog.content.forEach(blog => {
-    //                     let siteObject = {
-    //                         url: `/blog/${blog.id}`,
-    //                         changefred: 'daily',
-    //                         lastmod: new Date()
-    //                     }
-    //                     siteArray.push(siteObject);
-    //                 })
-    //             });
-    //             return siteArray;
-    //         });
-    //     return productList;
-    // }
     // 页面路由
     routes(callback) {
+        // axios.get('https://www.yalexin.top/api/category/all').then(res=>{
+        //     console.log(res.data);
+        // }).catch(e=>{
+        //     console.log(e);
+        // })
         axios.all([
             // 文章分类
             axios.get('https://www.yalexin.top/api/category/all'),
             // 文章标签
             axios.get('https://www.yalexin.top/api/tag/all'),
             // 所有文章
-            axios.get('https://www.yalexin.top/api/archive')
+            axios.post('https://www.yalexin.top/api/archive', {
+                data: 2020,
+            }),
+            axios.post('https://www.yalexin.top/api/archive', {
+                data: 2021,
+            }),
+            axios.post('https://www.yalexin.top/api/archive', {
+                data: 2022,
+            }),
+            axios.post('https://www.yalexin.top/api/archive', {
+                data: 2023,
+            }),
+            axios.post('https://www.yalexin.top/api/archive', {
+                data: 2024,
+            })
 
-        ]).then(axios.spread(function (categories, tags, blogs) {
+        ]).then(axios.spread(function (categories, tags, blogs2020, blogs2021, blogs2022, blogs2023, blogs2024) {
 
             let now = new Date();
             now.setHours(now.getHours(), now.getMinutes() - now.getTimezoneOffset());
 
             let indexRoutes = [
                 {
-                    url: '/',
+                    url: '/blog/',
                     changefreq: 'daily',
                     priority: 1,
                     lastmodISO: now.toISOString()
@@ -58,7 +56,7 @@ const sitemap = {
             // 首页
             let homeRoutes = [
                 {
-                    url: '/home',
+                    url: '/blog/home',
                     changefreq: 'daily',
                     priority: 1,
                     lastmodISO: now.toISOString()
@@ -67,7 +65,7 @@ const sitemap = {
             // 分类
             let categoryRoutes = categories.data.categories.map((data) => {
                 return {
-                    url: '/category/' + data.id,
+                    url: '/blog/category/' + data.id,
                     changefreq: 'daily',
                     lastmodISO: now.toISOString()
                 }
@@ -75,7 +73,7 @@ const sitemap = {
             // 标签
             let tagRoutes = tags.data.tags.map((data) => {
                 return {
-                    url: '/tag/' + data.id,
+                    url: '/blog/tag/' + data.id,
                     changefreq: 'daily',
                     lastmodISO: now.toISOString()
                 }
@@ -83,7 +81,7 @@ const sitemap = {
             // 友链
             let linkRoutes = [
                 {
-                    url: '/link',
+                    url: '/blog/link',
                     changefreq: 'daily',
                     priority: 1,
                     lastmodISO: now.toISOString()
@@ -92,7 +90,7 @@ const sitemap = {
             // 留言
             let talkRoutes = [
                 {
-                    url: '/talk',
+                    url: '/blog/talk',
                     changefreq: 'daily',
                     priority: 1,
                     lastmodISO: now.toISOString()
@@ -101,7 +99,7 @@ const sitemap = {
             // 归档
             let archiveRoutes = [
                 {
-                    url: '/archive',
+                    url: '/blog/archive',
                     changefreq: 'daily',
                     priority: 1,
                     lastmodISO: now.toISOString()
@@ -109,16 +107,20 @@ const sitemap = {
             ];
             // 文章
             let blogList = [];
-            blogs.data.blogs.forEach((yearMonths) => {
-                yearMonths.content.forEach((blog) => {
-                    blogList.push({
-                        id: blog.id
+            let blogListByYears = [blogs2020, blogs2021, blogs2022, blogs2023, blogs2024];
+            blogListByYears.forEach((blogListByYear) => {
+                blogListByYear.data.blogs.forEach((yearMonths) => {
+                    yearMonths.content.forEach((blog) => {
+                        blogList.push({
+                            id: blog.id
+                        })
                     })
                 })
             })
+
             let blogRoutes = blogList.map((blog) => {
                 return {
-                    url: '/blog/' + blog.id,
+                    url: '/blog/blog/' + blog.id,
                     changefreq: 'daily',
                     lastmodISO: now.toISOString()
                 }
@@ -127,6 +129,8 @@ const sitemap = {
             callback(null, indexRoutes.concat(homeRoutes, categoryRoutes, tagRoutes, linkRoutes, talkRoutes, archiveRoutes, blogRoutes));
         }), function (err) {
             throw (err);
+        }).catch(e=>{
+            console.log('axios.all err:', e);
         });
     }
 }

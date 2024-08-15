@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin
 Disallow: /admin/*
-Sitemap: https://www.yalexin.top/blog/sitemap.xml
+Sitemap: https://www.yalexin.top/sitemap.xml
