@@ -45,6 +45,10 @@ validate({ params }) {
     return /^\d+$/.test(params.id) || params.id == "-1";
   },
   async asyncData(context) {
+     const { query } = context;
+    // 获取pageNum参数，注意这里需要处理pageNum不存在的情况，以防报错
+    const pageNum = query.pageNum ? parseInt(query.pageNum, 10) : 1;
+
     // 输入 -1 则先查找所有分类，再获取第一个分类下的文章
     if (context.params.id == "-1" || context.params.id === -1) {
       // 先请求所有分类
@@ -55,7 +59,7 @@ validate({ params }) {
         context.$axios
             .get("/tag/" + tagList[0].id, {
               params: {
-                pageNum: 1,
+                pageNum: pageNum,
                 pageSize: 5
               }
             })
@@ -74,7 +78,7 @@ validate({ params }) {
         context.$axios
             .get("/tag/" + context.params.id, {
               params: {
-                pageNum: 1,
+                pageNum: pageNum,
                 pageSize: 5
               }
             })
@@ -132,6 +136,12 @@ validate({ params }) {
             }
           })
           .then(res => {
+            this.$router.push({
+            path: this.$route.path, 
+              query: {
+                pageNum: newIndex,
+              },
+            });
             this.page = res.page;
           })
           .catch(e => {

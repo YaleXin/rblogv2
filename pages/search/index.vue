@@ -46,6 +46,26 @@ export default {
     }
   },
   asyncData(context) {
+    const { query } = context;
+    const pageNum = query.pageNum ? parseInt(query.pageNum, 10) : 1;
+    const keyword = query.keyword ?? "";
+    if(keyword != ""){
+      return context.$axios
+            .get("/blog/search", {
+            params: {
+              pageNum: pageNum,
+              pageSize: 5,
+              nameOrContent: keyword
+            }
+          }).then(res=>{
+              return {
+                page: res.page,
+                nameOrContent: keyword,
+              };
+            }).catch(e=>{
+
+            })
+    }
   },
   data() {
     return {
@@ -98,10 +118,17 @@ export default {
             params: {
               pageNum: this.page.pageNum,
               pageSize: this.page.pageSize,
-              nameOrcontent: this.nameOrContent
+              nameOrContent: this.nameOrContent
             }
           })
           .then(res => {
+            this.$router.push({
+            path: this.$route.path, 
+            query: {
+              pageNum: newIndex,
+              keyword: this.nameOrContent
+            },
+            });
             this.page = res.page;
           })
           .catch(e => {

@@ -44,6 +44,12 @@ export default {
     return /^\d+$/.test(params.id) || params.id == "-1";
   },
   async asyncData(context) {
+
+    const { query } = context;
+    // 获取pageNum参数，注意这里需要处理pageNum不存在的情况，以防报错
+    const pageNum = query.pageNum ? parseInt(query.pageNum, 10) : 1;
+    console.log("pageNum=", pageNum);
+    
     // 输入 -1 则先查找所有分类，再获取第一个分类下的文章
     if (context.params.id == "-1" || context.params.id === -1) {
       // 先请求所有分类
@@ -54,7 +60,7 @@ export default {
         context.$axios
             .get("/category/" + categoryList[0].id, {
               params: {
-                pageNum: 1,
+                pageNum: pageNum,
                 pageSize: 5
               }
             })
@@ -73,7 +79,7 @@ export default {
         context.$axios
             .get("/category/" + context.params.id, {
               params: {
-                pageNum: 1,
+                pageNum: pageNum,
                 pageSize: 5
               }
             })
@@ -121,8 +127,10 @@ export default {
 
   methods: {
     currentChange(newIndex) {
+      console.log('newIndex=',newIndex);
       this.page.pageNum = newIndex;
       if (this.activedId > 0) {
+        console.log('this.$route.path=',this.$route.path);
         this.$axios
           .get("/category/" + this.activedId, {
             params: {
@@ -131,11 +139,19 @@ export default {
             }
           })
           .then(res => {
+            this.$router.push({
+            path: this.$route.path, 
+            query: {
+              pageNum: newIndex,
+            },
+            });
+            console.log('res.page=',res.page);
             this.page = res.page;
           })
           .catch(e => {
             console.log(e);
           });
+
       }
     }
   },

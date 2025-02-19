@@ -44,6 +44,8 @@ head() {
         return {
           linkList: res.links
         };
+      }).catch(e=>{
+        console.log("link get e");
       });
   },
   data() {
