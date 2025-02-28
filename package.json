@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NUXT_HOST=0.0.0.0 nuxt",
     "dev_andr": "cross-env NUXT_HOST=192.168.137.1 nuxt",
-    "build": "nuxt build",
+    "build": "nuxt build --mode production",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },

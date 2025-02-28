@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
  */
 import sitemap from './static/js/sitemap.js';
-let turePlugins =       [
+let turePlugins = [
   [
     'component',
     {
@@ -15,49 +15,51 @@ let turePlugins =       [
   [
     'prismjs',
     {
-        languages: [
-            'html',
-            'css',
-            'javascript',
-            'php',
-            'dart',
-            'bash',
-            'nginx',
-            'sql',
-            'c',
-            'cpp',
-            'python',
-            'go',
-            'java',
-            'clike',
-            'matlab',
-            'bash',
-            'shell',
-            'plsql',
-            'sql',
-            'json',
-            'solidity',
-            'makefile',
-            'vhdl'
+      languages: [
+        'html',
+        'css',
+        'javascript',
+        'php',
+        'dart',
+        'bash',
+        'nginx',
+        'sql',
+        'c',
+        'cpp',
+        'python',
+        'go',
+        'java',
+        'clike',
+        'matlab',
+        'bash',
+        'shell',
+        'plsql',
+        'sql',
+        'json',
+        'solidity',
+        'makefile',
+        'vhdl'
 
-        ],
-        plugins: [
-            'line-numbers',
-            'show-language',
-            'copy-to-clipboard'
-        ],
-        theme: 'dark',
-        css: true
+      ],
+      plugins: [
+        'line-numbers',
+        'show-language',
+        'copy-to-clipboard'
+      ],
+      theme: 'dark',
+      css: true
     }
-],
+  ],
 ]
 if (process.env.NODE_ENV === 'production') {
   turePlugins.push("transform-remove-console")
 }
 
 export default {
-  env:{
-    VUE_APP_ABOUT_ME_ID: process.env.VUE_APP_ABOUT_ME_ID
+  env: {
+    VUE_APP_ABOUT_ME_ID: process.env.VUE_APP_ABOUT_ME_ID,
+    VUE_APP_GRAVATAR_URL: process.env.VUE_APP_GRAVATAR_URL,
+    VUE_APP_HOST_IP: process.env.VUE_APP_HOST_IP,
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'server',
@@ -79,16 +81,16 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/favicon.ico' },
       // { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' }
-      {rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'}
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' }
     ],
     script: [
       // {
       // src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js'
       // },
       {
-        src :'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'
       },
-      
+
       // {
       // src: 'https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'
       // },
@@ -104,15 +106,15 @@ export default {
       {
         src: (process.env.NODE_ENV === 'production' ? '/blog' : '') + '/js/copyright.js'
       },
-      
-      ]
+
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    
+
     '~/assets/css/main.css'
-  
+
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -120,7 +122,7 @@ export default {
     {
       src: '~/plugins/axios',
       'ssr': true // 服务端渲染
-   },
+    },
     // '~/plugins/element-ui',
     {
       src: '~/plugins/element-ui',
@@ -147,7 +149,7 @@ export default {
     'nuxt-fontawesome',
     '@nuxtjs/sitemap'
   ],
-  sitemap:sitemap,
+  sitemap: sitemap,
   toast: {
     position: 'top-center',
     duration: 3000
@@ -181,29 +183,29 @@ export default {
     prefix: '/api', // 配置基本得url地址
     credentials: true
   },
-  router:{
+  router: {
     base: process.env.NODE_ENV === 'production' ? '/blog/' : '',
     resourceHints: false,
     prefetchLinks: false  // 解决首屏加载全部js
   },
   proxy: {
     '/api': {
-        target: process.env.NODE_ENV === 'production' ? `http://${process.env.HOST_IP}:8080/api/` : 'http://localhost:8080/api/',
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-            '^/api': '',
-        }
+      target: process.env.NODE_ENV === 'production' ? `http://${process.env.VUE_APP_HOST_IP}:8080/api/` : 'http://localhost:8080/api/',
+      ws: false,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': '',
+      }
     },
     '/jinri': {
-        target: 'http://v1.jinrishici.com/',
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-            '^/jinri': '',
-        }
+      target: 'http://v1.jinrishici.com/',
+      ws: false,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/jinri': '',
+      }
     },
-},
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     vendor: ['element-ui'],
