@@ -7,7 +7,7 @@ MAINTAINER yalexin
 # 设置工作目录
 WORKDIR /app
 ENV NODE_ENV=production
-ENV HOST_IP 39.100.87.216
+ENV VUE_APP_HOST_IP 39.100.87.216
 ENV HOST 0.0.0.0
 # 复制项目文件到容器中
 COPY . .
