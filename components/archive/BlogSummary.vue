@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 250px;">
+    <div style="height: 250px;width: 95%;">
             <el-table :data="summaryTableData" border style="width: 100%">
                 <el-table-column prop="itemName1" label="项目名">
                 </el-table-column>
