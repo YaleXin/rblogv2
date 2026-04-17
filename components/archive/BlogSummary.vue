@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 250px;width: 95%;">
+    <div class="blog-summary-table" style="height: 250px;width: 95%;">
             <el-table :data="summaryTableData" border style="width: 100%" height="240">
                 <el-table-column prop="itemName1" label="项目名">
                 </el-table-column>
@@ -80,5 +80,33 @@ export default {
     /* 必须给容器一个高度 */
     position: relative;
     overflow: hidden;
+}
+</style>
+
+<style lang="scss">
+@import "~/assets/scss/common/common.scss";
+
+.blog-summary-table .el-table {
+    @include background_color("bold_white_tini_tini_black_color");
+    @include font_color("text-color");
+}
+
+.blog-summary-table .el-table th,
+.blog-summary-table .el-table td {
+    @include font_color("text-color");
+    @include border_color("tini_gray_color");
+    background-color: transparent !important;
+}
+
+.blog-summary-table .el-table__header-wrapper {
+    @include background_color("bold_white_tini_tini_black_color");
+}
+
+.blog-summary-table .el-table__body-wrapper {
+    @include background_color("bold_white_tini_tini_black_color");
+}
+
+.blog-summary-table .el-table tr {
+    background-color: transparent !important;
 }
 </style>

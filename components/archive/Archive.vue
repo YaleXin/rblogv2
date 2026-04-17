@@ -28,7 +28,7 @@
 
 
 
-    <div id="select_year">
+    <div id="select_year" class="archive-select-year">
       发表年份：
       <el-select v-model="select_year" placeholder="请选择年份" @change="selectChange">
         <el-option v-for="item in yearList" :key="item" :label="item" :value="item">
@@ -381,5 +381,32 @@ a:focus {
 #select_year {
   text-align: center;
   margin-top: 10px;
+  @include font_color("text-color");
+}
+</style>
+
+<style lang="scss">
+@import "~/assets/scss/common/common.scss";
+
+.archive-select-year .el-select {
+  @include font_color("text-color");
+}
+
+.archive-select-year .el-input__inner {
+  @include background_color("bold_white_tini_tini_black_color");
+  @include font_color("text-color");
+  @include border_color("tini_gray_color");
+}
+
+.archive-select-year .el-select-dropdown {
+  @include background_color("bold_white_tini_tini_black_color");
+}
+
+.archive-select-year .el-select-dropdown__item {
+  @include font_color("text-color");
+}
+
+.archive-select-year .el-select-dropdown__item:hover {
+  @include background_color("tini_gray_color");
 }
 </style>
