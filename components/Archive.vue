@@ -5,19 +5,33 @@
 -->
 <template>
   <div id="archive-content">
+    <el-row :gutter="20" class="barcode-content">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <el-card class="center-card">
+          <div slot="header" class="clearfix">
+            <span>文章词云</span>
+          </div>
+          <blog-word-cloud :word-list="wordCloud" v-loading="wordCloudLoading"
+            :loading="wordCloudLoading"></blog-word-cloud>
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <el-card>
+          <div slot="header" class="clearfix">
+            <span>文章总结</span>
+          </div>
+          <blog-summary :summary-table-data="summaryTableData"></blog-summary>
+
+        </el-card>
+      </el-col>
+    </el-row>
+
+
+
     <div id="select_year">
       发表年份：
-      <el-select
-        v-model="select_year"
-        placeholder="请选择年份"
-        @change="selectChange"
-      >
-        <el-option
-          v-for="item in yearList"
-          :key="item"
-          :label="item"
-          :value="item"
-        >
+      <el-select v-model="select_year" placeholder="请选择年份" @change="selectChange">
+        <el-option v-for="item in yearList" :key="item" :label="item" :value="item">
         </el-option>
       </el-select>
     </div>
@@ -25,32 +39,21 @@
     <!--  height: '800px' -->
     <div ref="heatmap" :style="{ width: '100%' }"></div>
     <el-divider class="total-divider" content-position="center">
-      <span style="color: #35b8ff; font-size: 2em"
-        >{{ select_year }} : 共 <count-to :startVal='0' :endVal='totalNum' :duration='3000'></count-to> 篇</span
-      >
-      
+      <span style="color: #35b8ff; font-size: 2em">{{ select_year }} : 共 <count-to :startVal='0' :endVal='totalNum'
+          :duration='3000'></count-to> 篇</span>
+
     </el-divider>
     <div v-for="(list, index) in blogList" :key="index">
       <el-divider content-position="center">
-        <span style="color: #35b8ff; font-size: 1.2em"
-          >{{ list.yearMonth.toString().substring(0, 4) }}-{{
-            list.yearMonth.toString().substring(4, 6)
-          }}: <count-to :startVal='0' :endVal='list.content.length' :duration='3000'></count-to> 篇</span
-        >
+        <span style="color: #35b8ff; font-size: 1.2em">{{ list.yearMonth.toString().substring(0, 4) }}-{{
+          list.yearMonth.toString().substring(4, 6)
+        }}: <count-to :startVal='0' :endVal='list.content.length' :duration='3000'></count-to> 篇</span>
       </el-divider>
       <el-card shadow="hover">
         <el-timeline>
-          <el-timeline-item
-            class="my-timeline-item"
-            v-for="(blog, index1) in list.content"
-            :key="index1"
-            :timestamp="blog.createTime.substr(5, 99)"
-          >
-            <nuxt-link
-              class="article-title-link"
-              :to="{ path: '/blog/' + blog.id }"
-              >{{ blog.name }}</nuxt-link
-            >
+          <el-timeline-item class="my-timeline-item" v-for="(blog, index1) in list.content" :key="index1"
+            :timestamp="blog.createTime.substr(5, 99)">
+            <nuxt-link class="article-title-link" :to="{ path: '/blog/' + blog.id }">{{ blog.name }}</nuxt-link>
           </el-timeline-item>
         </el-timeline>
       </el-card>
@@ -61,9 +64,15 @@
 <script>
 import CountTo from 'vue-count-to';
 import echarts from "~/assets/js/echarts.min.js";
+import BlogWordCloud from '~/components/archive/BlogWordCloud.vue';
+import BlogSummary from '~/components/archive/BlogSummary.vue'
 export default {
   name: "Archive",
-  components: {CountTo},
+  components: {
+    CountTo,
+    BlogWordCloud,
+    BlogSummary
+  },
   mounted() {
     this.blogList = this.initBlogList;
     let heatMapCurrentYearData = this.handleCurrentYearHeatmapData(new Date().getFullYear());
@@ -78,8 +87,35 @@ export default {
       .catch((e) => {
         console.log(e);
       });
+    //  获取词云
+    this.$axios.get("/wordCloud/all").then((res) => {
+      this.wordCloud = res.wordCloud;
+      this.wordCloudLoading = false;
+    })
+      .catch((e) => {
+        console.log(e);
+      });
+    // 获取文章总结
+    this.$axios.get("/archive/summary").then((res) => {
+      this.parseSummary(res);
+    })
+      .catch((e) => {
+        console.log(e);
+      });
   },
   methods: {
+    // 解析总结
+    parseSummary(res) {
+      const totalBlogs = res.totalBlogs;
+      const totalBlogWords = res.totalBlogWords;
+      const totalRead = res.totalRead;
+      const earliest = res.earliest;
+      this.summaryTableData[0].itemValue1 = totalBlogs;
+      this.summaryTableData[0].itemValue2 = totalBlogWords;
+      this.summaryTableData[1].itemValue1 = totalRead;
+      const earliestDate = new Date(earliest * 1000);
+      this.summaryTableData[1].itemValue2 = earliestDate.toLocaleDateString('zh-CN');
+    },
     // 根据所选择的年份绘制热力图
     drawLineThisYear(heatMapCurrentYearData) {
       this.$refs.heatmap.style.height = "230px";
@@ -134,7 +170,7 @@ export default {
             this.handleCurrentYearHeatmapData(newYear);
           this.drawLineThisYear(heatMapCurrentYearData);
         })
-        .catch((e) => {});
+        .catch((e) => { });
     },
     applicationPre() {
       console.log(process.env.NODE_ENV);
@@ -254,12 +290,36 @@ export default {
           ],
         },
       ],
+      wordCloud: [],
+      wordCloudLoading: true,
+      summaryTableData: [{
+        itemName1: '总文章数',
+        itemValue1: 0,
+        itemName2: '总文字数',
+        itemValue2: 0,
+      },
+      {
+        itemName1: '总阅读数',
+        itemValue1: 0,
+        itemName2: '最早发表时间',
+        itemValue2: 0,
+      }]
     };
   },
 };
 </script>
 
 <style scoped>
+.center-card /deep/ .el-card__body {
+  /* 开启 Flex 布局 */
+  display: flex;
+  /* 水平居中 */
+  justify-content: center;
+  /* 垂直居中 */
+  align-items: center;
+  padding: 0;
+}
+
 .article-title-link {
   position: relative;
   /* text-align: center; */
@@ -269,9 +329,11 @@ export default {
   left: 0%;
   width: 100%;
 }
+
 .my-timeline-item {
   font-size: 16px;
 }
+
 .total-divider {
   margin-bottom: 30px;
 }
@@ -283,6 +345,7 @@ export default {
   @include background_color("bold_white_tini_tini_black_color");
   @include font_color("text-color");
 }
+
 a,
 a:link,
 a:visited,
@@ -290,6 +353,7 @@ a:focus {
   text-decoration: none;
   @include font_color("small_black_color");
 }
+
 .article-title-link::after {
   content: "";
   width: 0;
@@ -300,6 +364,7 @@ a:focus {
   left: 50%;
   transition: all 0.5s;
 }
+
 #select_year {
   text-align: center;
   margin-top: 10px;

@@ -33,7 +33,8 @@
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "vuex-persistedstate": "^4.1.0",
-    "webpack": "^4.46.0"
+    "webpack": "^4.46.0",
+    "wordcloud": "^1.2.3"
   },
   "devDependencies": {
     "@nuxtjs/proxy": "^2.1.0",
