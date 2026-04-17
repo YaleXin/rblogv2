@@ -25,7 +25,7 @@
 <script>
 import Navigation from "~/components/admin/AdminNavigation.vue";
 
-import BlogFooter from "~/components/Footer.vue";
+import BlogFooter from "~/components/footer/Footer.vue";
 
 export default {
   name: "AdminIndex",

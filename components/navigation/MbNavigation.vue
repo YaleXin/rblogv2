@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import { EventBus } from "../eventBus/index.js";
+import { EventBus } from "../../eventBus/index.js";
 export default {
   name: "MbNavigation",
   components: {},

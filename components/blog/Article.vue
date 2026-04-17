@@ -80,8 +80,8 @@
 
 <script>
 import CountTo from 'vue-count-to';
-import Appreciate from "~/components/Appreciate.vue";
-import CopyRightArticle from "~/components/CopyRightArticle.vue";
+import Appreciate from "~/components/blog/Appreciate.vue";
+import CopyRightArticle from "~/components/blog/CopyRightArticle.vue";
 import Prism from "prismjs";
 import tocbot from "tocbot";
 import BlogTalkContent from "~/components/Talk.vue";

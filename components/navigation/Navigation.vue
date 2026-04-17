@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import MbNavigation from "~/components/MbNavigation.vue";
-import PcNavigation from "~/components/PcNavigation.vue";
+import MbNavigation from "~/components/navigation/MbNavigation.vue";
+import PcNavigation from "~/components/navigation/PcNavigation.vue";
 
 export default {
   components: {

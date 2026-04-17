@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import Poetry from '~/components/Poetry.vue';
-import TimeInfo from "~/components/TimeInfo.vue";
-import Icp from "~/components/Icp.vue";
-import CopyRight from "~/components/CopyRight.vue";
+import Poetry from '~/components/footer/Poetry.vue';
+import TimeInfo from "~/components/footer/TimeInfo.vue";
+import Icp from "~/components/footer/Icp.vue";
+import CopyRight from "~/components/footer/CopyRight.vue";
 export default {
   name: "Footer",
   components: {

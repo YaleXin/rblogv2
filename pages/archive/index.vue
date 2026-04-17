@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import Navigation from "~/components/Navigation.vue";
-import Archive from "~/components/Archive.vue";
-import BlogFooter from "~/components/Footer.vue";
+import Navigation from "~/components/navigation/Navigation.vue";
+import Archive from "~/components/archive/Archive.vue";
+import BlogFooter from "~/components/footer/Footer.vue";
 import ToTop from "~/components/ToTop.vue";
 
 export default {
