@@ -16,11 +16,11 @@
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="12">
-        <el-card class="center-card">
+        <el-card class="center-card box-card">
           <div slot="header" class="clearfix">
             <span>文章总结</span>
           </div>
-          <blog-summary :summary-table-data="summaryTableData"></blog-summary>
+          <blog-summary :summary-table-data="summaryTableData" v-loading="summaryLoading"></blog-summary>
 
         </el-card>
       </el-col>
@@ -97,6 +97,7 @@ export default {
       });
     // 获取文章总结
     this.$axios.get("/archive/summary").then((res) => {
+      this.summaryLoading = false;
       this.parseSummary(res);
     })
       .catch((e) => {
@@ -106,15 +107,20 @@ export default {
   methods: {
     // 解析总结
     parseSummary(res) {
-      const totalBlogs = res.totalBlogs;
-      const totalBlogWords = res.totalBlogWords;
-      const totalRead = res.totalRead;
-      const earliest = res.earliest;
+      const totalBlogs = res.summary.totalBlogs;
+      const totalBlogWords = res.summary.totalBlogWords;
+      const totalRead = res.summary.totalRead;
+      const maxRead = res.summary.maxRead;
+      const earliest = res.summary.earliest;
+      const latest = res.summary.latest;
       this.summaryTableData[0].itemValue1 = totalBlogs;
       this.summaryTableData[0].itemValue2 = totalBlogWords;
       this.summaryTableData[1].itemValue1 = totalRead;
-      const earliestDate = new Date(earliest * 1000);
-      this.summaryTableData[1].itemValue2 = earliestDate.toLocaleDateString('zh-CN');
+      this.summaryTableData[1].itemValue2 = maxRead;
+      const earliestDate = new Date(earliest);
+      const latestDate = new Date(latest);
+      this.summaryTableData[2].itemValue1 = earliestDate.toLocaleDateString('zh-CN');
+      this.summaryTableData[2].itemValue2 = latestDate.toLocaleDateString('zh-CN');
     },
     // 根据所选择的年份绘制热力图
     drawLineThisYear(heatMapCurrentYearData) {
@@ -292,6 +298,7 @@ export default {
       ],
       wordCloud: [],
       wordCloudLoading: true,
+      summaryLoading: true,
       summaryTableData: [{
         itemName1: '总文章数',
         itemValue1: 0,
@@ -301,7 +308,13 @@ export default {
       {
         itemName1: '总阅读数',
         itemValue1: 0,
-        itemName2: '最早发表时间',
+        itemName2: '单篇最大阅读数',
+        itemValue2: 0,
+      },
+    {
+        itemName1: '最早发文时间',
+        itemValue1: 0,
+        itemName2: '最后发文时间',
         itemValue2: 0,
       }]
     };
@@ -335,7 +348,7 @@ export default {
 }
 
 .total-divider {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 </style>
 <style scoped lang="scss">

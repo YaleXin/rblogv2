@@ -1,12 +1,18 @@
 <template>
     <div style="height: 250px;width: 95%;">
-            <el-table :data="summaryTableData" border style="width: 100%">
+            <el-table :data="summaryTableData" border style="width: 100%" height="240">
                 <el-table-column prop="itemName1" label="项目名">
                 </el-table-column>
                 <el-table-column prop="itemValue1" label="项目值">
                     <template slot-scope="scope">
-                        <span style="color: #35b8ff; font-size: 1.5em"><count-to :startVal='0' :endVal='scope.row.itemValue1'
-                                :duration='3000'></count-to> </span>
+                        <span style="color: #35b8ff; font-size: 1.5em">
+                            <count-to v-if="!isNaN( scope.row.itemValue1) && !isNaN(parseFloat( scope.row.itemValue1)) && isFinite( scope.row.itemValue1)" :startVal='0' :endVal='scope.row.itemValue1'
+                                :duration='3000'></count-to>
+                            <span v-else>
+                                 {{ scope.row.itemValue1 }}
+                            </span>
+                           
+                        </span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="itemName2" label="项目名">
