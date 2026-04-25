@@ -89,7 +89,9 @@ export default {
       });
     //  获取词云
     this.$axios.get("/wordCloud/all").then((res) => {
+      //this.wordCloud = res.wordCloud.map(item => [item.word, item.weight]);
       this.wordCloud = res.wordCloud;
+      console.log('this.wordCloud=',this.wordCloud);
       this.wordCloudLoading = false;
     })
       .catch((e) => {

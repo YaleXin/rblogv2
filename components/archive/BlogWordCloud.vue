@@ -42,8 +42,9 @@ export default {
 
             const options = {
                 list: this.wordList,
+                // 最大为 17
+                weightFactor: 17/100,
                 backgroundColor: 'transparent',
-                
             }
 
             if (WordCloud.isSupported) {
