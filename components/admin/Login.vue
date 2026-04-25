@@ -154,26 +154,15 @@ export default {
       this.$router.replace("/admin").catch((e) => {});
     },
     login() {
-      const code =
-        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      let len = parseInt(Math.random() * 100 + 1);
-      let str = "";
-      for (let i = 0; i < len; i++) {
-        str += code[parseInt(Math.random() * 62)];
-      }
-      let md5Str = md5(str);
-      let codeStr = md5(md5(this.loginForm.code.toLocaleLowerCase()));
       let user = {
         username: this.loginForm.username,
-        password: md5(md5(md5(this.loginForm.rawPassword)) + md5Str),
+        password: md5(md5(this.loginForm.rawPassword)),
       };
-      console.log("code = ", codeStr);
+      console.log('user=', user)
       this.$axios
         .post("/admin/login", {
           data: {
-            user: user,
-            salt: md5Str,
-            code: codeStr,
+            user: user         
           },
         })
         .then((res) => {
