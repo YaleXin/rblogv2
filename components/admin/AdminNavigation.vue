@@ -63,7 +63,7 @@ export default {
     },
     logout() {
       this.$axios
-        .delete("/admin/logout/")
+        .delete("/admin/logout")
         .then(res => {
           console.log('logout res = ', res);
             this.logoutSuccess();
