@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div v-loading="loading">
     <el-divider content-position="center">修改密码</el-divider>
     <el-form inline :model="pswForm" :rules="passRules" ref="pswForm" label-width="100px">
       <el-form-item label="原密码" prop="oldPass">
@@ -30,6 +30,7 @@ export default {
   name: "User",
   components: {},
   data() {
+    
     let validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -70,6 +71,7 @@ export default {
       }
     };
     return {
+      loading : true,
       pswForm: {
         oldPass: "",
         pass: "",
@@ -82,18 +84,16 @@ export default {
       }
     };
   },
-  created() {
-    // this.getUser();
+  mounted() {
+    this.getUser();
   },
   activated() {},
   methods: {
     getUser() {
-      innerHttp
+      this.$axios
         .get("/admin/user/info")
         .then(res => {
-          if (res.data !== undefined) {
-            this.$store.commit("saveUser", res.data);
-          }
+          this.loading = false
         })
         .catch(e => {});
     },

@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div v-loading="loading">
     <el-table :data="page.content" border style="width: 100%" stripe :fit="true">
       <el-table-column align="center" label="标签名称">
         <template slot-scope="scope">
@@ -58,6 +58,7 @@ export default {
   components: {},
   data() {
     return {
+      loading: true,
       page: {
         pageNum: 1,
         pageSize: 5,
@@ -95,6 +96,7 @@ export default {
           }
         })
         .then(res => {
+          this.loading = false;
           this.page = res.page;
         })
         .catch(e => {

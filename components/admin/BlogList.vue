@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div v-loading="loading">
     <div>
       <el-button @click="editBlogClick(-1)" type="primary" style="margin-bottom: 10px;" plain>添加新文章</el-button>
     </div>
@@ -76,6 +76,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       page: {
         pageNum: 1,
         pageSize: 5,
@@ -161,6 +162,7 @@ export default {
           }
         })
         .then(res => {
+          this.loading = false;
           this.page = res.page;
         })
         .catch(e => {

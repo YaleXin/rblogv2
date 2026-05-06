@@ -4,7 +4,7 @@
  * @LastEditors : YaleXin
 -->
 <template>
-  <div>
+  <div v-loading="loading">
     <el-table :data="page.content" border style="width: 100%" stripe :fit="true">
       <el-table-column align="center" label="分类名称">
         <template slot-scope="scope">
@@ -70,6 +70,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       categoryList: [
         { id: 0, name: "算法" },
         { id: 1, name: "Java" },
@@ -202,6 +203,7 @@ export default {
         })
         .then(res => {
           this.page = res.page;
+          this.loading = false;
         })
         .catch(e => {
           console.log(e);
