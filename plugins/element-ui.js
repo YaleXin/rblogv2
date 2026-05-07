@@ -41,7 +41,8 @@ import {
   Checkbox,
   Badge,
   Image,
-  Loading
+  Loading,
+  Dialog,
 } from 'element-ui'
 
 Vue.use(Carousel)
@@ -78,5 +79,6 @@ Vue.use(Checkbox)
 Vue.use(Badge)
 Vue.use(Image)
 Vue.use(Loading)
+Vue.use(Dialog)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

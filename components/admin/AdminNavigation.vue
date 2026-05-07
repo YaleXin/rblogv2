@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { EventBus } from '@/eventBus/index.js';
 // import innerHttp from "../../network/innerHttp.js";
 export default {
   name: "Navigation",
@@ -58,6 +59,7 @@ export default {
         type: "success",
         showClose: true
       });
+      EventBus.$emit('logoutSuccess');
       this.$store.commit("user/removeUser");
       this.$router.replace("/admin/login").catch(e => {});
     },

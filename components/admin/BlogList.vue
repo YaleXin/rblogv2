@@ -7,6 +7,21 @@
   <div v-loading="loading">
     <div>
       <el-button @click="editBlogClick(-1)" type="primary" style="margin-bottom: 10px;" plain>添加新文章</el-button>
+
+      <el-button @click="generateWordCloud" type="primary" style="margin-bottom: 10px;" plain :loading="wordCloudLoading">生成新的词云</el-button>
+
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        >
+        <span>{{ wordCloudContent }}</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
+
     </div>
     <el-table :data="page.content" border style="width: 100%" stripe :fit="true">
       <el-table-column align="center"  label="文章">
@@ -68,6 +83,7 @@
 </template>
 
 <script>
+
 export default {
   name: "BlogList",
   components: {},
@@ -77,6 +93,9 @@ export default {
   data() {
     return {
       loading: true,
+      wordCloudLoading: false,
+      dialogVisible: false,
+      wordCloudContent: '',
       page: {
         pageNum: 1,
         pageSize: 5,
@@ -108,6 +127,18 @@ export default {
   methods: {
     editBlogClick(id) {
       this.$router.replace("/admin/blog/" + id).catch(e => {});
+    },
+    generateWordCloud(){
+      this.wordCloudLoading = true;
+      this.$axios
+            .put("/admin/word-cloud/generate")
+            .then(res => {
+              // console.log('cloud:', res);
+              this.wordCloudContent = res;
+              this.dialogVisible = true;
+              this.wordCloudLoading = false;
+            })
+            .catch(e => {});
     },
     delBlogSuccess() {
       this.$message({

@@ -63,6 +63,7 @@
 import md5 from "js-md5";
 const Captcha = require("@yalexin/pow-captcha");
 // import { Captcha } from "../../static/js/pow-captcha-js.js";
+import { EventBus } from '@/eventBus/index.js';
 
 export default {
   name: "Login",
@@ -150,6 +151,7 @@ export default {
         message: "登录成功",
         type: "success",
       });
+      EventBus.$emit('loginSuccess');
       this.$store.commit("user/saveUser", user);
       this.$router.replace("/admin").catch((e) => {});
     },

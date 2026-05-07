@@ -8,7 +8,7 @@
     <div id="admin-div">
       <el-row :gutter="20">
         <el-col :span="3">
-          <navigation></navigation>
+          <navigation v-show="showNavigation"></navigation>
         </el-col>
         <el-col :span="21" class="content">
           <div class="admin-right-content">
@@ -24,6 +24,7 @@
 
 <script>
 import Navigation from "~/components/admin/AdminNavigation.vue";
+import { EventBus } from '@/eventBus/index.js';
 
 import BlogFooter from "~/components/footer/Footer.vue";
 
@@ -33,16 +34,42 @@ export default {
     Navigation,
     BlogFooter
   },
-  mounted() {},
+  mounted() {
+    EventBus.$on('loginSuccess', (data) => {
+      this.showNavigation = true;
+    });
 
+    EventBus.$on('logoutSuccess', (data) => {
+      this.showNavigation = false;
+    });
+  },
+  beforeDestroy() {
+    EventBus.$off('loginSuccess'); // 移除监听，避免内存泄漏
+    EventBus.$off('logoutSuccess');
+  },
   asyncData(context) {
     
   },
   data() {
-    return {};
+    return {
+      showNavigation: false
+    };
   },
   methods: {},
-  created() {}
+  created() {
+    console.log('当前路径:', this.$route.path); 
+    if(this.$route.path!='/admin/login'){
+        // 请求后端session
+      this.$axios.get("/admin/user/info")
+          .then(res => {
+            this.showNavigation = true;
+          })
+          .catch(e => {
+
+          });
+    }
+      
+  }
 };
 </script>
 <style scoped>
@@ -51,5 +78,6 @@ export default {
 }
 #admin-div{
   margin-bottom: 80px;
+  min-height: 300px;
 }
 </style>
